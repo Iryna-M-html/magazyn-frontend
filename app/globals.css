@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #59b17a;
+  --color-primary-hover: #3f945f;
+  --color-dark: #1d2433;
+  --color-text: #5b6577;
+  --color-bg: #f7f8fa;
+}
+
+body {
+  background: var(--white);
+  color: var(--main);
+  font-family: var(--font-family);
+}
+
+.container {
+  min-width: 320px;
+  max-width: 410px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 0 64px;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+section {
+  scroll-margin-top: 105px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  margin-top: 75px;
+}
+li {
+  list-style: none;
+}
+@layer utilities {
+  @keyframes truck-bounce {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(3px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-truck-bounce {
+    animation: truck-bounce 1s linear infinite;
+  }
+
+  @keyframes road-move {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-350px);
+    }
+  }
+
+  .animate-road-move {
+    animation: road-move 1.4s linear infinite;
+  }
+}
+
+@keyframes floatPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.12);
+  }
+
+  50% {
+    transform: scale(0.98);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.floatPulse {
+  animation: floatPulse 2.2s ease-in-out infinite;
+}
+
+.beat {
+  animation: beat 0.42s ease-in-out 1;
+}

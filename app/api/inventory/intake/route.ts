@@ -33,3 +33,34 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const cookie = await cookies();
+
+    // Передаем query-параметры и заголовок Cookie для авторизации
+    const response = await api.get("/inventory/intake", {
+      params: Object.fromEntries(searchParams.entries()),
+      headers: {
+        Cookie: cookie.toString(),
+      },
+    });
+
+    return NextResponse.json(response.data, { status: 200 });
+  } catch (error) {
+    if (isAxiosError(error)) {
+      logErrorResponse(error.response?.data);
+      return NextResponse.json(
+        error.response?.data || { error: "Backend error" },
+        { status: error.response?.status || 500 },
+      );
+    }
+
+    logErrorResponse({ message: (error as Error).message });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
+}

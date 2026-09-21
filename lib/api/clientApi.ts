@@ -55,3 +55,52 @@ export const createInventoryIntake = async (
   );
   return response.data;
 };
+
+export interface IntakeItem {
+  _id: string;
+  quantity: number;
+  batch?: string;
+  expirationDate: string;
+  productId: {
+    _id: string;
+    name: string;
+    barcode: string;
+    brand?: string;
+    imageUrl?: string;
+    unit?: string;
+  };
+}
+
+export interface GetIntakesQueryParams {
+  productId?: string;
+  year?: string;
+  month?: string;
+  expirationDate?: string;
+}
+
+export interface IntakesListResponse {
+  status: "success" | "error";
+  amount: number;
+  data: IntakeItem[];
+  message?: string;
+}
+
+export const getAllIntakes = async ({
+  productId,
+  year,
+  month,
+  expirationDate,
+}: GetIntakesQueryParams = {}) => {
+  const params = {
+    productId,
+    year,
+    month,
+    expirationDate,
+  };
+
+  const res = await nextServer.get("/inventory/intake", {
+    params,
+  });
+
+  return res.data;
+};

@@ -14,6 +14,8 @@ export interface IntakeItem {
     brand?: string;
     imageUrl?: string;
     unit?: string;
+
+    productQuantity?: string;
   };
 }
 
@@ -63,6 +65,12 @@ export function ProductCard({ item }: ProductCardProps) {
       <div className={styles.info}>
         <h3 className={styles.title}>{productId?.name || "Без названия"}</h3>
         <p className={styles.barcode}>{productId?.barcode || "—"}</p>
+        <p className={styles.barcode}>
+          {productId?.brand || "Бренд не указан"}
+        </p>
+        {/* <p className={styles.barcode}>
+          {productId?.productQuantity || "Не указано"}
+        </p> */}
         <span
           className={`${styles.date} ${
             isCritical() ? styles.dateCritical : styles.dateNormal

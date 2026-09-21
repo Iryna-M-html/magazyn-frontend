@@ -15,23 +15,30 @@ export default function ScanClient() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleBarcodeSubmit = async (barcode: string) => {
+    // 1. Блокируем повторные срабатывания камеры, пока идет загрузка
+    if (loading) return;
+
+    // 2. ОЧИСТКА ШТРИХКОДА: убираем пробелы и символы переноса строк (\n, \r)
+    const cleanBarcode = barcode.trim();
+    if (!cleanBarcode) return;
+
     setIsManualModalOpen(false);
     setLoading(true);
     setErrorMessage("");
 
     try {
-      const result = await getProductByBarcode(barcode);
+      // Отправляем чистый штрихкод без лишних символов
+      const result = await getProductByBarcode(cleanBarcode);
 
       if (result.status === "success" && result.data) {
         // Перенаправляем на страницу товара
-        router.push(`/sprzedawca?barcode=${barcode}`);
+        router.push(`/sprzedawca?barcode=${cleanBarcode}`);
       }
     } catch (error: unknown) {
-      // ИСПРАВЛЕНИЕ: Безопасная проверка ошибки Axios вместо any
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 404) {
           if (confirm("Товар не найден. Желаете добавить его вручную?")) {
-            router.push(`/sprzedawca/create?barcode=${barcode}`);
+            router.push(`/sprzedawca/create?barcode=${cleanBarcode}`);
           }
         } else {
           setErrorMessage(

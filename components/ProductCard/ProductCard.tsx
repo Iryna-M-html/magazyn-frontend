@@ -15,7 +15,7 @@ export interface IntakeItem {
     imageUrl?: string;
     unit?: string;
 
-    productQuantity?: string;
+    product_quantity?: string;
   };
 }
 
@@ -69,7 +69,7 @@ export function ProductCard({ item }: ProductCardProps) {
           {productId?.brand || "Бренд не указан"}
         </p>
         {/* <p className={styles.barcode}>
-          {productId?.productQuantity || "Не указано"}
+          {productId?.product_quantity || "Не указано"}
         </p> */}
         <span
           className={`${styles.date} ${

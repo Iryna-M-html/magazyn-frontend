@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BarcodeScanner } from "@/app/components/BarcodeScanner/BarcodeScanner";
-import { ManualCodeModal } from "@/app/components/ManualCodeModal/ManualCodeModal";
-import { getProductByBarcode } from "@/app/lib/api/clientApi";
+import axios from "axios";
+import { BarcodeScanner } from "@/components/BarcodeScanner/BarcodeScanner";
+import { ManualCodeModal } from "@/components/ManualCodeModal/ManualCodeModal";
+import { getProductByBarcode } from "@/lib/api/clientApi";
 import styles from "./Scan.module.css";
 
 export default function ScanClient() {
@@ -25,15 +26,20 @@ export default function ScanClient() {
         // Перенаправляем на страницу товара
         router.push(`/sprzedawca?barcode=${barcode}`);
       }
-    } catch (error: any) {
-      if (error.response?.status === 404) {
-        if (confirm("Товар не найден. Желаете добавить его вручную?")) {
-          router.push(`/sprzedawca/create?barcode=${barcode}`);
+    } catch (error: unknown) {
+      // ИСПРАВЛЕНИЕ: Безопасная проверка ошибки Axios вместо any
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          if (confirm("Товар не найден. Желаете добавить его вручную?")) {
+            router.push(`/sprzedawca/create?barcode=${barcode}`);
+          }
+        } else {
+          setErrorMessage(
+            error.response?.data?.message || "Ошибка поиска товара",
+          );
         }
       } else {
-        setErrorMessage(
-          error.response?.data?.message || "Ошибка поиска товара",
-        );
+        setErrorMessage("Произошла неизвестная ошибка");
       }
     } finally {
       setLoading(false);

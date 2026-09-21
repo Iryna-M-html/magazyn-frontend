@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api",
-});
-
+import { nextServer } from "@/lib/api/api";
 export interface ProductData {
   id: string;
   name: string;
@@ -25,7 +20,7 @@ export interface ApiResponse<T> {
 export const getProductByBarcode = async (
   barcode: string,
 ): Promise<ApiResponse<ProductData>> => {
-  const response = await API.get<ApiResponse<ProductData>>(
+  const response = await nextServer.get<ApiResponse<ProductData>>(
     `/products/barcode/${barcode}`,
   );
   return response.data;
@@ -35,12 +30,10 @@ export const getProductByBarcode = async (
 export const createProductManual = async (
   formData: FormData,
 ): Promise<ApiResponse<ProductData>> => {
-  const response = await API.post<ApiResponse<ProductData>>(
+  // Axios сам правильно установит multipart/form-data вместе с boundary
+  const response = await nextServer.post<ApiResponse<ProductData>>(
     "/products/manual",
     formData,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    },
   );
   return response.data;
 };

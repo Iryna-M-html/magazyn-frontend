@@ -70,3 +70,45 @@ body {
   background: #cbd5e1;
   border-radius: 4px;
 }
+@keyframes scan-beam {
+  0%,
+  100% {
+    transform: translateY(10px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(70px);
+    opacity: 1;
+  }
+}
+
+@keyframes conveyor {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 32px 0;
+  }
+}
+
+@keyframes bounce-short {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-scan-beam {
+  animation: scan-beam 1.5s ease-in-out infinite;
+}
+
+.animate-conveyor {
+  animation: conveyor 0.8s linear infinite;
+}
+
+.animate-bounce-short {
+  animation: bounce-short 1.2s ease-in-out infinite;
+}

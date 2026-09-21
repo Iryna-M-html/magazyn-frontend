@@ -1,31 +1,46 @@
-import { CamperQueryParams, FetchCampersParams } from "@/types/filters";
-import { nextServer } from "./api";
-import { Camper } from "@/types/shop";
+import axios from "axios";
 
-export const fetchCampers = async ({
-  page = 1,
-  limit = 4,
-  filters,
-}: FetchCampersParams = {}): Promise<Camper[]> => {
-  const params: CamperQueryParams = { page, limit };
+const API = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api",
+});
 
-  if (filters?.location) params.location = filters.location;
-  if (filters?.form) params.form = filters.form;
-  if (filters?.transmission) params.transmission = filters.transmission;
+export interface ProductData {
+  id: string;
+  name: string;
+  barcode: string;
+  brand: string;
+  imageUrl: string;
+  source: string;
+  product_quantity: number | null;
+  product_quantity_unit: string;
+}
 
-  if (filters?.equipment?.length) {
-    filters.equipment.forEach((key) => {
-      // key: "AC" | "kitchen" | "TV" | "bathroom"
-      params[key] = true;
-    });
-  }
+export interface ApiResponse<T> {
+  status: "success" | "error";
+  message?: string;
+  data?: T;
+}
 
-  const res = await nextServer.get("/campers", { params });
-
-  return res.data.items;
+// 1. Поиск товара по штрихкоду
+export const getProductByBarcode = async (
+  barcode: string,
+): Promise<ApiResponse<ProductData>> => {
+  const response = await API.get<ApiResponse<ProductData>>(
+    `/products/barcode/${barcode}`,
+  );
+  return response.data;
 };
 
-export const fetchCamper = async (id: string): Promise<Camper> => {
-  const res = await nextServer.get(`/campers/${id}`);
-  return res.data;
+// 2. Ручное создание товара
+export const createProductManual = async (
+  formData: FormData,
+): Promise<ApiResponse<ProductData>> => {
+  const response = await API.post<ApiResponse<ProductData>>(
+    "/products/manual",
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    },
+  );
+  return response.data;
 };

@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-import ScrollToTopBtn from "@/components/ScrollToTop/ScrollToTop";
-import Footer from "@/components/Footer/Footer";
-// Предположим, у вас есть компонент Header, импортируем его:
-// import Header from "@/components/Header/Header";
-
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata, Viewport } from "next";
+import css from "./globals.css";
 
 export const metadata: Metadata = {
-  title: "E-Pharmacy",
-  description: "Your medications, delivered.",
+  title: "Statistic for a shop",
+  description: "Statistic for a shop",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -19,14 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <header></header>
-
-        <main>{children}</main>
-
-        <Footer />
-        <ScrollToTopBtn />
+    <html lang="ru">
+      <body>
+        <main id="app-container">{children}</main>
       </body>
     </html>
   );

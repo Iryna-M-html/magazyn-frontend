@@ -37,3 +37,21 @@ export const createProductManual = async (
   );
   return response.data;
 };
+
+export interface CreateIntakeData {
+  productId: string;
+  quantity: number;
+  batch?: string;
+  expirationDate: string;
+}
+
+// 3. Фиксация приёмки товара (сохранение количества, партии и срока годности)
+export const createInventoryIntake = async (
+  intakeData: CreateIntakeData,
+): Promise<ApiResponse<unknown>> => {
+  const response = await nextServer.post<ApiResponse<unknown>>(
+    "/inventory/intake",
+    intakeData,
+  );
+  return response.data;
+};

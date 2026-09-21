@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { ProductFoundClient } from "@/components/ProductFoundClient/ProductFoundClient";
 import {
   QrCode,
   CalendarDays,
@@ -53,6 +55,15 @@ const Logo = () => (
 );
 
 const SprzedawcaClient = () => {
+  const searchParams = useSearchParams();
+  const barcode = searchParams.get("barcode");
+
+  // Если в URL передан barcode, отображаем карточку найденного товара "3. ТОВАР НАЙДЕН"
+  if (barcode) {
+    return <ProductFoundClient />;
+  }
+
+  // Если штрихкода нет — показываем главную панель "Статистика магазина"
   return (
     <div className={styles.container}>
       {/* Шапка */}

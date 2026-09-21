@@ -1,13 +1,14 @@
-"use client";
-
+import { Suspense } from "react";
 import SprzedawcaClient from "./Sprzedawca.client";
 
-const SprzedawcaPage = () => {
+export default function SprzedawcaPage() {
   return (
-    <div>
+    <Suspense
+      fallback={
+        <div style={{ padding: 20, textAlign: "center" }}>Загрузка...</div>
+      }
+    >
       <SprzedawcaClient />
-    </div>
+    </Suspense>
   );
-};
-
-export default SprzedawcaPage;
+}

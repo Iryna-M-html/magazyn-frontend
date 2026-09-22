@@ -1,0 +1,35 @@
+.statCard {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.statValue {
+  display: flex;
+  align-items: baseline;
+
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.statValueSub {
+  font-size: 16px;
+  font-weight: 600;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+.statSubtext {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+}

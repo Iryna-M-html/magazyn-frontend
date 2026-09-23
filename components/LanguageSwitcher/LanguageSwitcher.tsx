@@ -1,6 +1,7 @@
 "use client";
 
-import { useTransition, useEffect, useState } from "react";
+import { useTransition } from "react";
+import { useLocale } from "next-intl";
 import { setUserLocale } from "@/actions/set-locale";
 import styles from "./LanguageSwitcher.module.css";
 
@@ -11,21 +12,12 @@ const languages = [
 ];
 
 export function LanguageSwitcher() {
-  const [currentLocale, setCurrentLocale] = useState("pl");
+  const currentLocale = useLocale();
   const [isPending, startTransition] = useTransition();
-
-  useEffect(() => {
-    // Получаем значение locale из cookies
-    const match = document.cookie.match(/locale=([^;]+)/);
-    if (match) {
-      setCurrentLocale(match[1]);
-    }
-  }, []);
 
   const handleLanguageChange = (newLocale: string) => {
     if (newLocale === currentLocale) return;
 
-    setCurrentLocale(newLocale);
     startTransition(async () => {
       await setUserLocale(newLocale);
     });

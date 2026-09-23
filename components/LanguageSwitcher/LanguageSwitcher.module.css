@@ -1,0 +1,58 @@
+/* Контейнер переключателя */
+.switcherContainer {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+  box-sizing: border-box;
+}
+
+/* Кнопка языка */
+.langButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.langButton:hover:not(:disabled) {
+  color: #0f172a;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.langButton:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Активная кнопка */
+.active {
+  background-color: #ffffff !important;
+  color: #2563eb !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Состояние загрузки (pending) */
+.pending {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Фокус с клавиатуры */
+.langButton:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}

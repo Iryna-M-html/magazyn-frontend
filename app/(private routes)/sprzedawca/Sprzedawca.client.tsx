@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { ProductFoundClient } from "@/components/ProductFoundClient/ProductFoundClient";
 import IntakeStatBlock, {
@@ -10,6 +11,7 @@ import IntakeStatBlock, {
 } from "@/components/IntakeStatBlock/IntakeStatBlock";
 
 import { getAllIntakes, IntakesListResponse } from "@/lib/api/clientApi";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 
 import {
   QrCode,
@@ -35,6 +37,7 @@ const Logo = () => (
     viewBox="0 0 100 100"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
   >
     <defs>
       <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -68,11 +71,20 @@ const SprzedawcaClient = () => {
   const searchParams = useSearchParams();
   const barcode = searchParams.get("barcode");
 
-  // Все партии товаров
+  // ================= ПЕРЕВОДЫ =================
+
+  const tHeader = useTranslations("Header");
+  const tStats = useTranslations("Stats");
+  const tMenu = useTranslations("Menu");
+  const tNav = useTranslations("Navigation");
+
+  // ================= СОСТОЯНИЕ =================
+
   const [items, setItems] = useState<IntakeItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Загрузка партий
+  // ================= ЗАГРУЗКА ПАРТИЙ =================
+
   useEffect(() => {
     let cancelled = false;
 
@@ -109,34 +121,40 @@ const SprzedawcaClient = () => {
     };
   }, []);
 
-  // Если в URL есть barcode,
-  // показываем страницу найденного товара
+  // ================= НАЙДЕННЫЙ ТОВАР =================
+
   if (barcode) {
     return <ProductFoundClient />;
   }
 
   return (
     <div className={styles.container}>
-      {/* ================= ШАПКА ================= */}
+      {/* ================= HEADER ================= */}
 
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <Logo />
 
           <div>
-            <h1 className={styles.title}>Статистика магазина</h1>
+            <h1 className={styles.title}>{tHeader("title")}</h1>
 
-            <p className={styles.subtitle}>Учёт сроков годности</p>
+            <p className={styles.subtitle}>{tHeader("subtitle")}</p>
           </div>
         </div>
 
-        <button
-          type="button"
-          aria-label="Настройки"
-          className={styles.settingsButton}
-        >
-          <Settings size={20} />
-        </button>
+        <div className={styles.headerRight}>
+          <div className={styles.headerLanguageSwitcher}>
+            <LanguageSwitcher />
+          </div>
+
+          <button
+            type="button"
+            aria-label={tNav("settings")}
+            className={styles.settingsButton}
+          >
+            <Settings size={20} />
+          </button>
+        </div>
       </header>
 
       {/* ================= КОНТЕНТ ================= */}
@@ -153,44 +171,51 @@ const SprzedawcaClient = () => {
                 marginBottom: 0,
               }}
             >
-              Обзор склада
+              {tStats("overview")}
             </span>
 
             <span className={styles.badge}>
-              <TrendingUp size={12} />В норме
+              <TrendingUp size={12} />
+              {tStats("inNorm")}
             </span>
           </div>
 
           <div className={styles.gridTwoCols}>
-            {/* Всего партий */}
+            {/* ================= ВСЕГО ПАРТИЙ ================= */}
 
             <div className={styles.statBox}>
               {loading ? (
                 <>
-                  <div className={styles.statLabel}>Всего партий (шт)</div>
+                  <div className={styles.statLabel}>
+                    {tStats("totalBatches")}
+                  </div>
 
                   <div className={styles.statValue}>...</div>
 
-                  <div className={styles.statSubtext}>позиций на складе</div>
+                  <div className={styles.statSubtext}>
+                    {tStats("warehouse")}
+                  </div>
                 </>
               ) : (
                 <IntakeStatBlock
                   intakes={items}
-                  label="Всего партий (шт)"
-                  subtext="позиций на складе"
+                  label={tStats("totalBatches")}
+                  subtext={tStats("warehouse")}
                 />
               )}
             </div>
 
-            {/* Скоро истекает */}
+            {/* ================= СКОРО ИСТЕКАЕТ ================= */}
 
             <div className={styles.statBoxWarning}>
-              <div className={styles.statLabelWarning}>Скоро истекает</div>
+              <div className={styles.statLabelWarning}>
+                {tStats("expiringSoon")}
+              </div>
 
               <div className={styles.statValueWarning}>12</div>
 
               <div className={styles.statSubtextWarning}>
-                в ближайшие 7 дней
+                {tStats("nextDays")}
               </div>
             </div>
           </div>
@@ -199,10 +224,10 @@ const SprzedawcaClient = () => {
         {/* ================= ГЛАВНОЕ МЕНЮ ================= */}
 
         <section>
-          <h2 className={styles.sectionTitle}>Главное меню</h2>
+          <h2 className={styles.sectionTitle}>{tMenu("title")}</h2>
 
           <div className={styles.menuList}>
-            {/* Сканировать товар */}
+            {/* ================= СКАНИРОВАТЬ ТОВАР ================= */}
 
             <Link
               href="/scan"
@@ -214,10 +239,10 @@ const SprzedawcaClient = () => {
                 </div>
 
                 <div>
-                  <div className={styles.menuTitle}>СКАНИРОВАТЬ ТОВАР</div>
+                  <div className={styles.menuTitle}>{tMenu("scanProduct")}</div>
 
                   <div className={styles.menuSubtitle}>
-                    Добавить товар по штрихкоду
+                    {tMenu("scanSubtitle")}
                   </div>
                 </div>
               </div>
@@ -225,7 +250,7 @@ const SprzedawcaClient = () => {
               <ChevronRight size={20} opacity={0.7} />
             </Link>
 
-            {/* Сроки по месяцам */}
+            {/* ================= СРОКИ ПО МЕСЯЦАМ ================= */}
 
             <Link
               href="/months"
@@ -237,16 +262,18 @@ const SprzedawcaClient = () => {
                 </div>
 
                 <div>
-                  <div className={styles.menuTitle}>СРОКИ ПО МЕСЯЦАМ</div>
+                  <div className={styles.menuTitle}>{tMenu("months")}</div>
 
-                  <div className={styles.menuSubtitle}>Смотреть по месяцам</div>
+                  <div className={styles.menuSubtitle}>
+                    {tMenu("monthsSubtitle")}
+                  </div>
                 </div>
               </div>
 
               <ChevronRight size={20} opacity={0.7} />
             </Link>
 
-            {/* Скоро истекает */}
+            {/* ================= СКОРО ИСТЕКАЕТ ================= */}
 
             <Link
               href="/expiring"
@@ -258,10 +285,10 @@ const SprzedawcaClient = () => {
                 </div>
 
                 <div>
-                  <div className={styles.menuTitle}>СКОРО ИСТЕКАЕТ</div>
+                  <div className={styles.menuTitle}>{tMenu("expiring")}</div>
 
                   <div className={styles.menuSubtitle}>
-                    Товары с критическим сроком
+                    {tMenu("expiringSubtitle")}
                   </div>
                 </div>
               </div>
@@ -269,7 +296,7 @@ const SprzedawcaClient = () => {
               <ChevronRight size={20} opacity={0.7} />
             </Link>
 
-            {/* Все товары */}
+            {/* ================= ВСЕ ТОВАРЫ ================= */}
 
             <Link
               href="/products"
@@ -281,10 +308,10 @@ const SprzedawcaClient = () => {
                 </div>
 
                 <div>
-                  <div className={styles.menuTitle}>ВСЕ ТОВАРЫ</div>
+                  <div className={styles.menuTitle}>{tMenu("allProducts")}</div>
 
                   <div className={styles.menuSubtitle}>
-                    Полный список товаров
+                    {tMenu("allProductsSubtitle")}
                   </div>
                 </div>
               </div>
@@ -297,29 +324,29 @@ const SprzedawcaClient = () => {
 
       {/* ================= НИЖНЯЯ НАВИГАЦИЯ ================= */}
 
-      <nav className={styles.bottomNav} aria-label="Основная навигация">
+      <nav className={styles.bottomNav} aria-label={tNav("main")}>
         <Link href="/" className={styles.navTabActive}>
           <Home size={20} />
 
-          <span className={styles.navLabel}>Главная</span>
+          <span className={styles.navLabel}>{tNav("main")}</span>
         </Link>
 
         <Link href="/products" className={styles.navTab}>
           <BarChart3 size={20} />
 
-          <span className={styles.navLabel}>Товары</span>
+          <span className={styles.navLabel}>{tNav("products")}</span>
         </Link>
 
         <Link href="/reports" className={styles.navTab}>
           <FileText size={20} />
 
-          <span className={styles.navLabel}>Отчёты</span>
+          <span className={styles.navLabel}>{tNav("reports")}</span>
         </Link>
 
         <Link href="/more" className={styles.navTab}>
           <MoreHorizontal size={20} />
 
-          <span className={styles.navLabel}>Ещё</span>
+          <span className={styles.navLabel}>{tNav("more")}</span>
         </Link>
       </nav>
     </div>

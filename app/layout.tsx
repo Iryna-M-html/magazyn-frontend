@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import css from "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Statistic for a shop",
@@ -13,15 +14,20 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="ru">
+    <html lang={locale}>
       <body>
-        <main id="app-container">{children}</main>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <main id="app-container">{children}</main>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

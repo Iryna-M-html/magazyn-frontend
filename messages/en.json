@@ -1,0 +1,32 @@
+{
+  "Header": {
+    "title": "Store Statistics",
+    "subtitle": "Expiration Date Control"
+  },
+  "Stats": {
+    "totalBatches": "Total Batches (pcs)",
+    "warehouse": "items in stock",
+    "expiringSoon": "Expiring Soon",
+    "nextDays": "in the next 7 days",
+    "overview": "Warehouse + Store Overview",
+    "inNorm": "Normal Status"
+  },
+  "Menu": {
+    "title": "Main Menu",
+    "scanProduct": "SCAN PRODUCT",
+    "scanSubtitle": "Add product by barcode",
+    "months": "EXPIRATION BY MONTHS",
+    "monthsSubtitle": "Browse by months",
+    "expiring": "EXPIRING SOON",
+    "expiringSubtitle": "Critical expiration dates",
+    "allProducts": "ALL PRODUCTS",
+    "allProductsSubtitle": "Full product catalog"
+  },
+  "Navigation": {
+    "main": "Home",
+    "products": "Products",
+    "reports": "Reports",
+    "more": "More",
+    "settings": "Settings"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "Header": {
+    "title": "Статистика магазина",
+    "subtitle": "Учёт сроков годности"
+  },
+  "Stats": {
+    "totalBatches": "Всего партий (шт)",
+    "warehouse": "позиций на складе",
+    "expiringSoon": "Скоро истекает",
+    "nextDays": "в ближайшие 7 дней",
+    "overview": "Обзор склад+магазин",
+    "inNorm": "В норме"
+  },
+  "Menu": {
+    "title": "Главное меню",
+    "scanProduct": "СКАНИРОВАТЬ ТОВАР",
+    "scanSubtitle": "Добавить товар по штрихкоду",
+    "months": "СРОКИ ПО МЕСЯЦАМ",
+    "monthsSubtitle": "Смотреть по месяцам",
+    "expiring": "СКОРО ИСТЕКАЕТ",
+    "expiringSubtitle": "Товары с критическим сроком",
+    "allProducts": "ВСЕ ТОВАРЫ",
+    "allProductsSubtitle": "Полный список товаров"
+  },
+
+  "Navigation": {
+    "main": "Главная",
+    "products": "Товары",
+    "reports": "Отчёты",
+    "more": "Ещё",
+    "settings": "Настройки"
+  }
+}

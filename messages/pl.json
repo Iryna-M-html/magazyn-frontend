@@ -1,0 +1,32 @@
+{
+  "Header": {
+    "title": "Statystyki sklepu",
+    "subtitle": "KONTROLA DAT WAŻNOŚCI"
+  },
+  "Stats": {
+    "totalBatches": "Wszystkie partie (szt)",
+    "warehouse": "pozycji w magazynie",
+    "expiringSoon": "Wkrótce upływa ważność",
+    "nextDays": "w ciągu najbliższych 7 dni",
+    "overview": "Przegląd magazyn + sklep",
+    "inNorm": "W normie"
+  },
+  "Menu": {
+    "title": "Menu główne",
+    "scanProduct": "SKANUJ PRODUKT",
+    "scanSubtitle": "Dodaj produkt za pomocą kodu kreskowego",
+    "months": "TERMINY WEDŁUG MIESIĘCY",
+    "monthsSubtitle": "Przeglądaj według miesięcy",
+    "expiring": "WKRÓTCE UPŁYWA WAŻNOŚĆ",
+    "expiringSubtitle": "Produkty z krytycznym terminem",
+    "allProducts": "WSZYSTKIE PRODUKTY",
+    "allProductsSubtitle": "Pełna lista produktów"
+  },
+  "Navigation": {
+    "main": "Główna",
+    "products": "Produkty",
+    "reports": "Raporty",
+    "more": "Więcej",
+    "settings": "Ustawienia"
+  }
+}

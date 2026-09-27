@@ -28,5 +28,30 @@
     "reports": "Reports",
     "more": "More",
     "settings": "Settings"
+  },
+  "Months": {
+    "title": "Expiration Dates by Month (Number of Batches)",
+    "filter": "Filter",
+    "loading": "Loading data...",
+    "expired": "Expired",
+    "later": "Later",
+    "home": "Home",
+    "search": "Search",
+    "reports": "Reports",
+    "more": "More",
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    }
   }
 }

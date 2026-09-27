@@ -28,5 +28,30 @@
     "reports": "Raporty",
     "more": "Więcej",
     "settings": "Ustawienia"
+  },
+  "Months": {
+    "title": "Terminy według miesięcy (liczba partii)",
+    "filter": "Filtr",
+    "loading": "Ładowanie danych...",
+    "expired": "Przeterminowane",
+    "later": "Później",
+    "home": "Główna",
+    "search": "Wyszukiwanie",
+    "reports": "Raporty",
+    "more": "Więcej",
+    "months": {
+      "january": "Styczeń",
+      "february": "Luty",
+      "march": "Marzec",
+      "april": "Kwiecień",
+      "may": "Maj",
+      "june": "Czerwiec",
+      "july": "Lipiec",
+      "august": "Sierpień",
+      "september": "Wrzesień",
+      "october": "Październik",
+      "november": "Listopad",
+      "december": "Grudzień"
+    }
   }
 }

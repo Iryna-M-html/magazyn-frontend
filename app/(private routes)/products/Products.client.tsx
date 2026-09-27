@@ -40,6 +40,10 @@ export default function ProductsClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
+  // ============================================================
+  // ЗАГРУЗКА ТОВАРОВ
+  // ============================================================
+
   useEffect(() => {
     const fetchIntakes = async () => {
       try {
@@ -94,6 +98,10 @@ export default function ProductsClient() {
     fetchIntakes();
   }, [yearParam, monthParam, filterParam]);
 
+  // ============================================================
+  // ЗАГОЛОВОК СТРАНИЦЫ
+  // ============================================================
+
   const pageTitle = useMemo(() => {
     if (yearParam && monthParam) {
       const monthIndex = Number(monthParam) - 1;
@@ -113,11 +121,16 @@ export default function ProductsClient() {
     return "Все товары";
   }, [yearParam, monthParam, filterParam]);
 
+  // ============================================================
+  // ПОИСК
+  // ============================================================
+
   const filteredProducts = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
 
     return intakes.filter((item) => {
       const name = item.productId?.name?.toLowerCase() || "";
+
       const barcode = item.productId?.barcode || "";
 
       return name.includes(query) || barcode.includes(query);
@@ -137,12 +150,42 @@ export default function ProductsClient() {
     setCurrentPage(1);
   };
 
+  // ============================================================
+  // ⭐ ИЗМЕНЕНИЕ №1
+  // Определяем, куда должна вести кнопка "Назад"
+  // ============================================================
+
+  const handleBack = () => {
+    // Если товары открыты из раздела "Сроки по месяцам",
+    // возвращаем пользователя обратно на страницу месяцев.
+    if (
+      (yearParam && monthParam) ||
+      filterParam === "expired" ||
+      filterParam === "later"
+    ) {
+      router.push("/months");
+      return;
+    }
+
+    // Если это обычная страница "Все товары",
+    // возвращаемся на главную страницу продавца.
+    router.push("/sprzedawca");
+  };
+
   return (
     <div className={styles.container}>
+      {/* ========================================================
+          HEADER
+      ======================================================== */}
+
       <header className={styles.header}>
         <button
+          type="button"
           className={styles.backButton}
-          onClick={() => router.push("/sprzedawca")}
+          // ⭐ ИЗМЕНЕНИЕ №2
+          // Вместо router.push("/sprzedawca")
+          // используем нашу функцию handleBack
+          onClick={handleBack}
         >
           <ArrowLeft size={22} />
         </button>
@@ -156,6 +199,10 @@ export default function ProductsClient() {
         </div>
       </header>
 
+      {/* ========================================================
+          ПОИСК
+      ======================================================== */}
+
       <div className={styles.searchBox}>
         <Search size={18} className={styles.searchIcon} />
 
@@ -167,6 +214,10 @@ export default function ProductsClient() {
           className={styles.searchInput}
         />
       </div>
+
+      {/* ========================================================
+          СПИСОК ТОВАРОВ
+      ======================================================== */}
 
       {loading ? (
         <div className={styles.emptyState}>Загрузка товаров...</div>
@@ -184,6 +235,10 @@ export default function ProductsClient() {
         </div>
       )}
 
+      {/* ========================================================
+          ПАГИНАЦИЯ
+      ======================================================== */}
+
       {!loading && !error && totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
@@ -191,6 +246,10 @@ export default function ProductsClient() {
           onPageChange={setCurrentPage}
         />
       )}
+
+      {/* ========================================================
+          НИЖНЯЯ ПАНЕЛЬ
+      ======================================================== */}
 
       <div className={styles.bottomBar}>
         <button className={styles.filterButton}>ФИЛЬТРЫ</button>

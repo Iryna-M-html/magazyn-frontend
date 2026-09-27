@@ -11,6 +11,7 @@ import IntakeStatBlock, {
 } from "@/components/IntakeStatBlock/IntakeStatBlock";
 
 import { getAllIntakes, IntakesListResponse } from "@/lib/api/clientApi";
+
 import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 
 import {
@@ -70,28 +71,17 @@ const Logo = () => (
 const SprzedawcaClient = () => {
   const searchParams = useSearchParams();
   const barcode = searchParams.get("barcode");
-
-  // ================= ПЕРЕВОДЫ =================
-
   const tHeader = useTranslations("Header");
   const tStats = useTranslations("Stats");
   const tMenu = useTranslations("Menu");
   const tNav = useTranslations("Navigation");
-
-  // ================= СОСТОЯНИЕ =================
-
   const [items, setItems] = useState<IntakeItem[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // ================= ЗАГРУЗКА ПАРТИЙ =================
-
   useEffect(() => {
     let cancelled = false;
 
     const fetchIntakes = async () => {
       try {
-        setLoading(true);
-
         const res: IntakesListResponse = await getAllIntakes();
 
         if (cancelled) return;
@@ -115,14 +105,15 @@ const SprzedawcaClient = () => {
     };
 
     fetchIntakes();
+    const interval = setInterval(() => {
+      fetchIntakes();
+    }, 5000);
 
     return () => {
       cancelled = true;
+      clearInterval(interval);
     };
   }, []);
-
-  // ================= НАЙДЕННЫЙ ТОВАР =================
-
   if (barcode) {
     return <ProductFoundClient />;
   }

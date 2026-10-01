@@ -1,7 +1,7 @@
 {
   "Header": {
-    "title": "Store Statistics",
-    "subtitle": "Expiration Date Control"
+    "title": "IVPOL",
+    "subtitle": "Store Statistics"
   },
   "Stats": {
     "totalBatches": "Total Batches (pcs)",

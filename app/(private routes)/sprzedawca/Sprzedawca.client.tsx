@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { ProductFoundClient } from "@/components/ProductFoundClient/ProductFoundClient";
+
 import IntakeStatBlock, {
   IntakeItem,
 } from "@/components/IntakeStatBlock/IntakeStatBlock";
@@ -19,7 +20,6 @@ import {
   CalendarDays,
   AlertTriangle,
   Package,
-  Settings,
   TrendingUp,
   ChevronRight,
   Home,
@@ -29,8 +29,6 @@ import {
 } from "lucide-react";
 
 import styles from "./Sprzedawca.module.css";
-
-// SVG Логотип
 const Logo = () => (
   <svg
     width="36"
@@ -68,15 +66,55 @@ const Logo = () => (
   </svg>
 );
 
+function parseExpirationDate(dateStr?: string | null): Date | null {
+  if (!dateStr) {
+    return null;
+  }
+
+  const cleanDate = dateStr.split("T")[0];
+  const parts = cleanDate.split("-");
+
+  if (parts.length === 3) {
+    const year = Number(parts[0]);
+    const month = Number(parts[1]);
+    const day = Number(parts[2]);
+
+    if (
+      Number.isInteger(year) &&
+      Number.isInteger(month) &&
+      Number.isInteger(day)
+    ) {
+      const date = new Date(year, month - 1, day, 0, 0, 0, 0);
+
+      if (!Number.isNaN(date.getTime())) {
+        return date;
+      }
+    }
+  }
+
+  const fallbackDate = new Date(dateStr);
+
+  if (Number.isNaN(fallbackDate.getTime())) {
+    return null;
+  }
+  return fallbackDate;
+}
+
 const SprzedawcaClient = () => {
   const searchParams = useSearchParams();
+
   const barcode = searchParams.get("barcode");
+
   const tHeader = useTranslations("Header");
   const tStats = useTranslations("Stats");
   const tMenu = useTranslations("Menu");
   const tNav = useTranslations("Navigation");
+
   const [items, setItems] = useState<IntakeItem[]>([]);
   const [loading, setLoading] = useState(true);
+  // ==========================================================
+  // ЗАГРУЗКА ПАРТИЙ
+  // ==========================================================
   useEffect(() => {
     let cancelled = false;
 
@@ -84,7 +122,9 @@ const SprzedawcaClient = () => {
       try {
         const res: IntakesListResponse = await getAllIntakes();
 
-        if (cancelled) return;
+        if (cancelled) {
+          return;
+        }
 
         if (res && res.status === "success" && Array.isArray(res.data)) {
           setItems(res.data as IntakeItem[]);
@@ -105,6 +145,8 @@ const SprzedawcaClient = () => {
     };
 
     fetchIntakes();
+
+    // Обновляем данные каждые 5 секунд
     const interval = setInterval(() => {
       fetchIntakes();
     }, 5000);
@@ -114,14 +156,41 @@ const SprzedawcaClient = () => {
       clearInterval(interval);
     };
   }, []);
+  const expiringSoonItems = useMemo(() => {
+    const now = new Date();
+
+    const startOfToday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0,
+      0,
+      0,
+      0,
+    );
+    const endOf7Days = new Date(startOfToday);
+    endOf7Days.setDate(endOf7Days.getDate() + 7);
+    return items.filter((item) => {
+      const expirationDate = parseExpirationDate(item.expirationDate);
+      if (!expirationDate) {
+        return false;
+      }
+      return expirationDate >= startOfToday && expirationDate < endOf7Days;
+    });
+  }, [items]);
+
+  // ==========================================================
+  // ЕСЛИ ЕСТЬ BARCODE
+  // ==========================================================
+
   if (barcode) {
     return <ProductFoundClient />;
   }
-
   return (
     <div className={styles.container}>
-      {/* ================= HEADER ================= */}
-
+      {/* ======================================================
+          HEADER
+      ====================================================== */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <Logo />
@@ -137,22 +206,12 @@ const SprzedawcaClient = () => {
           <div className={styles.headerLanguageSwitcher}>
             <LanguageSwitcher />
           </div>
-
-          <button
-            type="button"
-            aria-label={tNav("settings")}
-            className={styles.settingsButton}
-          >
-            <Settings size={20} />
-          </button>
         </div>
       </header>
-
-      {/* ================= КОНТЕНТ ================= */}
-
       <div className={styles.content}>
-        {/* ================= ОБЗОР СКЛАДА ================= */}
-
+        {/* ====================================================
+            ОБЗОР СКЛАДА
+        ==================================================== */}
         <section className={styles.statsCard}>
           <div className={styles.statsHeader}>
             <span
@@ -167,13 +226,15 @@ const SprzedawcaClient = () => {
 
             <span className={styles.badge}>
               <TrendingUp size={12} />
+
               {tStats("inNorm")}
             </span>
           </div>
 
           <div className={styles.gridTwoCols}>
-            {/* ================= ВСЕГО ПАРТИЙ ================= */}
-
+            {/* ==================================================
+                ВСЕГО ПАРТИЙ
+            ================================================== */}
             <div className={styles.statBox}>
               {loading ? (
                 <>
@@ -195,30 +256,38 @@ const SprzedawcaClient = () => {
                 />
               )}
             </div>
-
-            {/* ================= СКОРО ИСТЕКАЕТ ================= */}
-
             <div className={styles.statBoxWarning}>
-              <div className={styles.statLabelWarning}>
-                {tStats("expiringSoon")}
-              </div>
+              {loading ? (
+                <>
+                  <div className={styles.statLabelWarning}>
+                    {tStats("expiringSoon")}
+                  </div>
 
-              <div className={styles.statValueWarning}>12</div>
+                  <div className={styles.statValueWarning}>...</div>
 
-              <div className={styles.statSubtextWarning}>
-                {tStats("nextDays")}
-              </div>
+                  <div className={styles.statSubtextWarning}>
+                    {tStats("nextDays")}
+                  </div>
+                </>
+              ) : (
+                <Link href="/expiring" className={styles.expiringStatLink}>
+                  <IntakeStatBlock
+                    intakes={expiringSoonItems}
+                    label={tStats("expiringSoon")}
+                    subtext={tStats("nextDays")}
+                  />
+                </Link>
+              )}
             </div>
           </div>
         </section>
-
-        {/* ================= ГЛАВНОЕ МЕНЮ ================= */}
-
         <section>
           <h2 className={styles.sectionTitle}>{tMenu("title")}</h2>
 
           <div className={styles.menuList}>
-            {/* ================= СКАНИРОВАТЬ ТОВАР ================= */}
+            {/* ==================================================
+                СКАНИРОВАТЬ ТОВАР
+            ================================================== */}
 
             <Link
               href="/scan"
@@ -241,7 +310,9 @@ const SprzedawcaClient = () => {
               <ChevronRight size={20} opacity={0.7} />
             </Link>
 
-            {/* ================= СРОКИ ПО МЕСЯЦАМ ================= */}
+            {/* ==================================================
+                СРОКИ ПО МЕСЯЦАМ
+            ================================================== */}
 
             <Link
               href="/months"
@@ -264,7 +335,9 @@ const SprzedawcaClient = () => {
               <ChevronRight size={20} opacity={0.7} />
             </Link>
 
-            {/* ================= СКОРО ИСТЕКАЕТ ================= */}
+            {/* ==================================================
+                СКОРО ИСТЕКАЕТ
+            ================================================== */}
 
             <Link
               href="/expiring"
@@ -287,7 +360,9 @@ const SprzedawcaClient = () => {
               <ChevronRight size={20} opacity={0.7} />
             </Link>
 
-            {/* ================= ВСЕ ТОВАРЫ ================= */}
+            {/* ==================================================
+                ВСЕ ТОВАРЫ
+            ================================================== */}
 
             <Link
               href="/products"
@@ -313,7 +388,9 @@ const SprzedawcaClient = () => {
         </section>
       </div>
 
-      {/* ================= НИЖНЯЯ НАВИГАЦИЯ ================= */}
+      {/* ======================================================
+          НИЖНЯЯ НАВИГАЦИЯ
+      ====================================================== */}
 
       <nav className={styles.bottomNav} aria-label={tNav("main")}>
         <Link href="/" className={styles.navTabActive}>

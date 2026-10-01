@@ -3,25 +3,28 @@
     "title": "IVPOL",
     "subtitle": "Store Statistics"
   },
+
   "Stats": {
-    "totalBatches": "Total Batches (pcs)",
+    "totalBatches": "Total batches (pcs)",
     "warehouse": "items in stock",
-    "expiringSoon": "Expiring Soon",
-    "nextDays": "in the next 7 days",
+    "expiringSoon": "Expiring soon",
+    "nextDays": "within the next 7 days",
     "overview": "Warehouse + Store Overview",
-    "inNorm": "Normal Status"
+    "inNorm": "Within normal range"
   },
+
   "Menu": {
     "title": "Main Menu",
     "scanProduct": "SCAN PRODUCT",
     "scanSubtitle": "Add product by barcode",
-    "months": "EXPIRATION BY MONTHS",
-    "monthsSubtitle": "Browse by months",
+    "months": "EXPIRATION BY MONTH",
+    "monthsSubtitle": "View by month",
     "expiring": "EXPIRING SOON",
-    "expiringSubtitle": "Critical expiration dates",
+    "expiringSubtitle": "Products with critical expiration dates",
     "allProducts": "ALL PRODUCTS",
-    "allProductsSubtitle": "Full product catalog"
+    "allProductsSubtitle": "Full list of products"
   },
+
   "Navigation": {
     "main": "Home",
     "products": "Products",
@@ -29,8 +32,9 @@
     "more": "More",
     "settings": "Settings"
   },
+
   "Months": {
-    "title": "Expiration Dates by Month (Number of Batches)",
+    "title": "Expiration by month (number of batches)",
     "filter": "Filter",
     "loading": "Loading data...",
     "expired": "Expired",
@@ -39,6 +43,7 @@
     "search": "Search",
     "reports": "Reports",
     "more": "More",
+
     "months": {
       "january": "January",
       "february": "February",
@@ -53,5 +58,28 @@
       "november": "November",
       "december": "December"
     }
+  },
+
+  "Expiring": {
+    "title": "Expiring Soon",
+    "filter": "Filter",
+    "loading": "Loading data...",
+
+    "expired": "Expired",
+    "days3": "Within 3 days",
+    "days7": "Within 7 days",
+    "days30": "Within 30 days",
+    "later": "More than 30 days",
+
+    "empty": "There are no products in this period",
+
+    "backToProducts": "Back to products",
+
+    "navigation": "Main navigation",
+
+    "home": "Home",
+    "search": "Search",
+    "reports": "Reports",
+    "more": "More"
   }
 }

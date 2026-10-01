@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import {
   getAllIntakes,
@@ -78,13 +79,14 @@ interface PeriodGroup {
     icon: string;
   };
 }
-
 function parseExpirationDate(dateStr?: string | null): Date | null {
   if (!dateStr) {
     return null;
   }
+
   const cleanDate = dateStr.split("T")[0];
   const parts = cleanDate.split("-");
+
   if (parts.length === 3) {
     const year = Number(parts[0]);
     const month = Number(parts[1]);
@@ -102,29 +104,33 @@ function parseExpirationDate(dateStr?: string | null): Date | null {
       }
     }
   }
+
   const fallbackDate = new Date(dateStr);
 
   if (Number.isNaN(fallbackDate.getTime())) {
     return null;
   }
+
   return fallbackDate;
 }
-
 export default function ExpiringDaysPage() {
   const router = useRouter();
+  const t = useTranslations("Expiring");
   const [items, setItems] = useState<IntakeItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [openPeriod, setOpenPeriod] = useState<PeriodRangeKey | null>(null);
-
   useEffect(() => {
     let cancelled = false;
+
     const fetchData = async () => {
       try {
         setLoading(true);
         const res: IntakesListResponse = await getAllIntakes();
+
         if (cancelled) {
           return;
         }
+
         if (res && res.status === "success" && Array.isArray(res.data)) {
           setItems(res.data);
         } else {
@@ -133,7 +139,6 @@ export default function ExpiringDaysPage() {
       } catch (error) {
         if (!cancelled) {
           console.error("Ошибка при загрузке товаров:", error);
-
           setItems([]);
         }
       } finally {
@@ -149,6 +154,7 @@ export default function ExpiringDaysPage() {
       cancelled = true;
     };
   }, []);
+
   const dateLimits = useMemo(() => {
     const now = new Date();
 
@@ -163,11 +169,17 @@ export default function ExpiringDaysPage() {
     );
 
     const endOf3Days = new Date(startOfToday);
+
     endOf3Days.setDate(endOf3Days.getDate() + 3);
+
     const endOf7Days = new Date(startOfToday);
+
     endOf7Days.setDate(endOf7Days.getDate() + 7);
+
     const endOf30Days = new Date(startOfToday);
+
     endOf30Days.setDate(endOf30Days.getDate() + 30);
+
     return {
       startOfToday,
       endOf3Days,
@@ -178,69 +190,85 @@ export default function ExpiringDaysPage() {
 
   const periods = useMemo<PeriodGroup[]>(() => {
     const { startOfToday, endOf3Days, endOf7Days, endOf30Days } = dateLimits;
-
     const list: PeriodGroup[] = [
       {
         id: "expired",
-        label: "Просрочено",
+        label: t("expired"),
         count: 0,
         colorScheme: PERIOD_COLORS.expired,
       },
+
       {
         id: "3days",
-        label: "До 3 дней",
+        label: t("days3"),
         count: 0,
         colorScheme: PERIOD_COLORS.days3,
       },
+
       {
         id: "7days",
-        label: "До 7 дней",
+        label: t("days7"),
         count: 0,
         colorScheme: PERIOD_COLORS.days7,
       },
+
       {
         id: "30days",
-        label: "До 30 дней",
+        label: t("days30"),
         count: 0,
         colorScheme: PERIOD_COLORS.days30,
       },
+
       {
         id: "later",
-        label: "Более 30 дней",
+        label: t("later"),
         count: 0,
         colorScheme: PERIOD_COLORS.later,
       },
     ];
+
     items.forEach((item) => {
       const expirationDate = parseExpirationDate(item.expirationDate);
+
       if (!expirationDate) {
         return;
       }
+
+      // Просрочено
       if (expirationDate < startOfToday) {
         list[0].count += 1;
         return;
       }
+
       // До 3 дней
       if (expirationDate < endOf3Days) {
         list[1].count += 1;
         return;
       }
+
       // До 7 дней
       if (expirationDate < endOf7Days) {
         list[2].count += 1;
         return;
       }
+
       // До 30 дней
       if (expirationDate < endOf30Days) {
         list[3].count += 1;
         return;
       }
+
       // Более 30 дней
       list[4].count += 1;
     });
 
     return list;
-  }, [items, dateLimits]);
+  }, [items, dateLimits, t]);
+
+  // ==========================================================
+  // ТОВАРЫ КОНКРЕТНОГО ПЕРИОДА
+  // ==========================================================
+
   const getItemsForPeriod = (periodId: PeriodRangeKey): IntakeItem[] => {
     const { startOfToday, endOf3Days, endOf7Days, endOf30Days } = dateLimits;
 
@@ -250,43 +278,64 @@ export default function ExpiringDaysPage() {
       if (!expirationDate) {
         return false;
       }
+
       switch (periodId) {
         case "expired":
           return expirationDate < startOfToday;
+
         case "3days":
           return expirationDate >= startOfToday && expirationDate < endOf3Days;
+
         case "7days":
           return expirationDate >= endOf3Days && expirationDate < endOf7Days;
+
         case "30days":
           return expirationDate >= endOf7Days && expirationDate < endOf30Days;
+
         case "later":
           return expirationDate >= endOf30Days;
+
         default:
           return items;
       }
     });
   };
 
+  // ==========================================================
+  // ОТКРЫТИЕ ГРУППЫ
+  // ==========================================================
+
   const handleGroupClick = (periodId: PeriodRangeKey) => {
     setOpenPeriod((current) => (current === periodId ? null : periodId));
   };
+
+  // ==========================================================
+  // ИКОНКИ
+  // ==========================================================
+
   const getPeriodIcon = (id: PeriodRangeKey) => {
     const iconProps = {
       size: 18,
       strokeWidth: 2,
       "aria-hidden": true,
     };
+
     switch (id) {
       case "expired":
         return <XCircle {...iconProps} />;
+
       case "3days":
         return <AlertTriangle {...iconProps} />;
+
       case "7days":
         return <Clock {...iconProps} />;
+
       case "30days":
         return <Calendar {...iconProps} />;
+
       case "later":
         return <Calendar {...iconProps} />;
+
       default:
         return <Calendar {...iconProps} />;
     }
@@ -306,15 +355,18 @@ export default function ExpiringDaysPage() {
   const handleOpenFilters = () => {
     console.log("Открыть фильтры");
   };
-
   return (
     <main className={styles.container}>
+      {/* ======================================================
+          HEADER
+      ====================================================== */}
+
       <header className={styles.header}>
         <button
           type="button"
           className={styles.headerBack}
           onClick={goProducts}
-          aria-label="Вернуться к товарам"
+          aria-label={t("backToProducts")}
         >
           <ChevronRight
             size={20}
@@ -322,22 +374,28 @@ export default function ExpiringDaysPage() {
             aria-hidden="true"
           />
         </button>
-        <h1 className={styles.title}>Скоро истекает</h1>
+
+        <h1 className={styles.title}>{t("title")}</h1>
+
         <button
           type="button"
           className={styles.filterButton}
           onClick={handleOpenFilters}
-          aria-label="Фильтры"
+          aria-label={t("filter")}
         >
           <SlidersHorizontal size={20} aria-hidden="true" />
         </button>
       </header>
+
+      {/* ======================================================
+          CONTENT
+      ====================================================== */}
+
       <section className={styles.content}>
         {loading ? (
           <div className={styles.loading}>
             <div className={styles.loadingSpinner} />
-
-            <span>Загрузка данных...</span>
+            <span>{t("loading")}</span>
           </div>
         ) : (
           <div className={styles.periodList}>
@@ -370,10 +428,13 @@ export default function ExpiringDaysPage() {
                     >
                       {getPeriodIcon(period.id)}
                     </div>
+
                     <div className={styles.periodInfo}>
                       <span className={styles.periodLabel}>{period.label}</span>
+
                       <span className={styles.periodCount}>{period.count}</span>
                     </div>
+
                     {isOpen ? (
                       <ChevronDown
                         size={18}
@@ -388,6 +449,11 @@ export default function ExpiringDaysPage() {
                       />
                     )}
                   </button>
+
+                  {/* ==================================================
+                      РАСКРЫВАЕМЫЙ СПИСОК
+                  ================================================== */}
+
                   {isOpen && (
                     <div className={styles.dropdown}>
                       {periodItems.length > 0 ? (
@@ -403,7 +469,7 @@ export default function ExpiringDaysPage() {
                             strokeWidth={1.5}
                             aria-hidden="true"
                           />
-                          <span>Товаров в этом периоде нет</span>
+                          <span>{t("empty")}</span>
                         </div>
                       )}
                     </div>
@@ -414,22 +480,31 @@ export default function ExpiringDaysPage() {
           </div>
         )}
       </section>
-      <nav className={styles.bottomNav} aria-label="Основная навигация">
+
+      {/* ======================================================
+          BOTTOM NAVIGATION
+      ====================================================== */}
+
+      <nav className={styles.bottomNav} aria-label={t("navigation")}>
         <button type="button" className={styles.navItem} onClick={goHome}>
           <Home size={21} aria-hidden="true" />
-          <span>Главная</span>
+          <span>{t("home")}</span>
         </button>
+
         <button type="button" className={styles.navItem} onClick={goProducts}>
           <Search size={21} aria-hidden="true" />
-          <span>Поиск</span>
+          <span>{t("search")}</span>
         </button>
+
         <button type="button" className={styles.navItem} onClick={goReports}>
           <FileText size={21} aria-hidden="true" />
-          <span>Отчёты</span>
+          <span>{t("reports")}</span>
         </button>
+
         <button type="button" className={styles.navItem} onClick={goMore}>
           <MoreHorizontal size={21} aria-hidden="true" />
-          <span>Ещё</span>
+
+          <span>{t("more")}</span>
         </button>
       </nav>
     </main>

@@ -3,25 +3,28 @@
     "title": "IVPOL",
     "subtitle": "Statystyki sklepu"
   },
+
   "Stats": {
-    "totalBatches": "Wszystkie partie (szt)",
+    "totalBatches": "Wszystkie partie (szt.)",
     "warehouse": "pozycji w magazynie",
-    "expiringSoon": "Wkrótce upływa ważność",
+    "expiringSoon": "Wkrótce wygasa",
     "nextDays": "w ciągu najbliższych 7 dni",
-    "overview": "Przegląd magazyn + sklep",
+    "overview": "Przegląd magazynu + sklepu",
     "inNorm": "W normie"
   },
+
   "Menu": {
     "title": "Menu główne",
     "scanProduct": "SKANUJ PRODUKT",
     "scanSubtitle": "Dodaj produkt za pomocą kodu kreskowego",
-    "months": "TERMINY WEDŁUG MIESIĘCY",
-    "monthsSubtitle": "Przeglądaj według miesięcy",
-    "expiring": "WKRÓTCE UPŁYWA WAŻNOŚĆ",
-    "expiringSubtitle": "Produkty z krytycznym terminem",
+    "months": "TERMINY WAŻNOŚCI WEDŁUG MIESIĘCY",
+    "monthsSubtitle": "Wyświetl według miesięcy",
+    "expiring": "WKRÓTCE WYGASA",
+    "expiringSubtitle": "Produkty z krótkim terminem ważności",
     "allProducts": "WSZYSTKIE PRODUKTY",
     "allProductsSubtitle": "Pełna lista produktów"
   },
+
   "Navigation": {
     "main": "Główna",
     "products": "Produkty",
@@ -29,16 +32,18 @@
     "more": "Więcej",
     "settings": "Ustawienia"
   },
+
   "Months": {
-    "title": "Terminy według miesięcy (liczba partii)",
+    "title": "Terminy ważności według miesięcy (liczba partii)",
     "filter": "Filtr",
     "loading": "Ładowanie danych...",
     "expired": "Przeterminowane",
     "later": "Później",
     "home": "Główna",
-    "search": "Wyszukiwanie",
+    "search": "Szukaj",
     "reports": "Raporty",
     "more": "Więcej",
+
     "months": {
       "january": "Styczeń",
       "february": "Luty",
@@ -53,5 +58,28 @@
       "november": "Listopad",
       "december": "Grudzień"
     }
+  },
+
+  "Expiring": {
+    "title": "Wkrótce wygasa",
+    "filter": "Filtr",
+    "loading": "Ładowanie danych...",
+
+    "expired": "Przeterminowane",
+    "days3": "Do 3 dni",
+    "days7": "Do 7 dni",
+    "days30": "Do 30 dni",
+    "later": "Ponad 30 dni",
+
+    "empty": "Brak produktów w tym okresie",
+
+    "backToProducts": "Wróć do produktów",
+
+    "navigation": "Główna nawigacja",
+
+    "home": "Główna",
+    "search": "Szukaj",
+    "reports": "Raporty",
+    "more": "Więcej"
   }
 }

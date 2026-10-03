@@ -9,7 +9,7 @@
     "warehouse": "items in stock",
     "expiringSoon": "Expiring soon",
     "nextDays": "within the next 7 days",
-    "overview": "Warehouse + Store Overview",
+    "overview": "Warehouse + store overview",
     "inNorm": "Within normal range"
   },
 
@@ -22,7 +22,7 @@
     "expiring": "EXPIRING SOON",
     "expiringSubtitle": "Products with critical expiration dates",
     "allProducts": "ALL PRODUCTS",
-    "allProductsSubtitle": "Full list of products"
+    "allProductsSubtitle": "Full product list"
   },
 
   "Navigation": {
@@ -35,6 +35,7 @@
 
   "Months": {
     "title": "Expiration by month (number of batches)",
+    "backToHome": "Back to home",
     "filter": "Filter",
     "loading": "Loading data...",
     "expired": "Expired",
@@ -61,25 +62,47 @@
   },
 
   "Expiring": {
-    "title": "Expiring Soon",
+    "title": "Expiring soon",
     "filter": "Filter",
     "loading": "Loading data...",
-
     "expired": "Expired",
     "days3": "Within 3 days",
     "days7": "Within 7 days",
     "days30": "Within 30 days",
     "later": "More than 30 days",
-
-    "empty": "There are no products in this period",
-
+    "empty": "No products in this period",
     "backToProducts": "Back to products",
-
     "navigation": "Main navigation",
-
     "home": "Home",
     "search": "Search",
     "reports": "Reports",
     "more": "More"
+  },
+
+  "IntakeDetails": {
+    "title": "Batch details",
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Failed to load batch data",
+    "notFound": "Batch not found",
+    "backButton": "Go back",
+    "noImage": "No image",
+    "noName": "Unnamed product",
+    "expirationDate": "Expiration date",
+    "receivedQuantity": "Received quantity",
+    "discounted": "Discounted",
+    "writtenOff": "Written off",
+    "remaining": "Remaining",
+    "addedDate": "Date added",
+    "batch": "Batch",
+    "category": "Category",
+    "shelfPrice": "Shelf price",
+    "units": {
+      "pieces": "pcs."
+    },
+    "edit": "EDIT",
+    "delete": "DELETE",
+    "editLog": "Edit",
+    "deleteLog": "Delete"
   }
 }

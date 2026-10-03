@@ -1,0 +1,304 @@
+.container {
+  max-width: 480px;
+  min-height: 100vh;
+
+  margin: 0 auto;
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  background-color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: inherit;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 24px;
+}
+
+.backBtn {
+  width: 44px;
+  height: 40px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #111827;
+
+  font-size: 32px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.backBtn:hover {
+  color: #2563eb;
+}
+
+.headerTitle {
+  flex: 1;
+
+  margin: 0;
+  padding-right: 44px;
+
+  color: #111827;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.productHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.imageContainer {
+  width: 64px;
+  height: 64px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background-color: #f9fafb;
+
+  overflow: hidden;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+
+  object-fit: contain;
+}
+
+.noImage {
+  padding: 4px;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+.productMainInfo {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.productTitle {
+  margin: 0 0 4px;
+
+  color: #111827;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.productQuantity {
+  margin-bottom: 2px;
+
+  color: #4b5563;
+
+  font-size: 13px;
+}
+
+.barcode {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-bottom: 32px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  font-size: 14px;
+}
+
+.label {
+  color: #111827;
+}
+
+.value {
+  color: #4b5563;
+
+  text-align: right;
+}
+
+.valueBold {
+  color: #111827;
+
+  font-weight: 700;
+
+  text-align: right;
+}
+
+.valueCritical {
+  color: #dc2626;
+
+  font-weight: 700;
+
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.editBtn {
+  flex: 1;
+
+  padding: 12px;
+
+  border: 1px solid #16a34a;
+  border-radius: 12px;
+
+  background: transparent;
+
+  color: #16a34a;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.editBtn:hover {
+  background-color: #f0fdf4;
+}
+
+.deleteBtn {
+  flex: 1;
+
+  padding: 12px;
+
+  border: 1px solid #ef4444;
+  border-radius: 12px;
+
+  background: transparent;
+
+  color: #ef4444;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.deleteBtn:hover {
+  background-color: #fef2f2;
+}
+
+.loader {
+  padding: 40px 24px;
+
+  color: #6b7280;
+
+  text-align: center;
+}
+
+.error {
+  padding: 24px;
+
+  color: #dc2626;
+
+  text-align: center;
+}
+
+.backErrorBtn {
+  align-self: center;
+
+  margin-top: 16px;
+  padding: 10px 16px;
+
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #2563eb;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.backErrorBtn:hover {
+  background-color: #eff6ff;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .infoRow {
+    font-size: 13px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .editBtn,
+  .deleteBtn {
+    padding: 11px 8px;
+
+    font-size: 12px;
+  }
+}

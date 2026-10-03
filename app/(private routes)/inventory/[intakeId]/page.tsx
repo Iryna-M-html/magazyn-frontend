@@ -8,9 +8,30 @@ import { useTranslations } from "next-intl";
 
 import styles from "./IntakeDetails.module.css";
 import { IntakeItem } from "@/components/ProductCard/ProductCard";
+import { AuditModal } from "@/components/AuditModal/AuditModal";
 
 interface ApiResponse {
   data?: IntakeItem;
+}
+
+export interface InventoryAudit {
+  _id: string;
+  intakeId: string;
+
+  expectedQuantity: number;
+  countedQuantity: number;
+  difference: number;
+
+  countedAt: string;
+
+  note?: string;
+
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+interface AuditsResponse {
+  data?: InventoryAudit[];
 }
 
 export default function IntakeDetailsPage({
@@ -21,11 +42,30 @@ export default function IntakeDetailsPage({
   const { intakeId } = use(params);
 
   const router = useRouter();
+
   const t = useTranslations("IntakeDetails");
 
   const [intake, setIntake] = useState<IntakeItem | null>(null);
+
   const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState<string | null>(null);
+
+  const [audits, setAudits] = useState<InventoryAudit[]>([]);
+
+  const [auditLoading, setAuditLoading] = useState(false);
+
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
+
+  const [auditSaving, setAuditSaving] = useState(false);
+
+  const [auditError, setAuditError] = useState<string | null>(null);
+
+  /*
+   * ==============================
+   * Загрузка партии
+   * ==============================
+   */
 
   useEffect(() => {
     async function fetchIntake() {
@@ -36,6 +76,7 @@ export default function IntakeDetailsPage({
         const response = await axios.get<ApiResponse>(
           `/api/inventory/${intakeId}`,
         );
+
         const data = response.data?.data;
 
         if (data) {
@@ -60,8 +101,45 @@ export default function IntakeDetailsPage({
   }, [intakeId, t]);
 
   /*
-   * Формат даты:
+   * ==============================
+   * Загрузка истории ревизий
+   * ==============================
    */
+
+  useEffect(() => {
+    async function fetchAudits() {
+      try {
+        setAuditLoading(true);
+
+        const response = await axios.get<AuditsResponse>(
+          `/api/inventory/${intakeId}/audits`,
+        );
+
+        setAudits(response.data?.data ?? []);
+      } catch (err) {
+        console.error("Ошибка загрузки ревизий:", err);
+      } finally {
+        setAuditLoading(false);
+      }
+    }
+
+    fetchAudits();
+  }, [intakeId]);
+
+  /*
+   * ==============================
+   * Формат даты
+   * ==============================
+   *
+   * Важно:
+   *
+   * MongoDB:
+   * 2026-10-03T00:00:00.000Z
+   *
+   * Отображаем:
+   * 03.10.2026
+   */
+
   const formatDate = (dateStr?: string): string => {
     if (!dateStr) {
       return "—";
@@ -73,20 +151,19 @@ export default function IntakeDetailsPage({
       return "—";
     }
 
-    const day = String(date.getDate()).padStart(2, "0");
-
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-
-    const year = date.getFullYear();
-
-    return `${day}.${month}.${year}`;
+    return date.toLocaleDateString(undefined, {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
   };
 
   /*
-   * Формат даты + времени:
-   *
-   * 25.03.2026 14:35
+   * ==============================
+   * Формат даты + времени
+   * ==============================
    */
+
   const formatDateTime = (dateStr?: string): string => {
     if (!dateStr) {
       return "—";
@@ -98,21 +175,60 @@ export default function IntakeDetailsPage({
       return "—";
     }
 
-    const day = String(date.getDate()).padStart(2, "0");
+    const datePart = date.toLocaleDateString(undefined, {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
 
-    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const timePart = date.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
-    const year = date.getFullYear();
-
-    const hours = String(date.getHours()).padStart(2, "0");
-
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-
-    return `${day}.${month}.${year} ${hours}:${minutes}`;
+    return `${datePart} ${timePart}`;
   };
 
   /*
-   * Загрузка
+   * ==============================
+   * Сохранение ревизии
+   * ==============================
+   */
+
+  const handleSaveAudit = async (countedQuantity: number, note: string) => {
+    try {
+      setAuditSaving(true);
+      setAuditError(null);
+
+      const response = await axios.post(`/api/inventory/${intakeId}/audits`, {
+        countedQuantity,
+        note,
+      });
+
+      const newAudit = response.data?.data;
+
+      if (newAudit) {
+        setAudits((prev) => [newAudit, ...prev]);
+      }
+
+      setIsAuditModalOpen(false);
+    } catch (err) {
+      console.error("Ошибка сохранения ревизии:", err);
+
+      if (axios.isAxiosError(err)) {
+        console.error("Ответ:", err.response?.data);
+      }
+
+      setAuditError(t("audit.saveError"));
+    } finally {
+      setAuditSaving(false);
+    }
+  };
+
+  /*
+   * ==============================
+   * Loading
+   * ==============================
    */
 
   if (loading) {
@@ -124,7 +240,9 @@ export default function IntakeDetailsPage({
   }
 
   /*
-   * Ошибка / партия не найдена
+   * ==============================
+   * Error
+   * ==============================
    */
 
   if (error || !intake) {
@@ -145,10 +263,22 @@ export default function IntakeDetailsPage({
 
   const product = intake.productId;
 
+  /*
+   * ==============================
+   * Расчётный остаток
+   * ==============================
+   */
+
   const remainingQuantity =
     intake.quantity -
     (intake.discountedQuantity ?? 0) -
     (intake.writtenOffQuantity ?? 0);
+
+  /*
+   * ==============================
+   * Срок годности
+   * ==============================
+   */
 
   const expirationTimestamp = intake.expirationDate
     ? new Date(intake.expirationDate).getTime()
@@ -159,9 +289,15 @@ export default function IntakeDetailsPage({
     !Number.isNaN(expirationTimestamp) &&
     expirationTimestamp <= Date.now() + 7 * 24 * 60 * 60 * 1000;
 
+  /*
+   * Последняя ревизия
+   */
+
+  const lastAudit = audits.length > 0 ? audits[0] : null;
+
   return (
     <div className={styles.container}>
-      {/* HEADER */}
+      {/* ================= HEADER ================= */}
 
       <header className={styles.header}>
         <button
@@ -176,7 +312,7 @@ export default function IntakeDetailsPage({
         <h1 className={styles.headerTitle}>{t("title")}</h1>
       </header>
 
-      {/* PRODUCT */}
+      {/* ================= PRODUCT ================= */}
 
       <section className={styles.productHeader}>
         <div className={styles.imageContainer}>
@@ -208,11 +344,9 @@ export default function IntakeDetailsPage({
         </div>
       </section>
 
-      {/* INFORMATION */}
+      {/* ================= INFORMATION ================= */}
 
       <section className={styles.infoList}>
-        {/* Срок годности */}
-
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("expirationDate")}</span>
 
@@ -225,8 +359,6 @@ export default function IntakeDetailsPage({
           </span>
         </div>
 
-        {/* Приёмка */}
-
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("receivedQuantity")}</span>
 
@@ -234,8 +366,6 @@ export default function IntakeDetailsPage({
             {intake.quantity} {t("units.pieces")}
           </span>
         </div>
-
-        {/* Уценено */}
 
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("discounted")}</span>
@@ -245,8 +375,6 @@ export default function IntakeDetailsPage({
           </span>
         </div>
 
-        {/* Списано */}
-
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("writtenOff")}</span>
 
@@ -254,8 +382,6 @@ export default function IntakeDetailsPage({
             {intake.writtenOffQuantity ?? 0} {t("units.pieces")}
           </span>
         </div>
-
-        {/* Остаток */}
 
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("remaining")}</span>
@@ -265,8 +391,6 @@ export default function IntakeDetailsPage({
           </span>
         </div>
 
-        {/* Дата добавления */}
-
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("addedDate")}</span>
 
@@ -275,23 +399,17 @@ export default function IntakeDetailsPage({
           </span>
         </div>
 
-        {/* Партия */}
-
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("batch")}</span>
 
           <span className={styles.value}>{intake.batch || "—"}</span>
         </div>
 
-        {/* Категория */}
-
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("category")}</span>
 
           <span className={styles.value}>{product?.category || "—"}</span>
         </div>
-
-        {/* Цена */}
 
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("shelfPrice")}</span>
@@ -304,14 +422,130 @@ export default function IntakeDetailsPage({
         </div>
       </section>
 
-      {/* ACTIONS */}
+      {/* ================= AUDIT ================= */}
+
+      <section className={styles.auditSection}>
+        <div className={styles.auditHeader}>
+          <h2 className={styles.auditTitle}>{t("audit.title")}</h2>
+
+          <button
+            type="button"
+            className={styles.auditAddBtn}
+            onClick={() => {
+              setAuditError(null);
+
+              setIsAuditModalOpen(true);
+            }}
+          >
+            {t("audit.create")}
+          </button>
+        </div>
+
+        {auditLoading ? (
+          <div className={styles.auditLoading}>{t("loading")}</div>
+        ) : lastAudit ? (
+          <div className={styles.lastAudit}>
+            <div className={styles.auditRow}>
+              <span className={styles.auditLabel}>{t("audit.lastAudit")}</span>
+
+              <span className={styles.auditValue}>
+                {formatDateTime(lastAudit.countedAt)}
+              </span>
+            </div>
+
+            <div className={styles.auditRow}>
+              <span className={styles.auditLabel}>{t("audit.expected")}</span>
+
+              <span className={styles.auditValue}>
+                {lastAudit.expectedQuantity} {t("units.pieces")}
+              </span>
+            </div>
+
+            <div className={styles.auditRow}>
+              <span className={styles.auditLabel}>{t("audit.actual")}</span>
+
+              <strong className={styles.auditValueBold}>
+                {lastAudit.countedQuantity} {t("units.pieces")}
+              </strong>
+            </div>
+
+            <div className={styles.auditRow}>
+              <span className={styles.auditLabel}>{t("audit.difference")}</span>
+
+              <span
+                className={
+                  lastAudit.difference === 0
+                    ? styles.auditOk
+                    : lastAudit.difference < 0
+                      ? styles.auditNegative
+                      : styles.auditPositive
+                }
+              >
+                {lastAudit.difference > 0 ? "+" : ""}
+                {lastAudit.difference} {t("units.pieces")}
+              </span>
+            </div>
+
+            {lastAudit.note ? (
+              <div className={styles.auditNote}>{lastAudit.note}</div>
+            ) : null}
+          </div>
+        ) : (
+          <div className={styles.noAudits}>{t("audit.noAudits")}</div>
+        )}
+
+        {/* История */}
+
+        {audits.length > 0 ? (
+          <div className={styles.auditHistory}>
+            <h3 className={styles.auditHistoryTitle}>{t("audit.history")}</h3>
+
+            {audits.map((audit) => (
+              <div key={audit._id} className={styles.auditHistoryItem}>
+                <div className={styles.auditHistoryDate}>
+                  {formatDateTime(audit.countedAt)}
+                </div>
+
+                <div className={styles.auditHistoryInfo}>
+                  <span>
+                    {t("audit.expected")}: {audit.expectedQuantity}
+                  </span>
+
+                  <span>
+                    {t("audit.actual")}: {audit.countedQuantity}
+                  </span>
+
+                  <span
+                    className={
+                      audit.difference === 0
+                        ? styles.auditOk
+                        : audit.difference < 0
+                          ? styles.auditNegative
+                          : styles.auditPositive
+                    }
+                  >
+                    {t("audit.difference")}: {audit.difference > 0 ? "+" : ""}
+                    {audit.difference}
+                  </span>
+                </div>
+
+                {audit.note ? (
+                  <div className={styles.auditHistoryNote}>{audit.note}</div>
+                ) : null}
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </section>
+
+      {/* ================= ACTIONS ================= */}
 
       <div className={styles.actions}>
         <button
           type="button"
           className={styles.editBtn}
           onClick={() => {
-            console.log(t("editLog"), intake._id);
+            console.log("Редактировать:", intake._id);
           }}
         >
           {t("edit")}
@@ -321,12 +555,27 @@ export default function IntakeDetailsPage({
           type="button"
           className={styles.deleteBtn}
           onClick={() => {
-            console.log(t("deleteLog"), intake._id);
+            console.log("Удалить:", intake._id);
           }}
         >
           {t("delete")}
         </button>
       </div>
+
+      {/* ================= AUDIT MODAL ================= */}
+
+      <AuditModal
+        isOpen={isAuditModalOpen}
+        expectedQuantity={remainingQuantity}
+        loading={auditSaving}
+        error={auditError}
+        onClose={() => {
+          if (!auditSaving) {
+            setIsAuditModalOpen(false);
+          }
+        }}
+        onSubmit={handleSaveAudit}
+      />
     </div>
   );
 }

@@ -80,29 +80,40 @@
   },
 
   "IntakeDetails": {
-    "title": "Szczegóły partii",
-    "back": "Wstecz",
-    "loading": "Ładowanie...",
-    "error": "Nie udało się załadować danych partii",
-    "notFound": "Nie znaleziono partii",
-    "backButton": "Wróć",
-    "noImage": "Brak zdjęcia",
-    "noName": "Produkt bez nazwy",
-    "expirationDate": "Termin ważności",
-    "receivedQuantity": "Ilość przyjęta",
-    "discounted": "Przeceniono",
-    "writtenOff": "Spisano",
-    "remaining": "Pozostało",
-    "addedDate": "Data dodania",
-    "batch": "Partia",
-    "category": "Kategoria",
-    "shelfPrice": "Cena na półce",
+    "title": "Batch details",
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Failed to load batch data",
+    "notFound": "Batch not found",
+    "backButton": "Go back",
+    "noImage": "No image",
+    "noName": "Unnamed product",
+    "expirationDate": "Expiration date",
+    "receivedQuantity": "Received quantity",
+    "discounted": "Discounted",
+    "writtenOff": "Written off",
+    "remaining": "Remaining",
+    "addedDate": "Date added",
+    "batch": "Batch",
+    "category": "Category",
+    "shelfPrice": "Shelf price",
     "units": {
-      "pieces": "szt."
+      "pieces": "pcs."
     },
-    "edit": "EDYTUJ",
-    "delete": "USUŃ",
-    "editLog": "Edytuj",
-    "deleteLog": "Usuń"
+    "edit": "EDIT",
+    "delete": "DELETE",
+    "editLog": "Edit",
+    "deleteLog": "Delete",
+    "audit": {
+      "title": "Stock Audit",
+      "create": "New Audit",
+      "lastAudit": "Last audit",
+      "expected": "Expected",
+      "actual": "Actual",
+      "difference": "Difference",
+      "noAudits": "No audits recorded yet",
+      "history": "Audit History",
+      "saveError": "Failed to save audit"
+    }
   }
 }

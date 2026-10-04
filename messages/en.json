@@ -103,6 +103,17 @@
     "edit": "EDIT",
     "delete": "DELETE",
     "editLog": "Edit",
-    "deleteLog": "Delete"
+    "deleteLog": "Delete",
+    "audit": {
+      "title": "Stock Audit",
+      "create": "New Audit",
+      "lastAudit": "Last audit",
+      "expected": "Expected",
+      "actual": "Actual",
+      "difference": "Difference",
+      "noAudits": "No audits recorded yet",
+      "history": "Audit History",
+      "saveError": "Failed to save audit"
+    }
   }
 }

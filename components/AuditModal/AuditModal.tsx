@@ -7,15 +7,10 @@ import styles from "./AuditModal.module.css";
 
 interface AuditModalProps {
   isOpen: boolean;
-
   expectedQuantity: number;
-
   loading: boolean;
-
   error: string | null;
-
   onClose: () => void;
-
   onSubmit: (countedQuantity: number, note: string) => void;
 }
 
@@ -40,12 +35,14 @@ export function AuditModal({
   }
 
   const handleSubmit = () => {
-    const quantity = Number(countedQuantity);
+    const trimmedQuantity = countedQuantity.trim();
+    const quantity = Number(trimmedQuantity);
 
     if (
-      countedQuantity.trim() === "" ||
+      trimmedQuantity === "" ||
       !Number.isFinite(quantity) ||
-      quantity < 0
+      quantity < 0 ||
+      !Number.isInteger(quantity)
     ) {
       return;
     }
@@ -54,7 +51,7 @@ export function AuditModal({
   };
 
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
+    if (event.target === event.currentTarget && !loading) {
       onClose();
     }
   };
@@ -67,6 +64,8 @@ export function AuditModal({
         aria-modal="true"
         aria-labelledby="audit-modal-title"
       >
+        {/* HEADER */}
+
         <div className={styles.header}>
           <h2 id="audit-modal-title" className={styles.title}>
             {t("modalTitle")}
@@ -83,55 +82,63 @@ export function AuditModal({
           </button>
         </div>
 
-        {/* Расчётный остаток */}
+        {/* РАСЧЁТНЫЙ ОСТАТОК */}
 
         <div className={styles.expectedBox}>
-          <span>{t("expected")}</span>
+          <span className={styles.expectedLabel}>{t("expected")}</span>
 
-          <strong>
-            {expectedQuantity} {t("../units.pieces")}
+          <strong className={styles.expectedValue}>
+            {expectedQuantity} {t("expectedUnit")}
           </strong>
         </div>
 
-        {/* Фактическое количество */}
+        {/* ФАКТИЧЕСКОЕ КОЛИЧЕСТВО */}
 
-        <label htmlFor="countedQuantity" className={styles.label}>
-          {t("actual")}
-        </label>
+        <div className={styles.field}>
+          <label htmlFor="countedQuantity" className={styles.label}>
+            {t("actual")}
+          </label>
 
-        <input
-          id="countedQuantity"
-          type="number"
-          min="0"
-          step="1"
-          value={countedQuantity}
-          onChange={(event) => setCountedQuantity(event.target.value)}
-          className={styles.input}
-          disabled={loading}
-          autoFocus
-        />
+          <div className={styles.inputWrapper}>
+            <input
+              id="countedQuantity"
+              type="number"
+              min="0"
+              step="1"
+              value={countedQuantity}
+              onChange={(event) => setCountedQuantity(event.target.value)}
+              className={styles.input}
+              disabled={loading}
+              autoFocus
+            />
 
-        {/* Комментарий */}
+            <span className={styles.inputUnit}>{t("expectedUnit")}</span>
+          </div>
+        </div>
 
-        <label htmlFor="auditNote" className={styles.label}>
-          {t("note")}
-        </label>
+        {/* КОММЕНТАРИЙ */}
 
-        <textarea
-          id="auditNote"
-          value={note}
-          onChange={(event) => setNote(event.target.value)}
-          className={styles.textarea}
-          rows={3}
-          placeholder={t("notePlaceholder")}
-          disabled={loading}
-        />
+        <div className={styles.field}>
+          <label htmlFor="auditNote" className={styles.label}>
+            {t("note")}
+          </label>
 
-        {/* Ошибка */}
+          <textarea
+            id="auditNote"
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            className={styles.textarea}
+            rows={3}
+            placeholder={t("notePlaceholder")}
+            disabled={loading}
+          />
+        </div>
+
+        {/* ОШИБКА */}
 
         {error ? <div className={styles.error}>{error}</div> : null}
 
-        {/* Кнопки */}
+        {/* КНОПКИ */}
 
         <div className={styles.actions}>
           <button

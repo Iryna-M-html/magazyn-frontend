@@ -88,6 +88,7 @@
     "backButton": "Go back",
     "noImage": "No image",
     "noName": "Unnamed product",
+
     "expirationDate": "Expiration date",
     "receivedQuantity": "Received quantity",
     "discounted": "Discounted",
@@ -97,23 +98,34 @@
     "batch": "Batch",
     "category": "Category",
     "shelfPrice": "Shelf price",
+
     "units": {
       "pieces": "pcs."
     },
+
     "edit": "EDIT",
     "delete": "DELETE",
     "editLog": "Edit",
     "deleteLog": "Delete",
+
     "audit": {
       "title": "Stock Audit",
       "create": "New Audit",
       "lastAudit": "Last audit",
-      "expected": "Expected",
-      "actual": "Actual",
+      "expected": "Expected quantity",
+      "actual": "Actual quantity",
       "difference": "Difference",
       "noAudits": "No audits recorded yet",
       "history": "Audit History",
-      "saveError": "Failed to save audit"
+      "saveError": "Failed to save audit",
+
+      "modalTitle": "Stock Audit",
+      "expectedUnit": "pcs.",
+      "note": "Note",
+      "notePlaceholder": "For example: shortage found, product damaged...",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "save": "Save"
     }
   }
 }

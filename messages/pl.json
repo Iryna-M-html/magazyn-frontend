@@ -88,6 +88,7 @@
     "backButton": "Wróć",
     "noImage": "Brak zdjęcia",
     "noName": "Produkt bez nazwy",
+
     "expirationDate": "Termin ważności",
     "receivedQuantity": "Ilość przyjęta",
     "discounted": "Przeceniono",
@@ -97,13 +98,16 @@
     "batch": "Partia",
     "category": "Kategoria",
     "shelfPrice": "Cena na półce",
+
     "units": {
       "pieces": "szt."
     },
+
     "edit": "EDYTUJ",
     "delete": "USUŃ",
     "editLog": "Edytuj",
     "deleteLog": "Usuń",
+
     "audit": {
       "title": "Inwentaryzacja stanu",
       "create": "Nowa inwentaryzacja",
@@ -113,7 +117,15 @@
       "difference": "Różnica",
       "noAudits": "Brak zapisanych inwentaryzacji",
       "history": "Historia inwentaryzacji",
-      "saveError": "Nie udało się zapisać inwentaryzacji"
+      "saveError": "Nie udało się zapisać inwentaryzacji",
+
+      "modalTitle": "Inwentaryzacja stanu",
+      "expectedUnit": "szt.",
+      "note": "Komentarz",
+      "notePlaceholder": "Na przykład: stwierdzono brak, produkt uszkodzony...",
+      "cancel": "Anuluj",
+      "saving": "Zapisywanie...",
+      "save": "Zapisz"
     }
   }
 }

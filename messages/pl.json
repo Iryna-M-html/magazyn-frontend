@@ -6,10 +6,10 @@
 
   "Stats": {
     "totalBatches": "Wszystkie partie (szt.)",
-    "warehouse": "pozycji w magazynie",
-    "expiringSoon": "Wkrótce wygasa",
+    "warehouse": "pozycji na magazynie",
+    "expiringSoon": "Wkrótce upływa termin",
     "nextDays": "w ciągu najbliższych 7 dni",
-    "overview": "Przegląd magazyn + sklep",
+    "overview": "Przegląd magazynu + sklepu",
     "inNorm": "W normie"
   },
 
@@ -17,9 +17,9 @@
     "title": "Menu główne",
     "scanProduct": "SKANUJ PRODUKT",
     "scanSubtitle": "Dodaj produkt za pomocą kodu kreskowego",
-    "months": "TERMINY WAŻNOŚCI WEDŁUG MIESIĘCY",
+    "months": "TERMINY WEDŁUG MIESIĘCY",
     "monthsSubtitle": "Wyświetl według miesięcy",
-    "expiring": "WKRÓTCE WYGASA",
+    "expiring": "WKRÓTCE UPŁYWA TERMIN",
     "expiringSubtitle": "Produkty z krytycznym terminem ważności",
     "allProducts": "WSZYSTKIE PRODUKTY",
     "allProductsSubtitle": "Pełna lista produktów"
@@ -34,7 +34,7 @@
   },
 
   "Months": {
-    "title": "Terminy ważności według miesięcy (liczba partii)",
+    "title": "Terminy według miesięcy (liczba partii)",
     "backToHome": "Wróć do strony głównej",
     "filter": "Filtr",
     "loading": "Ładowanie danych...",
@@ -62,7 +62,7 @@
   },
 
   "Expiring": {
-    "title": "Wkrótce wygasa",
+    "title": "Wkrótce upływa termin",
     "filter": "Filtr",
     "loading": "Ładowanie danych...",
     "expired": "Przeterminowane",
@@ -108,21 +108,48 @@
     "editLog": "Edytuj",
     "deleteLog": "Usuń",
 
+    "inventoryAction": {
+      "title": "Obsługa produktu",
+      "remaining": "Pozostało",
+      "discount": "Przecenij",
+      "writeOff": "Spisz",
+      "noRemaining": "W tej partii nie ma już produktów dostępnych do przeceny lub spisania",
+
+      "discountTitle": "Przecena produktu",
+      "writeOffTitle": "Spisanie produktu",
+
+      "discountDescription": "Wprowadź ilość produktów, które mają zostać przecenione.",
+      "writeOffDescription": "Wprowadź ilość produktów, które mają zostać spisane.",
+
+      "available": "Dostępne do obsługi",
+      "quantity": "Ilość, szt.",
+      "quantityPlaceholder": "Wprowadź ilość",
+
+      "exceedsAvailable": "Nie można przetworzyć więcej niż {quantity} szt.",
+
+      "cancel": "Anuluj",
+      "discountSubmit": "Przecenij",
+      "writeOffSubmit": "Spisz",
+      "saving": "Zapisywanie...",
+
+      "updateError": "Nie udało się zaktualizować ilości produktu."
+    },
+
     "audit": {
       "title": "Inwentaryzacja stanu",
       "create": "Nowa inwentaryzacja",
       "lastAudit": "Ostatnia inwentaryzacja",
-      "expected": "Stan oczekiwany",
-      "actual": "Stan faktyczny",
+      "expected": "Oczekiwana ilość",
+      "actual": "Rzeczywista ilość",
       "difference": "Różnica",
-      "noAudits": "Brak zapisanych inwentaryzacji",
+      "noAudits": "Brak inwentaryzacji",
       "history": "Historia inwentaryzacji",
       "saveError": "Nie udało się zapisać inwentaryzacji",
 
       "modalTitle": "Inwentaryzacja stanu",
       "expectedUnit": "szt.",
       "note": "Komentarz",
-      "notePlaceholder": "Na przykład: stwierdzono brak, produkt uszkodzony...",
+      "notePlaceholder": "Na przykład: stwierdzono niedobór, produkt uszkodzony...",
       "cancel": "Anuluj",
       "saving": "Zapisywanie...",
       "save": "Zapisz"

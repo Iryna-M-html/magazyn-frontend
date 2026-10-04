@@ -108,6 +108,33 @@
     "editLog": "Редактировать",
     "deleteLog": "Удалить",
 
+    "inventoryAction": {
+      "title": "Обработка товара",
+      "remaining": "Остаток",
+      "discount": "Уценить",
+      "writeOff": "Списать",
+      "noRemaining": "В партии больше нет доступного товара для уценки или списания",
+
+      "discountTitle": "Уценка товара",
+      "writeOffTitle": "Списание товара",
+
+      "discountDescription": "Укажите количество товара, которое необходимо уценить.",
+      "writeOffDescription": "Укажите количество товара, которое необходимо списать.",
+
+      "available": "Доступно для обработки",
+      "quantity": "Количество, шт.",
+      "quantityPlaceholder": "Введите количество",
+
+      "exceedsAvailable": "Нельзя обработать больше {quantity} шт.",
+
+      "cancel": "Отмена",
+      "discountSubmit": "Уценить",
+      "writeOffSubmit": "Списать",
+      "saving": "Сохранение...",
+
+      "updateError": "Не удалось обновить количество товара."
+    },
+
     "audit": {
       "title": "Ревизия остатков",
       "create": "Новая ревизия",

@@ -1,12 +1,18 @@
 /* ================= GLOBAL & CONTAINER ================= */
 
 .container {
+  width: 100%;
   max-width: 600px;
+
   margin: 0 auto;
   padding: 16px 20px 40px;
+
+  box-sizing: border-box;
+
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
+
   color: #111827;
   background-color: #ffffff;
 }
@@ -14,8 +20,11 @@
 .loader,
 .error {
   padding: 40px 0;
+
   text-align: center;
+
   font-size: 15px;
+
   color: #6b7280;
 }
 
@@ -26,13 +35,18 @@
 
 .backErrorBtn {
   display: block;
+
   margin: 16px auto 0;
   padding: 8px 16px;
+
   border: 1px solid #d1d5db;
   border-radius: 8px;
+
   background: #ffffff;
   color: #374151;
+
   font-size: 14px;
+
   cursor: pointer;
 }
 
@@ -41,7 +55,9 @@
 .header {
   display: flex;
   align-items: center;
+
   gap: 12px;
+
   margin-bottom: 24px;
 }
 
@@ -49,16 +65,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   width: 36px;
   height: 36px;
+
+  flex-shrink: 0;
+
   border: 1px solid #e5e7eb;
   border-radius: 10px;
+
   background: #ffffff;
   color: #374151;
+
   font-size: 20px;
   line-height: 1;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .backBtn:hover {
@@ -68,8 +94,10 @@
 
 .headerTitle {
   margin: 0;
+
   font-size: 22px;
   font-weight: 700;
+
   color: #111827;
 }
 
@@ -78,66 +106,92 @@
 .productHeader {
   display: flex;
   align-items: center;
+
   gap: 16px;
+
   padding: 16px;
   margin-bottom: 24px;
-  border-radius: 12px;
-  background-color: #f9fafb;
+
   border: 1px solid #f3f4f6;
+  border-radius: 12px;
+
+  background-color: #f9fafb;
+
+  box-sizing: border-box;
 }
 
 .imageContainer {
   width: 64px;
   height: 64px;
+
   flex-shrink: 0;
-  border-radius: 8px;
+
   overflow: hidden;
-  background: #ffffff;
+
   border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  background: #ffffff;
 }
 
 .image {
-  object-fit: cover;
   width: 100%;
   height: 100%;
+
+  object-fit: cover;
 }
 
 .noImage {
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
-  font-size: 11px;
-  color: #9ca3af;
-  text-align: center;
+
   padding: 4px;
+
+  box-sizing: border-box;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  text-align: center;
 }
 
 .productMainInfo {
   display: flex;
   flex-direction: column;
+
+  min-width: 0;
+
   gap: 4px;
 }
 
 .productTitle {
   margin: 0;
+
+  color: #111827;
+
   font-size: 18px;
   font-weight: 600;
-  color: #111827;
 }
 
 .productQuantity {
+  color: #4b5563;
+
   font-size: 13px;
   font-weight: 500;
-  color: #4b5563;
 }
 
 .barcode {
   margin: 0;
-  font-size: 12px;
+
   color: #6b7280;
+
   font-family: monospace;
+  font-size: 12px;
 }
 
 /* ================= INFORMATION LIST ================= */
@@ -145,16 +199,23 @@
 .infoList {
   display: flex;
   flex-direction: column;
+
   gap: 12px;
+
   margin-bottom: 28px;
 }
 
 .infoRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
   padding-bottom: 10px;
+
   border-bottom: 1px solid #f3f4f6;
+
   font-size: 14px;
 }
 
@@ -164,18 +225,179 @@
 
 .value {
   color: #111827;
+
   font-weight: 500;
+
+  text-align: right;
 }
 
 .valueBold {
   color: #111827;
-  font-weight: 700;
+
   font-size: 15px;
+  font-weight: 700;
+
+  text-align: right;
 }
 
 .valueCritical {
   color: #dc2626;
+
   font-weight: 700;
+
+  text-align: right;
+}
+
+/* =========================================================
+   INVENTORY ACTIONS
+   ========================================================= */
+
+.inventoryActions {
+  width: 100%;
+
+  margin-top: 8px;
+  margin-bottom: 28px;
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  background: #f9fafb;
+}
+
+.inventoryActionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+}
+
+.inventoryActionsTitle {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.inventoryActionsRemaining {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #6b7280;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.inventoryButtons {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+.discountButton,
+.writeOffButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 46px;
+
+  padding: 11px 16px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.1s ease;
+}
+
+.discountButton {
+  border: 1px solid #bfdbfe;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+}
+
+.discountButton:hover:not(:disabled) {
+  border-color: #93c5fd;
+
+  background: #dbeafe;
+}
+
+.discountButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.writeOffButton {
+  border: 1px solid #fecaca;
+
+  background: #fef2f2;
+
+  color: #dc2626;
+}
+
+.writeOffButton:hover:not(:disabled) {
+  border-color: #fca5a5;
+
+  background: #fee2e2;
+}
+
+.writeOffButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.discountButton:disabled,
+.writeOffButton:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+.noRemaining {
+  margin-top: 12px;
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: #f3f4f6;
+
+  color: #6b7280;
+
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 /* ================= AUDIT SECTION ================= */
@@ -184,6 +406,7 @@
   margin-top: 8px;
   margin-bottom: 28px;
   padding-top: 24px;
+
   border-top: 1px solid #e5e7eb;
 }
 
@@ -191,27 +414,36 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 12px;
+
   margin-bottom: 16px;
 }
 
 .auditTitle {
   margin: 0;
+
   color: #111827;
+
   font-size: 16px;
   font-weight: 700;
 }
 
 .auditAddBtn {
   padding: 8px 14px;
+
   border: none;
   border-radius: 8px;
+
   background: #111827;
   color: #ffffff;
+
   font-size: 13px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: background-color 0.2s;
+
+  transition: background-color 0.2s ease;
 }
 
 .auditAddBtn:hover {
@@ -220,15 +452,20 @@
 
 .auditLoading {
   padding: 16px;
+
   color: #6b7280;
+
   font-size: 13px;
+
   text-align: center;
 }
 
 .lastAudit {
   padding: 16px;
+
   border: 1px solid #e5e7eb;
   border-radius: 12px;
+
   background: #f9fafb;
 }
 
@@ -236,8 +473,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 12px;
+
   margin-bottom: 10px;
+
   font-size: 13px;
 }
 
@@ -251,47 +491,62 @@
 
 .auditValue {
   color: #374151;
+
   text-align: right;
 }
 
 .auditValueBold {
   color: #111827;
+
   font-weight: 700;
 }
 
 .auditOk {
   color: #16a34a;
+
   font-weight: 700;
 }
 
 .auditNegative {
   color: #dc2626;
+
   font-weight: 700;
 }
 
 .auditPositive {
   color: #2563eb;
+
   font-weight: 700;
 }
 
 .auditNote {
   margin-top: 12px;
   padding-top: 10px;
+
   border-top: 1px solid #e5e7eb;
+
   color: #6b7280;
+
   font-size: 12px;
   line-height: 1.4;
 }
 
 .noAudits {
   padding: 24px 16px;
+
   border: 1px dashed #d1d5db;
   border-radius: 12px;
+
+  background: #fafafa;
+
   color: #6b7280;
+
   font-size: 13px;
+
   text-align: center;
-  background-color: #fafafa;
 }
+
+/* ================= AUDIT HISTORY ================= */
 
 .auditHistory {
   margin-top: 20px;
@@ -299,33 +554,43 @@
 
 .auditHistoryTitle {
   margin: 0 0 12px;
+
   color: #111827;
+
   font-size: 14px;
   font-weight: 700;
 }
 
 .auditHistoryItem {
   padding: 12px 0;
+
   border-bottom: 1px solid #f0f0f0;
 }
 
 .auditHistoryDate {
   margin-bottom: 6px;
+
   color: #6b7280;
+
   font-size: 12px;
 }
 
 .auditHistoryInfo {
   display: flex;
   flex-wrap: wrap;
+
   gap: 12px;
+
   color: #4b5563;
+
   font-size: 13px;
 }
 
 .auditHistoryNote {
   margin-top: 6px;
+
   color: #6b7280;
+
   font-size: 12px;
 }
 
@@ -333,24 +598,35 @@
 
 .actions {
   display: flex;
+
   gap: 12px;
+
   margin-top: 24px;
 }
 
 .editBtn,
 .deleteBtn {
   flex: 1;
+
   padding: 12px 16px;
+
   border-radius: 10px;
+
   font-size: 14px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+
   text-align: center;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .editBtn {
   border: 1px solid #d1d5db;
+
   background: #ffffff;
   color: #374151;
 }
@@ -362,6 +638,7 @@
 
 .deleteBtn {
   border: 1px solid #fee2e2;
+
   background: #fef2f2;
   color: #dc2626;
 }
@@ -369,4 +646,46 @@
 .deleteBtn:hover {
   background: #fde8e8;
   border-color: #fca5a5;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 480px) {
+  .container {
+    padding: 14px 16px 32px;
+  }
+
+  .inventoryActions {
+    padding: 16px;
+  }
+
+  .inventoryActionsHeader {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+  .inventoryActionsRemaining {
+    white-space: normal;
+  }
+
+  .inventoryButtons {
+    grid-template-columns: 1fr;
+  }
+
+  .infoRow {
+    align-items: flex-start;
+  }
+
+  .value,
+  .valueBold,
+  .valueCritical {
+    text-align: right;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
 }

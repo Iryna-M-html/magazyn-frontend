@@ -7,11 +7,14 @@ import axios from "axios";
 import { useTranslations } from "next-intl";
 
 import styles from "./IntakeDetails.module.css";
+
 import { IntakeItem } from "@/components/ProductCard/ProductCard";
 import { AuditModal } from "@/components/AuditModal/AuditModal";
+import { InventoryActionModal } from "@/components/InventoryActionModal/InventoryActionModal";
 
-interface ApiResponse {
+interface IntakeResponse {
   data?: IntakeItem;
+  intake?: IntakeItem;
 }
 
 export interface InventoryAudit {
@@ -34,38 +37,34 @@ interface AuditsResponse {
   data?: InventoryAudit[];
 }
 
+interface UpdateIntakeResponse {
+  message?: string;
+  intake?: IntakeItem;
+}
+type InventoryAction = "discount" | "writeOff";
 export default function IntakeDetailsPage({
   params,
 }: {
   params: Promise<{ intakeId: string }>;
 }) {
   const { intakeId } = use(params);
-
   const router = useRouter();
-
   const t = useTranslations("IntakeDetails");
-
   const [intake, setIntake] = useState<IntakeItem | null>(null);
-
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState<string | null>(null);
-
   const [audits, setAudits] = useState<InventoryAudit[]>([]);
-
   const [auditLoading, setAuditLoading] = useState(false);
-
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-
   const [auditSaving, setAuditSaving] = useState(false);
-
   const [auditError, setAuditError] = useState<string | null>(null);
 
-  /*
-   * ==============================
-   * Загрузка партии
-   * ==============================
-   */
+  const [inventoryAction, setInventoryAction] =
+    useState<InventoryAction | null>(null);
+  const [inventoryActionSaving, setInventoryActionSaving] = useState(false);
+  const [inventoryActionError, setInventoryActionError] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     async function fetchIntake() {
@@ -73,11 +72,11 @@ export default function IntakeDetailsPage({
         setLoading(true);
         setError(null);
 
-        const response = await axios.get<ApiResponse>(
+        const response = await axios.get<IntakeResponse>(
           `/api/inventory/${intakeId}`,
         );
 
-        const data = response.data?.data;
+        const data = response.data?.data ?? response.data?.intake;
 
         if (data) {
           setIntake(data);
@@ -100,12 +99,6 @@ export default function IntakeDetailsPage({
     fetchIntake();
   }, [intakeId, t]);
 
-  /*
-   * ==============================
-   * Загрузка истории ревизий
-   * ==============================
-   */
-
   useEffect(() => {
     async function fetchAudits() {
       try {
@@ -126,44 +119,20 @@ export default function IntakeDetailsPage({
     fetchAudits();
   }, [intakeId]);
 
-  /*
-   * ==============================
-   * Формат даты
-   * ==============================
-   *
-   * Важно:
-   *
-   * MongoDB:
-   * 2026-10-03T00:00:00.000Z
-   *
-   * Отображаем:
-   * 03.10.2026
-   */
-
   const formatDate = (dateStr?: string): string => {
     if (!dateStr) {
       return "—";
     }
-
     const date = new Date(dateStr);
-
     if (Number.isNaN(date.getTime())) {
       return "—";
     }
-
     return date.toLocaleDateString(undefined, {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
     });
   };
-
-  /*
-   * ==============================
-   * Формат даты + времени
-   * ==============================
-   */
-
   const formatDateTime = (dateStr?: string): string => {
     if (!dateStr) {
       return "—";
@@ -188,13 +157,126 @@ export default function IntakeDetailsPage({
 
     return `${datePart} ${timePart}`;
   };
+  const handleOpenDiscount = () => {
+    setInventoryActionError(null);
+    setInventoryAction("discount");
+  };
 
-  /*
-   * ==============================
-   * Сохранение ревизии
-   * ==============================
-   */
+  const handleOpenWriteOff = () => {
+    setInventoryActionError(null);
+    setInventoryAction("writeOff");
+  };
+  const handleCloseInventoryAction = () => {
+    if (inventoryActionSaving) {
+      return;
+    }
 
+    setInventoryActionError(null);
+    setInventoryAction(null);
+  };
+
+  const handleSaveInventoryAction = async (quantity: number) => {
+    if (!intake) {
+      return;
+    }
+
+    if (!Number.isInteger(quantity) || quantity <= 0) {
+      setInventoryActionError(t("inventoryAction.updateError"));
+
+      return;
+    }
+    const discountedQuantity = intake.discountedQuantity ?? 0;
+    const writtenOffQuantity = intake.writtenOffQuantity ?? 0;
+    const remainingQuantity =
+      intake.quantity - discountedQuantity - writtenOffQuantity;
+    if (quantity > remainingQuantity) {
+      setInventoryActionError(
+        t("inventoryAction.exceedsAvailable", {
+          quantity: remainingQuantity,
+        }),
+      );
+
+      return;
+    }
+
+    if (!inventoryAction) {
+      return;
+    }
+
+    try {
+      setInventoryActionSaving(true);
+      setInventoryActionError(null);
+
+      const body =
+        inventoryAction === "discount"
+          ? {
+              discountedQuantity: quantity,
+            }
+          : {
+              writtenOffQuantity: quantity,
+            };
+
+      const response = await axios.patch<UpdateIntakeResponse>(
+        `/api/inventory/${intakeId}`,
+        body,
+      );
+
+      const updatedIntake = response.data?.intake;
+
+      if (updatedIntake) {
+        setIntake(updatedIntake);
+      } else {
+        setIntake((prev) => {
+          if (!prev) {
+            return prev;
+          }
+
+          if (inventoryAction === "discount") {
+            return {
+              ...prev,
+
+              discountedQuantity: (prev.discountedQuantity ?? 0) + quantity,
+            };
+          }
+
+          return {
+            ...prev,
+
+            writtenOffQuantity: (prev.writtenOffQuantity ?? 0) + quantity,
+          };
+        });
+      }
+
+      setInventoryActionError(null);
+      setInventoryAction(null);
+    } catch (err) {
+      console.error("Ошибка обновления партии:", err);
+
+      if (axios.isAxiosError(err)) {
+        console.error("Ответ backend:", err.response?.data);
+
+        const backendMessage = err.response?.data?.message;
+
+        const backendRemaining = err.response?.data?.remainingQuantity;
+
+        if (typeof backendRemaining === "number") {
+          setInventoryActionError(
+            t("inventoryAction.exceedsAvailable", {
+              quantity: backendRemaining,
+            }),
+          );
+        } else if (typeof backendMessage === "string") {
+          setInventoryActionError(backendMessage);
+        } else {
+          setInventoryActionError(t("inventoryAction.updateError"));
+        }
+      } else {
+        setInventoryActionError(t("inventoryAction.updateError"));
+      }
+    } finally {
+      setInventoryActionSaving(false);
+    }
+  };
   const handleSaveAudit = async (countedQuantity: number, note: string) => {
     try {
       setAuditSaving(true);
@@ -225,12 +307,6 @@ export default function IntakeDetailsPage({
     }
   };
 
-  /*
-   * ==============================
-   * Loading
-   * ==============================
-   */
-
   if (loading) {
     return (
       <div className={styles.container}>
@@ -238,12 +314,6 @@ export default function IntakeDetailsPage({
       </div>
     );
   }
-
-  /*
-   * ==============================
-   * Error
-   * ==============================
-   */
 
   if (error || !intake) {
     return (
@@ -263,22 +333,12 @@ export default function IntakeDetailsPage({
 
   const product = intake.productId;
 
-  /*
-   * ==============================
-   * Расчётный остаток
-   * ==============================
-   */
+  const discountedQuantity = intake.discountedQuantity ?? 0;
+
+  const writtenOffQuantity = intake.writtenOffQuantity ?? 0;
 
   const remainingQuantity =
-    intake.quantity -
-    (intake.discountedQuantity ?? 0) -
-    (intake.writtenOffQuantity ?? 0);
-
-  /*
-   * ==============================
-   * Срок годности
-   * ==============================
-   */
+    intake.quantity - discountedQuantity - writtenOffQuantity;
 
   const expirationTimestamp = intake.expirationDate
     ? new Date(intake.expirationDate).getTime()
@@ -289,16 +349,10 @@ export default function IntakeDetailsPage({
     !Number.isNaN(expirationTimestamp) &&
     expirationTimestamp <= Date.now() + 7 * 24 * 60 * 60 * 1000;
 
-  /*
-   * Последняя ревизия
-   */
-
   const lastAudit = audits.length > 0 ? audits[0] : null;
 
   return (
     <div className={styles.container}>
-      {/* ================= HEADER ================= */}
-
       <header className={styles.header}>
         <button
           type="button"
@@ -311,9 +365,6 @@ export default function IntakeDetailsPage({
 
         <h1 className={styles.headerTitle}>{t("title")}</h1>
       </header>
-
-      {/* ================= PRODUCT ================= */}
-
       <section className={styles.productHeader}>
         <div className={styles.imageContainer}>
           {product?.imageUrl ? (
@@ -343,9 +394,6 @@ export default function IntakeDetailsPage({
           <p className={styles.barcode}>{product?.barcode || "—"}</p>
         </div>
       </section>
-
-      {/* ================= INFORMATION ================= */}
-
       <section className={styles.infoList}>
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("expirationDate")}</span>
@@ -371,7 +419,7 @@ export default function IntakeDetailsPage({
           <span className={styles.label}>{t("discounted")}</span>
 
           <span className={styles.value}>
-            {intake.discountedQuantity ?? 0} {t("units.pieces")}
+            {discountedQuantity} {t("units.pieces")}
           </span>
         </div>
 
@@ -379,7 +427,7 @@ export default function IntakeDetailsPage({
           <span className={styles.label}>{t("writtenOff")}</span>
 
           <span className={styles.value}>
-            {intake.writtenOffQuantity ?? 0} {t("units.pieces")}
+            {writtenOffQuantity} {t("units.pieces")}
           </span>
         </div>
 
@@ -422,7 +470,52 @@ export default function IntakeDetailsPage({
         </div>
       </section>
 
-      {/* ================= AUDIT ================= */}
+      {/* ===================================================
+       * INVENTORY ACTIONS
+       * =================================================== */}
+
+      <section className={styles.inventoryActions}>
+        <div className={styles.inventoryActionsHeader}>
+          <h2 className={styles.inventoryActionsTitle}>
+            {t("inventoryAction.title")}
+          </h2>
+
+          <span className={styles.inventoryActionsRemaining}>
+            {t("inventoryAction.remaining")}: {remainingQuantity}{" "}
+            {t("units.pieces")}
+          </span>
+        </div>
+
+        <div className={styles.inventoryButtons}>
+          <button
+            type="button"
+            className={styles.discountButton}
+            onClick={handleOpenDiscount}
+            disabled={remainingQuantity <= 0}
+          >
+            {t("inventoryAction.discount")}
+          </button>
+
+          <button
+            type="button"
+            className={styles.writeOffButton}
+            onClick={handleOpenWriteOff}
+            disabled={remainingQuantity <= 0}
+          >
+            {t("inventoryAction.writeOff")}
+          </button>
+        </div>
+
+        {remainingQuantity <= 0 ? (
+          <div className={styles.noRemaining}>
+            {t("inventoryAction.noRemaining")}
+          </div>
+        ) : null}
+      </section>
+
+      {/* ===================================================
+       * AUDIT
+       * =================================================== */}
 
       <section className={styles.auditSection}>
         <div className={styles.auditHeader}>
@@ -433,7 +526,6 @@ export default function IntakeDetailsPage({
             className={styles.auditAddBtn}
             onClick={() => {
               setAuditError(null);
-
               setIsAuditModalOpen(true);
             }}
           >
@@ -494,7 +586,9 @@ export default function IntakeDetailsPage({
           <div className={styles.noAudits}>{t("audit.noAudits")}</div>
         )}
 
-        {/* История */}
+        {/* =================================================
+         * HISTORY
+         * ================================================= */}
 
         {audits.length > 0 ? (
           <div className={styles.auditHistory}>
@@ -508,11 +602,13 @@ export default function IntakeDetailsPage({
 
                 <div className={styles.auditHistoryInfo}>
                   <span>
-                    {t("audit.expected")}: {audit.expectedQuantity}
+                    {t("audit.expected")}: {audit.expectedQuantity}{" "}
+                    {t("units.pieces")}
                   </span>
 
                   <span>
-                    {t("audit.actual")}: {audit.countedQuantity}
+                    {t("audit.actual")}: {audit.countedQuantity}{" "}
+                    {t("units.pieces")}
                   </span>
 
                   <span
@@ -525,7 +621,7 @@ export default function IntakeDetailsPage({
                     }
                   >
                     {t("audit.difference")}: {audit.difference > 0 ? "+" : ""}
-                    {audit.difference}
+                    {audit.difference} {t("units.pieces")}
                   </span>
                 </div>
 
@@ -538,7 +634,9 @@ export default function IntakeDetailsPage({
         ) : null}
       </section>
 
-      {/* ================= ACTIONS ================= */}
+      {/* ===================================================
+       * ACTIONS
+       * =================================================== */}
 
       <div className={styles.actions}>
         <button
@@ -562,7 +660,23 @@ export default function IntakeDetailsPage({
         </button>
       </div>
 
-      {/* ================= AUDIT MODAL ================= */}
+      {/* ===================================================
+       * INVENTORY ACTION MODAL
+       * =================================================== */}
+
+      <InventoryActionModal
+        isOpen={inventoryAction !== null}
+        type={inventoryAction ?? "discount"}
+        maxQuantity={remainingQuantity}
+        loading={inventoryActionSaving}
+        error={inventoryActionError}
+        onClose={handleCloseInventoryAction}
+        onSubmit={handleSaveInventoryAction}
+      />
+
+      {/* ===================================================
+       * AUDIT MODAL
+       * =================================================== */}
 
       <AuditModal
         isOpen={isAuditModalOpen}

@@ -70,7 +70,7 @@
     "days7": "Within 7 days",
     "days30": "Within 30 days",
     "later": "More than 30 days",
-    "empty": "No products in this period",
+    "empty": "There are no products in this period",
     "backToProducts": "Back to products",
     "navigation": "Main navigation",
     "home": "Home",
@@ -80,7 +80,7 @@
   },
 
   "IntakeDetails": {
-    "title": "Batch details",
+    "title": "Batch Details",
     "back": "Back",
     "loading": "Loading...",
     "error": "Failed to load batch data",
@@ -108,20 +108,47 @@
     "editLog": "Edit",
     "deleteLog": "Delete",
 
+    "inventoryAction": {
+      "title": "Product processing",
+      "remaining": "Remaining",
+      "discount": "Discount",
+      "writeOff": "Write off",
+      "noRemaining": "There are no products left in this batch available for discounting or write-off",
+
+      "discountTitle": "Discount product",
+      "writeOffTitle": "Write off product",
+
+      "discountDescription": "Enter the quantity of products to be discounted.",
+      "writeOffDescription": "Enter the quantity of products to be written off.",
+
+      "available": "Available for processing",
+      "quantity": "Quantity, pcs.",
+      "quantityPlaceholder": "Enter quantity",
+
+      "exceedsAvailable": "You cannot process more than {quantity} pcs.",
+
+      "cancel": "Cancel",
+      "discountSubmit": "Discount",
+      "writeOffSubmit": "Write off",
+      "saving": "Saving...",
+
+      "updateError": "Failed to update product quantity."
+    },
+
     "audit": {
       "title": "Stock Audit",
       "create": "New Audit",
-      "lastAudit": "Last audit",
+      "lastAudit": "Last Audit",
       "expected": "Expected quantity",
       "actual": "Actual quantity",
       "difference": "Difference",
-      "noAudits": "No audits recorded yet",
-      "history": "Audit History",
+      "noAudits": "No audits yet",
+      "history": "Audit history",
       "saveError": "Failed to save audit",
 
       "modalTitle": "Stock Audit",
       "expectedUnit": "pcs.",
-      "note": "Note",
+      "note": "Comment",
       "notePlaceholder": "For example: shortage found, product damaged...",
       "cancel": "Cancel",
       "saving": "Saving...",

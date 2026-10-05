@@ -1,0 +1,377 @@
+.report-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.report-page * {
+  box-sizing: border-box;
+}
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.report-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.report-title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #2563eb;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.report-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.report-subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.report-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.report-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.report-button-secondary {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.report-button-secondary:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.report-button-primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.report-button-primary:hover {
+  background: #1d4ed8;
+}
+
+.report-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.report-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.report-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.report-card-heading h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.report-results-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  background: #e2e8f0;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.report-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.report-filter-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.report-filter-field-wide {
+  flex: 2 1 240px;
+}
+
+.report-filter-field label {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.report-filter-field input,
+.report-filter-field select {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.report-filter-field input:focus,
+.report-filter-field select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.report-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.report-input-wrapper svg {
+  position: absolute;
+  left: 10px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.report-input-wrapper input {
+  width: 100%;
+  padding-left: 32px;
+}
+
+.report-table-card {
+  overflow: hidden;
+}
+
+.report-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+/* Темная полоса шапки таблицы */
+.report-table thead tr {
+  background-color: #1e293b;
+}
+
+.report-table th {
+  padding: 10px 12px;
+  color: #f8fafc;
+  font-weight: 600;
+  border-bottom: 2px solid #0f172a;
+  border-right: 1px solid #334155;
+  white-space: nowrap;
+}
+
+.report-table th:last-child {
+  border-right: none;
+}
+
+.report-sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.report-sort-button:hover {
+  color: #60a5fa;
+}
+
+.report-sort-icon {
+  color: #94a3b8;
+}
+
+.report-sort-icon-active {
+  color: #60a5fa;
+}
+
+.report-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #f1f5f9;
+  white-space: nowrap;
+  color: #334155;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.report-table tbody tr:hover {
+  background-color: #eff6ff;
+}
+
+.report-product-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.report-category {
+  color: #475569;
+}
+
+.report-barcode {
+  font-family: monospace;
+  color: #64748b;
+}
+
+.report-date-critical {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.report-critical-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.report-days-normal {
+  color: #166534;
+}
+
+.report-discounted {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.report-written-off {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.report-muted {
+  color: #94a3b8;
+}
+
+.report-actual-cell {
+  background-color: #f1f5f9;
+}
+
+.report-actual-value {
+  font-weight: 700;
+  color: #0f172a;
+}
+.report-table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.report-pagination {
+  display: flex;
+  gap: 4px;
+}
+
+.report-page-button {
+  height: 28px;
+  padding: 0 10px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #334155;
+}
+
+.report-page-button-active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  font-weight: 600;
+}
+
+.report-page-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.report-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  color: #64748b;
+  gap: 6px;
+}

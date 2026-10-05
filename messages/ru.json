@@ -167,22 +167,22 @@
 
     "filters": {
       "title": "Фильтрация данных",
-      "records": "{count} записей",
-
+      "records": "{count, plural, =0 {0 записей} =1 {1 запись} few {# записи} many {# записей} other {# записей}}",
       "productName": "Название товара",
       "productNamePlaceholder": "Поиск товара...",
-
       "category": "Категория",
-      "allCategories": "Все категории",
-
       "barcode": "Штрихкод",
       "barcodePlaceholder": "Введите штрихкод",
+      "expiration": "Срок годности (дней ≤)",
+      "expirationPlaceholder": "Например, 7",
+      "audit": "Ревизия за последние (дней)",
+      "auditPlaceholder": "Например, 30"
+    },
 
-      "expirationDays": "Срок годности (дней ≤)",
-      "expirationDaysPlaceholder": "Например, 7",
-
-      "auditDays": "Ревизия за последние (дней)",
-      "auditDaysPlaceholder": "Например, 30"
+    "categories": {
+      "all": "Все категории",
+      "dairy": "Молочные продукты",
+      "bakery": "Выпечка"
     },
 
     "table": {
@@ -199,26 +199,56 @@
       "monthlyConsumption": "Расход/мес",
       "shelfPrice": "Цена полка",
       "brutto": "Brutto",
-      "netto": "Netto",
+      "netto": "Netto"
+    },
 
-      "pieces": "шт.",
+    "units": {
       "days": "дн.",
+      "pieces": "шт."
+    },
 
-      "noData": "Данные не найдены",
-      "noDataDescription": "Попробуйте изменить параметры фильтрации",
+    "empty": {
+      "title": "Данные не найдены",
+      "description": "Попробуйте изменить параметры фильтрации"
+    },
 
-      "pagination": {
-        "displayed": "Отображено",
-        "of": "из",
-        "previous": "Назад",
-        "next": "Вперед"
-      }
+    "pagination": {
+      "displayed": "Отображено",
+      "of": "из",
+      "records": "записей",
+      "previous": "Назад",
+      "next": "Вперед"
     },
 
     "sorting": {
       "sort": "Сортировать",
       "ascending": "Сортировка по возрастанию",
       "descending": "Сортировка по убыванию"
+    },
+
+    "Reports": {
+      "categories": {
+        "all": "Все категории",
+        "dairy": "Молочные продукты",
+        "bakery": "Выпечка"
+      },
+      "filters": {
+        "expiration": "Срок годности (дней ≤)",
+        "expirationPlaceholder": "Например, 7",
+        "audit": "Ревизия за последние (дней)",
+        "auditPlaceholder": "Например, 30"
+      },
+      "units": {
+        "days": "дн.",
+        "pieces": "шт."
+      },
+      "pagination": {
+        "displayed": "Отображено",
+        "of": "из",
+        "records": "записей",
+        "previous": "Назад",
+        "next": "Вперед"
+      }
     }
   }
 }

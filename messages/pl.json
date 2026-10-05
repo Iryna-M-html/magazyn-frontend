@@ -7,26 +7,26 @@
   "Stats": {
     "totalBatches": "Wszystkie partie (szt.)",
     "warehouse": "pozycji w magazynie",
-    "expiringSoon": "Wkrótce wygasa",
-    "nextDays": "w ciągu najbliższych 7 dni",
-    "overview": "Przegląd magazyn + sklep",
-    "inNorm": "W normie"
+    "expiringSoon": "Krótki termin",
+    "nextDays": "w najbliższe 7 dni",
+    "overview": "Przegląd magazyn+sklep",
+    "inNorm": "W норми"
   },
 
   "Menu": {
     "title": "Menu główne",
     "scanProduct": "SKANUJ PRODUKT",
-    "scanSubtitle": "Dodaj produkt za pomocą kodu kreskowego",
+    "scanSubtitle": "Dodaj produkt po kodzie kreskowym",
     "months": "TERMINY WEDŁUG MIESIĘCY",
-    "monthsSubtitle": "Wyświetl według miesięcy",
-    "expiring": "WKRÓTCE WYGASA",
-    "expiringSubtitle": "Produkty z krytycznym terminem ważności",
+    "monthsSubtitle": "Przeglądaj miesiącami",
+    "expiring": "KRÓTKI TERMIN",
+    "expiringSubtitle": "Produkty z krytycznym terminem",
     "allProducts": "WSZYSTKIE PRODUKTY",
     "allProductsSubtitle": "Pełna lista produktów"
   },
 
   "Navigation": {
-    "main": "Strona główna",
+    "main": "Główna",
     "products": "Produkty",
     "reports": "Raporty",
     "more": "Więcej",
@@ -35,12 +35,12 @@
 
   "Months": {
     "title": "Terminy według miesięcy (liczba partii)",
-    "backToHome": "Wróć do strony głównej",
+    "backToHome": "Powrót do strony głównej",
     "filter": "Filtr",
     "loading": "Ładowanie danych...",
     "expired": "Przeterminowane",
     "later": "Później",
-    "home": "Strona główna",
+    "home": "Główna",
     "search": "Szukaj",
     "reports": "Raporty",
     "more": "Więcej",
@@ -62,18 +62,18 @@
   },
 
   "Expiring": {
-    "title": "Wkrótce wygasa",
+    "title": "Krótki termin ważności",
     "filter": "Filtr",
     "loading": "Ładowanie danych...",
     "expired": "Przeterminowane",
     "days3": "Do 3 dni",
     "days7": "Do 7 dni",
     "days30": "Do 30 dni",
-    "later": "Ponad 30 dni",
+    "later": "Powyżej 30 dni",
     "empty": "Brak produktów w tym okresie",
-    "backToProducts": "Wróć do produktów",
+    "backToProducts": "Powrót do produktów",
     "navigation": "Główna nawigacja",
-    "home": "Strona główna",
+    "home": "Główna",
     "search": "Szukaj",
     "reports": "Raporty",
     "more": "Więcej"
@@ -83,16 +83,16 @@
     "title": "Szczegóły partii",
     "back": "Wstecz",
     "loading": "Ładowanie...",
-    "error": "Nie udało się załadować danych partii",
-    "notFound": "Nie znaleziono partii",
+    "error": "Nie udało się pobrać danych partii",
+    "notFound": "Partia nie została znaleziona",
     "backButton": "Wróć",
     "noImage": "Brak zdjęcia",
     "noName": "Bez nazwy",
 
-    "expirationDate": "Termin ważności",
+    "expirationDate": "Data ważności",
     "receivedQuantity": "Ilość (przyjęcie)",
-    "discounted": "Przeceniono",
-    "writtenOff": "Spisano",
+    "discounted": "Przecenione",
+    "writtenOff": "Spisane",
     "remaining": "Pozostało",
     "addedDate": "Data dodania",
     "batch": "Partia",
@@ -113,13 +113,13 @@
       "remaining": "Pozostało",
       "discount": "Przecenić",
       "writeOff": "Spisać",
-      "noRemaining": "W partii nie ma więcej dostępnego produktu do przeceny lub spisania",
+      "noRemaining": "W tej partii nie ma już dostępnego towaru do przeceny lub spisania",
 
-      "discountTitle": "Przecena produktu",
-      "writeOffTitle": "Spisanie produktu",
+      "discountTitle": "Przecena towaru",
+      "writeOffTitle": "Spisanie towaru",
 
-      "discountDescription": "Podaj ilość produktu, którą należy przecenić.",
-      "writeOffDescription": "Podaj ilość produktu, którą należy spisać.",
+      "discountDescription": "Podaj ilość towaru do przeceny.",
+      "writeOffDescription": "Podaj ilość towaru do spisania.",
 
       "available": "Dostępne do przetworzenia",
       "quantity": "Ilość, szt.",
@@ -128,15 +128,15 @@
       "exceedsAvailable": "Nie można przetworzyć więcej niż {quantity} szt.",
 
       "cancel": "Anuluj",
-      "discountSubmit": "Przecen",
-      "writeOffSubmit": "Spisz",
+      "discountSubmit": "Przecenić",
+      "writeOffSubmit": "Spisać",
       "saving": "Zapisywanie...",
 
-      "updateError": "Nie udało się zaktualizować ilości produktu."
+      "updateError": "Nie удалось zaktualizować ilości towaru."
     },
 
     "audit": {
-      "title": "Inwentaryzacja stanów",
+      "title": "Inwentaryzacja pozostałości",
       "create": "Nowa inwentaryzacja",
       "lastAudit": "Ostatnia inwentaryzacja",
       "expected": "Oczekiwana ilość",
@@ -146,18 +146,19 @@
       "history": "Historia inwentaryzacji",
       "saveError": "Nie udało się zapisać inwentaryzacji",
 
-      "modalTitle": "Inwentaryzacja stanów",
+      "modalTitle": "Inwentaryzacja pozostałości",
       "expectedUnit": "szt.",
       "note": "Komentarz",
-      "notePlaceholder": "Np.: stwierdzono brak, produkt uszkodzony...",
+      "notePlaceholder": "Np.: wykryto brak, towar uszkodzony...",
       "cancel": "Anuluj",
       "saving": "Zapisywanie...",
       "save": "Zapisz"
     }
   },
+
   "Reports": {
     "title": "Analityka i inwentaryzacja",
-    "subtitle": "Ewidencja stanów magazynowych, terminów ważności, odpisów i wskaźników finansowych",
+    "subtitle": "Ewidencja stanów, terminów ważności, spisów i wskaźników finansowych",
 
     "actions": {
       "reset": "Resetuj",
@@ -166,58 +167,88 @@
 
     "filters": {
       "title": "Filtrowanie danych",
-      "records": "{count} rekordów",
-
+      "records": "{count, plural, =0 {0 wpisów} =1 {1 wpis} few {# wpisy} many {# wpisów} other {# wpisów}}",
       "productName": "Nazwa produktu",
       "productNamePlaceholder": "Szukaj produktu...",
-
       "category": "Kategoria",
-      "allCategories": "Wszystkie kategorie",
-
       "barcode": "Kod kreskowy",
       "barcodePlaceholder": "Wprowadź kod kreskowy",
+      "expiration": "Termin ważności (dni ≤)",
+      "expirationPlaceholder": "Np. 7",
+      "audit": "Inwentaryzacja za ostatnie (dni)",
+      "auditPlaceholder": "Np. 30"
+    },
 
-      "expirationDays": "Termin ważności (dni ≤)",
-      "expirationDaysPlaceholder": "Na przykład 7",
-
-      "auditDays": "Inwentaryzacja z ostatnich (dni)",
-      "auditDaysPlaceholder": "Na przykład 30"
+    "categories": {
+      "all": "Wszystkie kategorie",
+      "dairy": "Nabiał",
+      "bakery": "Pieczywo"
     },
 
     "table": {
       "product": "Produkt",
       "category": "Kategoria",
       "barcode": "Kod kreskowy",
-      "expirationDate": "Termin ważności",
+      "expirationDate": "Data ważności",
       "intakeDate": "Przyjęcie",
       "daysToExpiration": "Pozostało (dni)",
-      "discounted": "Przeceniono",
-      "writtenOff": "Spisano",
-      "actual": "Stan faktyczny",
+      "discounted": "Przecenione",
+      "writtenOff": "Spisane",
+      "actual": "Fakt (rewizja)",
       "dailyConsumption": "Zużycie/dzień",
-      "monthlyConsumption": "Zużycie/mies.",
-      "shelfPrice": "Cena na półce",
+      "monthlyConsumption": "Zużycie/miesiąc",
+      "shelfPrice": "Cena półkowa",
       "brutto": "Brutto",
-      "netto": "Netto",
+      "netto": "Netto"
+    },
 
-      "pieces": "szt.",
+    "units": {
       "days": "dni",
+      "pieces": "szt."
+    },
 
-      "noData": "Nie znaleziono danych",
-      "noDataDescription": "Spróbuj zmienić parametry filtrowania",
+    "empty": {
+      "title": "Brak danych",
+      "description": "Spróbuj zmienić parametry filtrowania"
+    },
 
-      "pagination": {
-        "displayed": "Wyświetlono",
-        "of": "z",
-        "previous": "Wstecz",
-        "next": "Dalej"
-      }
+    "pagination": {
+      "displayed": "Wyświetlono",
+      "of": "z",
+      "records": "wpisów",
+      "previous": "Poprzednia",
+      "next": "Następna"
     },
 
     "sorting": {
       "sort": "Sortuj",
       "ascending": "Sortowanie rosnąco",
       "descending": "Sortowanie malejąco"
+    },
+
+    "Reports": {
+      "categories": {
+        "all": "Wszystkie kategorie",
+        "dairy": "Nabiał",
+        "bakery": "Pieczywo"
+      },
+      "filters": {
+        "expiration": "Termin ważności (dni ≤)",
+        "expirationPlaceholder": "Np. 7",
+        "audit": "Inwentaryzacja za ostatnie (dni)",
+        "auditPlaceholder": "Np. 30"
+      },
+      "units": {
+        "days": "dni",
+        "pieces": "szt."
+      },
+      "pagination": {
+        "displayed": "Wyświetlono",
+        "of": "z",
+        "records": "wpisów",
+        "previous": "Poprzednia",
+        "next": "Następna"
+      }
     }
   }
 }

@@ -5,22 +5,22 @@
   },
 
   "Stats": {
-    "totalBatches": "Total batches (pcs.)",
+    "totalBatches": "Total Batches (pcs)",
     "warehouse": "items in stock",
-    "expiringSoon": "Expiring soon",
-    "nextDays": "within the next 7 days",
-    "overview": "Warehouse + store overview",
-    "inNorm": "Within normal range"
+    "expiringSoon": "Expiring Soon",
+    "nextDays": "in next 7 days",
+    "overview": "Warehouse + Store Overview",
+    "inNorm": "In Order"
   },
 
   "Menu": {
     "title": "Main Menu",
     "scanProduct": "SCAN PRODUCT",
-    "scanSubtitle": "Add a product using its barcode",
-    "months": "EXPIRATION BY MONTH",
-    "monthsSubtitle": "View by month",
+    "scanSubtitle": "Add product by barcode",
+    "months": "EXPIRATION BY MONTHS",
+    "monthsSubtitle": "View month by month",
     "expiring": "EXPIRING SOON",
-    "expiringSubtitle": "Products with critical expiration dates",
+    "expiringSubtitle": "Products with critical dates",
     "allProducts": "ALL PRODUCTS",
     "allProductsSubtitle": "Complete list of products"
   },
@@ -34,8 +34,8 @@
   },
 
   "Months": {
-    "title": "Expiration by month (number of batches)",
-    "backToHome": "Back to home",
+    "title": "Expiration by Months (Batch Count)",
+    "backToHome": "Back to Home",
     "filter": "Filter",
     "loading": "Loading data...",
     "expired": "Expired",
@@ -62,17 +62,17 @@
   },
 
   "Expiring": {
-    "title": "Expiring soon",
+    "title": "Expiring Soon",
     "filter": "Filter",
     "loading": "Loading data...",
     "expired": "Expired",
-    "days3": "Within 3 days",
-    "days7": "Within 7 days",
-    "days30": "Within 30 days",
+    "days3": "Up to 3 days",
+    "days7": "Up to 7 days",
+    "days30": "Up to 30 days",
     "later": "More than 30 days",
     "empty": "No products in this period",
     "backToProducts": "Back to products",
-    "navigation": "Main navigation",
+    "navigation": "Main Navigation",
     "home": "Home",
     "search": "Search",
     "reports": "Reports",
@@ -83,24 +83,24 @@
     "title": "Batch Details",
     "back": "Back",
     "loading": "Loading...",
-    "error": "Failed to load batch data",
+    "error": "Failed to load batch details",
     "notFound": "Batch not found",
-    "backButton": "Go back",
+    "backButton": "Go Back",
     "noImage": "No image",
     "noName": "No name",
 
-    "expirationDate": "Expiration date",
-    "receivedQuantity": "Quantity (received)",
+    "expirationDate": "Expiration Date",
+    "receivedQuantity": "Received Quantity",
     "discounted": "Discounted",
-    "writtenOff": "Written off",
+    "writtenOff": "Written Off",
     "remaining": "Remaining",
-    "addedDate": "Added date",
+    "addedDate": "Date Added",
     "batch": "Batch",
     "category": "Category",
-    "shelfPrice": "Shelf price",
+    "shelfPrice": "Shelf Price",
 
     "units": {
-      "pieces": "pcs."
+      "pieces": "pcs"
     },
 
     "edit": "EDIT",
@@ -109,55 +109,56 @@
     "deleteLog": "Delete",
 
     "inventoryAction": {
-      "title": "Product processing",
+      "title": "Product Handling",
       "remaining": "Remaining",
       "discount": "Discount",
-      "writeOff": "Write off",
-      "noRemaining": "There is no more available product in this batch to discount or write off",
+      "writeOff": "Write Off",
+      "noRemaining": "No items available in this batch for discount or write-off",
 
-      "discountTitle": "Product discount",
-      "writeOffTitle": "Product write-off",
+      "discountTitle": "Discount Product",
+      "writeOffTitle": "Write Off Product",
 
-      "discountDescription": "Enter the quantity of product to discount.",
-      "writeOffDescription": "Enter the quantity of product to write off.",
+      "discountDescription": "Specify the quantity to be discounted.",
+      "writeOffDescription": "Specify the quantity to be written off.",
 
-      "available": "Available for processing",
-      "quantity": "Quantity, pcs.",
+      "available": "Available to process",
+      "quantity": "Quantity, pcs",
       "quantityPlaceholder": "Enter quantity",
 
-      "exceedsAvailable": "You cannot process more than {quantity} pcs.",
+      "exceedsAvailable": "Cannot process more than {quantity} pcs.",
 
       "cancel": "Cancel",
       "discountSubmit": "Discount",
-      "writeOffSubmit": "Write off",
+      "writeOffSubmit": "Write Off",
       "saving": "Saving...",
 
-      "updateError": "Failed to update product quantity."
+      "updateError": "Failed to update item quantity."
     },
 
     "audit": {
-      "title": "Inventory audit",
-      "create": "New inventory audit",
-      "lastAudit": "Last audit",
-      "expected": "Expected quantity",
-      "actual": "Actual quantity",
+      "title": "Stock Audit",
+      "create": "New Audit",
+      "lastAudit": "Last Audit",
+      "expected": "Expected Quantity",
+      "actual": "Actual Quantity",
       "difference": "Difference",
       "noAudits": "No audits yet",
-      "history": "Audit history",
-      "saveError": "Failed to save the inventory audit",
+      "history": "Audit History",
+      "saveError": "Failed to save audit",
 
-      "modalTitle": "Inventory audit",
-      "expectedUnit": "pcs.",
+      "modalTitle": "Stock Audit",
+      "expectedUnit": "pcs",
       "note": "Comment",
-      "notePlaceholder": "E.g.: shortage found, damaged product...",
+      "notePlaceholder": "E.g., shortage detected, damaged item...",
       "cancel": "Cancel",
       "saving": "Saving...",
       "save": "Save"
     }
   },
+
   "Reports": {
-    "title": "Analytics and Inventory",
-    "subtitle": "Inventory levels, expiration dates, write-offs and financial indicators",
+    "title": "Analytics & Stock Audit",
+    "subtitle": "Track balances, expiration dates, write-offs, and financial metrics",
 
     "actions": {
       "reset": "Reset",
@@ -165,59 +166,89 @@
     },
 
     "filters": {
-      "title": "Data filtering",
-      "records": "{count} records",
-
-      "productName": "Product name",
+      "title": "Data Filters",
+      "records": "{count, plural, =0 {0 records} =1 {1 record} other {# records}}",
+      "productName": "Product Name",
       "productNamePlaceholder": "Search product...",
-
       "category": "Category",
-      "allCategories": "All categories",
-
       "barcode": "Barcode",
       "barcodePlaceholder": "Enter barcode",
+      "expiration": "Expiration (days ≤)",
+      "expirationPlaceholder": "E.g., 7",
+      "audit": "Audit in last (days)",
+      "auditPlaceholder": "E.g., 30"
+    },
 
-      "expirationDays": "Expiration period (days ≤)",
-      "expirationDaysPlaceholder": "For example, 7",
-
-      "auditDays": "Inventory audit within last (days)",
-      "auditDaysPlaceholder": "For example, 30"
+    "categories": {
+      "all": "All Categories",
+      "dairy": "Dairy Products",
+      "bakery": "Bakery"
     },
 
     "table": {
       "product": "Product",
       "category": "Category",
       "barcode": "Barcode",
-      "expirationDate": "Expiration date",
-      "intakeDate": "Received",
+      "expirationDate": "Expiration Date",
+      "intakeDate": "Intake Date",
       "daysToExpiration": "Remaining (days)",
       "discounted": "Discounted",
-      "writtenOff": "Written off",
-      "actual": "Actual count",
-      "dailyConsumption": "Consumption/day",
-      "monthlyConsumption": "Consumption/month",
-      "shelfPrice": "Shelf price",
+      "writtenOff": "Written Off",
+      "actual": "Actual (Audit)",
+      "dailyConsumption": "Daily Usage",
+      "monthlyConsumption": "Monthly Usage",
+      "shelfPrice": "Shelf Price",
       "brutto": "Gross",
-      "netto": "Net",
+      "netto": "Net"
+    },
 
-      "pieces": "pcs.",
+    "units": {
       "days": "days",
+      "pieces": "pcs"
+    },
 
-      "noData": "No data found",
-      "noDataDescription": "Try changing the filter parameters",
+    "empty": {
+      "title": "No Data Found",
+      "description": "Try changing filter parameters"
+    },
 
-      "pagination": {
-        "displayed": "Showing",
-        "of": "of",
-        "previous": "Previous",
-        "next": "Next"
-      }
+    "pagination": {
+      "displayed": "Showing",
+      "of": "of",
+      "records": "records",
+      "previous": "Previous",
+      "next": "Next"
     },
 
     "sorting": {
       "sort": "Sort",
-      "ascending": "Sort ascending",
-      "descending": "Sort descending"
+      "ascending": "Sort Ascending",
+      "descending": "Sort Descending"
+    },
+
+    "Reports": {
+      "categories": {
+        "all": "All Categories",
+        "dairy": "Dairy Products",
+        "bakery": "Bakery"
+      },
+      "filters": {
+        "expiration": "Expiration (days ≤)",
+        "expirationPlaceholder": "E.g., 7",
+        "audit": "Audit in last (days)",
+        "auditPlaceholder": "E.g., 30"
+      },
+      "units": {
+        "days": "days",
+        "pieces": "pcs"
+      },
+      "pagination": {
+        "displayed": "Showing",
+        "of": "of",
+        "records": "records",
+        "previous": "Previous",
+        "next": "Next"
+      }
     }
   }
 }

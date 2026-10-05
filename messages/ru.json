@@ -154,5 +154,71 @@
       "saving": "Сохранение...",
       "save": "Сохранить"
     }
+  },
+
+  "Reports": {
+    "title": "Аналитика и инвентаризация",
+    "subtitle": "Учет остатков, сроков годности, списаний и финансовых показателей",
+
+    "actions": {
+      "reset": "Сбросить",
+      "exportCsv": "Экспорт CSV"
+    },
+
+    "filters": {
+      "title": "Фильтрация данных",
+      "records": "{count} записей",
+
+      "productName": "Название товара",
+      "productNamePlaceholder": "Поиск товара...",
+
+      "category": "Категория",
+      "allCategories": "Все категории",
+
+      "barcode": "Штрихкод",
+      "barcodePlaceholder": "Введите штрихкод",
+
+      "expirationDays": "Срок годности (дней ≤)",
+      "expirationDaysPlaceholder": "Например, 7",
+
+      "auditDays": "Ревизия за последние (дней)",
+      "auditDaysPlaceholder": "Например, 30"
+    },
+
+    "table": {
+      "product": "Товар",
+      "category": "Категория",
+      "barcode": "Штрихкод",
+      "expirationDate": "Срок годности",
+      "intakeDate": "Поступление",
+      "daysToExpiration": "Остаток (дни)",
+      "discounted": "Уценено",
+      "writtenOff": "Списано",
+      "actual": "Факт (ревизия)",
+      "dailyConsumption": "Расход/день",
+      "monthlyConsumption": "Расход/мес",
+      "shelfPrice": "Цена полка",
+      "brutto": "Brutto",
+      "netto": "Netto",
+
+      "pieces": "шт.",
+      "days": "дн.",
+
+      "noData": "Данные не найдены",
+      "noDataDescription": "Попробуйте изменить параметры фильтрации",
+
+      "pagination": {
+        "displayed": "Отображено",
+        "of": "из",
+        "previous": "Назад",
+        "next": "Вперед"
+      }
+    },
+
+    "sorting": {
+      "sort": "Сортировать",
+      "ascending": "Сортировка по возрастанию",
+      "descending": "Сортировка по убыванию"
+    }
   }
 }

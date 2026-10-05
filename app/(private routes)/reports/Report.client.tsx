@@ -10,6 +10,7 @@ import {
   RotateCcw,
   Search,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import styles from "./Report.module.css";
 
@@ -132,17 +133,6 @@ const MOCK_DATA: InventoryReportRow[] = [
 ];
 
 /* =========================================================
-   CATEGORIES
-========================================================= */
-
-const CATEGORIES = [
-  "Все категории",
-  "33 (Vat 8%)",
-  "Молочные продукты",
-  "Выпечка",
-];
-
-/* =========================================================
    SORTABLE HEADER
 ========================================================= */
 
@@ -195,9 +185,11 @@ function SortableHeader({
 ========================================================= */
 
 export default function ReportClient() {
-  /* -------------------------------------------------------
+  const t = useTranslations("Reports");
+
+  /* =======================================================
      FILTERS
-  ------------------------------------------------------- */
+  ======================================================= */
 
   const [searchName, setSearchName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -205,12 +197,35 @@ export default function ReportClient() {
   const [maxDaysToExp, setMaxDaysToExp] = useState("");
   const [auditDaysFilter, setAuditDaysFilter] = useState("");
 
-  /* -------------------------------------------------------
+  /* =======================================================
      SORT
-  ------------------------------------------------------- */
+  ======================================================= */
 
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+
+  /* =======================================================
+     CATEGORIES
+  ======================================================= */
+
+  const categories = [
+    {
+      value: "",
+      label: t("categories.all"),
+    },
+    {
+      value: "33 (Vat 8%)",
+      label: "33 (Vat 8%)",
+    },
+    {
+      value: "Молочные продукты",
+      label: t("categories.dairy"),
+    },
+    {
+      value: "Выпечка",
+      label: t("categories.bakery"),
+    },
+  ];
 
   /* =======================================================
      RESET FILTERS
@@ -245,20 +260,25 @@ export default function ReportClient() {
 
   const filteredData = useMemo(() => {
     let result = MOCK_DATA.filter((row) => {
+      /* Название */
       const matchesName = row.name
         .toLowerCase()
         .includes(searchName.toLowerCase().trim());
 
+      /* Категория */
       const matchesCategory =
         !selectedCategory || row.category === selectedCategory;
 
+      /* Штрихкод */
       const matchesBarcode = row.barcode
         .toLowerCase()
         .includes(searchBarcode.toLowerCase().trim());
 
+      /* Срок годности */
       const matchesExpiration =
         !maxDaysToExp || row.daysToExpiration <= Number(maxDaysToExp);
 
+      /* Ревизия */
       const matchesAudit = (() => {
         if (!auditDaysFilter) {
           return true;
@@ -271,8 +291,9 @@ export default function ReportClient() {
         }
 
         /*
-         * Сейчас вместо auditDate используется intakeDate.
-         * Когда появится auditDate, этот блок можно заменить.
+         * Пока используется intakeDate.
+         * После появления auditDate здесь можно заменить
+         * row.intakeDate на row.auditDate.
          */
         const intakeDate = new Date(row.intakeDate);
         const today = new Date();
@@ -334,20 +355,20 @@ export default function ReportClient() {
 
   const exportCSV = () => {
     const headers = [
-      "Товар",
-      "Категория",
-      "Штрихкод",
-      "Срок годности",
-      "Поступление",
-      "Остаток (дни)",
-      "Уценено",
-      "Списано",
-      "Факт (ревизия)",
-      "Расход/день",
-      "Расход/мес",
-      "Цена полка",
-      "Brutto",
-      "Netto",
+      t("table.product"),
+      t("table.category"),
+      t("table.barcode"),
+      t("table.expirationDate"),
+      t("table.intakeDate"),
+      t("table.daysToExpiration"),
+      t("table.discounted"),
+      t("table.writtenOff"),
+      t("table.actual"),
+      t("table.dailyConsumption"),
+      t("table.monthlyConsumption"),
+      t("table.shelfPrice"),
+      t("table.brutto"),
+      t("table.netto"),
     ];
 
     const rows = filteredData.map((row) => [
@@ -408,13 +429,9 @@ export default function ReportClient() {
           </div>
 
           <div>
-            <h1 className={styles["report-title"]}>
-              Аналитика и инвентаризация
-            </h1>
+            <h1 className={styles["report-title"]}>{t("title")}</h1>
 
-            <p className={styles["report-subtitle"]}>
-              Учет остатков, сроков годности, списаний и финансовых показателей
-            </p>
+            <p className={styles["report-subtitle"]}>{t("subtitle")}</p>
           </div>
         </div>
 
@@ -425,7 +442,7 @@ export default function ReportClient() {
             onClick={handleResetFilters}
           >
             <RotateCcw size={16} />
-            Сбросить
+            {t("actions.reset")}
           </button>
 
           <button
@@ -434,7 +451,7 @@ export default function ReportClient() {
             onClick={exportCSV}
           >
             <Download size={16} />
-            Экспорт CSV
+            {t("actions.exportCsv")}
           </button>
         </div>
       </div>
@@ -448,11 +465,13 @@ export default function ReportClient() {
           <div className={styles["report-card-heading"]}>
             <Filter size={18} />
 
-            <h2>Фильтрация данных</h2>
+            <h2>{t("filters.title")}</h2>
           </div>
 
           <span className={styles["report-results-badge"]}>
-            {filteredData.length} записей
+            {t("filters.records", {
+              count: filteredData.length,
+            })}
           </span>
         </div>
 
@@ -462,7 +481,7 @@ export default function ReportClient() {
           <div
             className={`${styles["report-filter-field"]} ${styles["report-filter-field-wide"]}`}
           >
-            <label htmlFor="search-name">Название товара</label>
+            <label htmlFor="search-name">{t("filters.productName")}</label>
 
             <div className={styles["report-input-wrapper"]}>
               <Search size={16} />
@@ -471,7 +490,7 @@ export default function ReportClient() {
                 id="search-name"
                 type="text"
                 value={searchName}
-                placeholder="Поиск товара..."
+                placeholder={t("filters.productNamePlaceholder")}
                 onChange={(event) => setSearchName(event.target.value)}
               />
             </div>
@@ -480,19 +499,16 @@ export default function ReportClient() {
           {/* CATEGORY */}
 
           <div className={styles["report-filter-field"]}>
-            <label htmlFor="category">Категория</label>
+            <label htmlFor="category">{t("filters.category")}</label>
 
             <select
               id="category"
               value={selectedCategory}
               onChange={(event) => setSelectedCategory(event.target.value)}
             >
-              {CATEGORIES.map((category) => (
-                <option
-                  key={category}
-                  value={category === "Все категории" ? "" : category}
-                >
-                  {category}
+              {categories.map((category) => (
+                <option key={category.value || "all"} value={category.value}>
+                  {category.label}
                 </option>
               ))}
             </select>
@@ -501,13 +517,13 @@ export default function ReportClient() {
           {/* BARCODE */}
 
           <div className={styles["report-filter-field"]}>
-            <label htmlFor="barcode">Штрихкод</label>
+            <label htmlFor="barcode">{t("filters.barcode")}</label>
 
             <input
               id="barcode"
               type="text"
               value={searchBarcode}
-              placeholder="Введите штрихкод"
+              placeholder={t("filters.barcodePlaceholder")}
               onChange={(event) => setSearchBarcode(event.target.value)}
             />
           </div>
@@ -515,14 +531,14 @@ export default function ReportClient() {
           {/* EXPIRATION */}
 
           <div className={styles["report-filter-field"]}>
-            <label htmlFor="expiration">Срок годности (дней ≤)</label>
+            <label htmlFor="expiration">{t("filters.expiration")}</label>
 
             <input
               id="expiration"
               type="number"
               min="0"
               value={maxDaysToExp}
-              placeholder="Например, 7"
+              placeholder={t("filters.expirationPlaceholder")}
               onChange={(event) => setMaxDaysToExp(event.target.value)}
             />
           </div>
@@ -530,14 +546,14 @@ export default function ReportClient() {
           {/* AUDIT */}
 
           <div className={styles["report-filter-field"]}>
-            <label htmlFor="audit">Ревизия за последние (дней)</label>
+            <label htmlFor="audit">{t("filters.audit")}</label>
 
             <input
               id="audit"
               type="number"
               min="0"
               value={auditDaysFilter}
-              placeholder="Например, 30"
+              placeholder={t("filters.auditPlaceholder")}
               onChange={(event) => setAuditDaysFilter(event.target.value)}
             />
           </div>
@@ -555,11 +571,11 @@ export default function ReportClient() {
           <table className={styles["report-table"]}>
             <thead>
               <tr>
-                {/* 1. Товар */}
+                {/* 1 */}
 
                 <th>
                   <SortableHeader
-                    label="Товар"
+                    label={t("table.product")}
                     sort="name"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -567,11 +583,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 2. Категория */}
+                {/* 2 */}
 
                 <th>
                   <SortableHeader
-                    label="Категория"
+                    label={t("table.category")}
                     sort="category"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -579,11 +595,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 3. Штрихкод */}
+                {/* 3 */}
 
                 <th>
                   <SortableHeader
-                    label="Штрихкод"
+                    label={t("table.barcode")}
                     sort="barcode"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -591,11 +607,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 4. Срок годности */}
+                {/* 4 */}
 
                 <th>
                   <SortableHeader
-                    label="Срок годности"
+                    label={t("table.expirationDate")}
                     sort="expirationDate"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -603,11 +619,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 5. Поступление */}
+                {/* 5 */}
 
                 <th>
                   <SortableHeader
-                    label="Поступление"
+                    label={t("table.intakeDate")}
                     sort="intakeDate"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -615,11 +631,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 6. Остаток */}
+                {/* 6 */}
 
                 <th>
                   <SortableHeader
-                    label="Остаток (дни)"
+                    label={t("table.daysToExpiration")}
                     sort="daysToExpiration"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -627,11 +643,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 7. Уценено */}
+                {/* 7 */}
 
                 <th>
                   <SortableHeader
-                    label="Уценено"
+                    label={t("table.discounted")}
                     sort="discountedQuantity"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -639,11 +655,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 8. Списано */}
+                {/* 8 */}
 
                 <th>
                   <SortableHeader
-                    label="Списано"
+                    label={t("table.writtenOff")}
                     sort="writtenOffQuantity"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -651,11 +667,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 9. Факт ревизии */}
+                {/* 9 */}
 
                 <th className={styles["report-th-audit"]}>
                   <SortableHeader
-                    label="Факт (ревизия)"
+                    label={t("table.actual")}
                     sort="actualQuantity"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -663,11 +679,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 10. Расход / день */}
+                {/* 10 */}
 
                 <th>
                   <SortableHeader
-                    label="Расход/день"
+                    label={t("table.dailyConsumption")}
                     sort="dailyConsumption"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -675,11 +691,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 11. Расход / месяц */}
+                {/* 11 */}
 
                 <th>
                   <SortableHeader
-                    label="Расход/мес"
+                    label={t("table.monthlyConsumption")}
                     sort="monthlyConsumption"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -687,11 +703,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 12. Цена полка */}
+                {/* 12 */}
 
                 <th>
                   <SortableHeader
-                    label="Цена полка"
+                    label={t("table.shelfPrice")}
                     sort="shelfPrice"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -699,11 +715,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 13. Brutto */}
+                {/* 13 */}
 
                 <th>
                   <SortableHeader
-                    label="Brutto"
+                    label={t("table.brutto")}
                     sort="shelfPriceBrutto"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -711,11 +727,11 @@ export default function ReportClient() {
                   />
                 </th>
 
-                {/* 14. Netto */}
+                {/* 14 */}
 
                 <th>
                   <SortableHeader
-                    label="Netto"
+                    label={t("table.netto")}
                     sort="shelfPriceNetto"
                     currentSortKey={sortKey}
                     sortDirection={sortDirection}
@@ -732,9 +748,9 @@ export default function ReportClient() {
                     <div className={styles["report-empty"]}>
                       <PackageCheck size={32} />
 
-                      <strong>Данные не найдены</strong>
+                      <strong>{t("empty.title")}</strong>
 
-                      <span>Попробуйте изменить параметры фильтрации</span>
+                      <span>{t("empty.description")}</span>
                     </div>
                   </td>
                 </tr>
@@ -792,11 +808,11 @@ export default function ReportClient() {
                         {isCritical ? (
                           <span className={styles["report-critical-badge"]}>
                             <AlertTriangle size={13} />
-                            {row.daysToExpiration} дн.
+                            {row.daysToExpiration} {t("units.days")}
                           </span>
                         ) : (
                           <span className={styles["report-days-normal"]}>
-                            {row.daysToExpiration} дн.
+                            {row.daysToExpiration} {t("units.days")}
                           </span>
                         )}
                       </td>
@@ -806,7 +822,7 @@ export default function ReportClient() {
                       <td>
                         {row.discountedQuantity > 0 ? (
                           <span className={styles["report-discounted"]}>
-                            {row.discountedQuantity} шт.
+                            {row.discountedQuantity} {t("units.pieces")}
                           </span>
                         ) : (
                           <span className={styles["report-muted"]}>—</span>
@@ -818,7 +834,7 @@ export default function ReportClient() {
                       <td>
                         {row.writtenOffQuantity > 0 ? (
                           <span className={styles["report-written-off"]}>
-                            {row.writtenOffQuantity} шт.
+                            {row.writtenOffQuantity} {t("units.pieces")}
                           </span>
                         ) : (
                           <span className={styles["report-muted"]}>—</span>
@@ -829,7 +845,7 @@ export default function ReportClient() {
 
                       <td className={styles["report-actual-cell"]}>
                         <span className={styles["report-actual-value"]}>
-                          {row.actualQuantity} шт.
+                          {row.actualQuantity} {t("units.pieces")}
                         </span>
                       </td>
 
@@ -868,11 +884,12 @@ export default function ReportClient() {
 
         <div className={styles["report-table-footer"]}>
           <div className={styles["report-pagination-info"]}>
-            Отображено{" "}
+            {t("pagination.displayed")}{" "}
             <strong>
               {filteredData.length > 0 ? `1 - ${filteredData.length}` : "0"}
             </strong>{" "}
-            из <strong>{filteredData.length}</strong> записей
+            {t("pagination.of")} <strong>{filteredData.length}</strong>{" "}
+            {t("pagination.records")}
           </div>
 
           <div className={styles["report-pagination"]}>
@@ -881,7 +898,7 @@ export default function ReportClient() {
               disabled
               className={styles["report-page-button"]}
             >
-              Назад
+              {t("pagination.previous")}
             </button>
 
             <button
@@ -896,7 +913,7 @@ export default function ReportClient() {
               disabled
               className={styles["report-page-button"]}
             >
-              Вперед
+              {t("pagination.next")}
             </button>
           </div>
         </div>

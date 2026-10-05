@@ -6,10 +6,10 @@
 
   "Stats": {
     "totalBatches": "Wszystkie partie (szt.)",
-    "warehouse": "pozycji na magazynie",
-    "expiringSoon": "Wkrótce upływa termin",
+    "warehouse": "pozycji w magazynie",
+    "expiringSoon": "Wkrótce wygasa",
     "nextDays": "w ciągu najbliższych 7 dni",
-    "overview": "Przegląd magazynu + sklepu",
+    "overview": "Przegląd magazyn + sklep",
     "inNorm": "W normie"
   },
 
@@ -19,14 +19,14 @@
     "scanSubtitle": "Dodaj produkt za pomocą kodu kreskowego",
     "months": "TERMINY WEDŁUG MIESIĘCY",
     "monthsSubtitle": "Wyświetl według miesięcy",
-    "expiring": "WKRÓTCE UPŁYWA TERMIN",
+    "expiring": "WKRÓTCE WYGASA",
     "expiringSubtitle": "Produkty z krytycznym terminem ważności",
     "allProducts": "WSZYSTKIE PRODUKTY",
     "allProductsSubtitle": "Pełna lista produktów"
   },
 
   "Navigation": {
-    "main": "Główna",
+    "main": "Strona główna",
     "products": "Produkty",
     "reports": "Raporty",
     "more": "Więcej",
@@ -40,7 +40,7 @@
     "loading": "Ładowanie danych...",
     "expired": "Przeterminowane",
     "later": "Później",
-    "home": "Główna",
+    "home": "Strona główna",
     "search": "Szukaj",
     "reports": "Raporty",
     "more": "Więcej",
@@ -62,7 +62,7 @@
   },
 
   "Expiring": {
-    "title": "Wkrótce upływa termin",
+    "title": "Wkrótce wygasa",
     "filter": "Filtr",
     "loading": "Ładowanie danych...",
     "expired": "Przeterminowane",
@@ -73,7 +73,7 @@
     "empty": "Brak produktów w tym okresie",
     "backToProducts": "Wróć do produktów",
     "navigation": "Główna nawigacja",
-    "home": "Główna",
+    "home": "Strona główna",
     "search": "Szukaj",
     "reports": "Raporty",
     "more": "Więcej"
@@ -87,10 +87,10 @@
     "notFound": "Nie znaleziono partii",
     "backButton": "Wróć",
     "noImage": "Brak zdjęcia",
-    "noName": "Produkt bez nazwy",
+    "noName": "Bez nazwy",
 
     "expirationDate": "Termin ważności",
-    "receivedQuantity": "Ilość przyjęta",
+    "receivedQuantity": "Ilość (przyjęcie)",
     "discounted": "Przeceniono",
     "writtenOff": "Spisano",
     "remaining": "Pozostało",
@@ -111,24 +111,24 @@
     "inventoryAction": {
       "title": "Obsługa produktu",
       "remaining": "Pozostało",
-      "discount": "Przecenij",
-      "writeOff": "Spisz",
-      "noRemaining": "W tej partii nie ma już produktów dostępnych do przeceny lub spisania",
+      "discount": "Przecenić",
+      "writeOff": "Spisać",
+      "noRemaining": "W partii nie ma więcej dostępnego produktu do przeceny lub spisania",
 
       "discountTitle": "Przecena produktu",
       "writeOffTitle": "Spisanie produktu",
 
-      "discountDescription": "Wprowadź ilość produktów, które mają zostać przecenione.",
-      "writeOffDescription": "Wprowadź ilość produktów, które mają zostać spisane.",
+      "discountDescription": "Podaj ilość produktu, którą należy przecenić.",
+      "writeOffDescription": "Podaj ilość produktu, którą należy spisać.",
 
-      "available": "Dostępne do obsługi",
+      "available": "Dostępne do przetworzenia",
       "quantity": "Ilość, szt.",
       "quantityPlaceholder": "Wprowadź ilość",
 
       "exceedsAvailable": "Nie można przetworzyć więcej niż {quantity} szt.",
 
       "cancel": "Anuluj",
-      "discountSubmit": "Przecenij",
+      "discountSubmit": "Przecen",
       "writeOffSubmit": "Spisz",
       "saving": "Zapisywanie...",
 
@@ -136,7 +136,7 @@
     },
 
     "audit": {
-      "title": "Inwentaryzacja stanu",
+      "title": "Inwentaryzacja stanów",
       "create": "Nowa inwentaryzacja",
       "lastAudit": "Ostatnia inwentaryzacja",
       "expected": "Oczekiwana ilość",
@@ -146,13 +146,78 @@
       "history": "Historia inwentaryzacji",
       "saveError": "Nie udało się zapisać inwentaryzacji",
 
-      "modalTitle": "Inwentaryzacja stanu",
+      "modalTitle": "Inwentaryzacja stanów",
       "expectedUnit": "szt.",
       "note": "Komentarz",
-      "notePlaceholder": "Na przykład: stwierdzono niedobór, produkt uszkodzony...",
+      "notePlaceholder": "Np.: stwierdzono brak, produkt uszkodzony...",
       "cancel": "Anuluj",
       "saving": "Zapisywanie...",
       "save": "Zapisz"
+    }
+  },
+  "Reports": {
+    "title": "Analityka i inwentaryzacja",
+    "subtitle": "Ewidencja stanów magazynowych, terminów ważności, odpisów i wskaźników finansowych",
+
+    "actions": {
+      "reset": "Resetuj",
+      "exportCsv": "Eksport CSV"
+    },
+
+    "filters": {
+      "title": "Filtrowanie danych",
+      "records": "{count} rekordów",
+
+      "productName": "Nazwa produktu",
+      "productNamePlaceholder": "Szukaj produktu...",
+
+      "category": "Kategoria",
+      "allCategories": "Wszystkie kategorie",
+
+      "barcode": "Kod kreskowy",
+      "barcodePlaceholder": "Wprowadź kod kreskowy",
+
+      "expirationDays": "Termin ważności (dni ≤)",
+      "expirationDaysPlaceholder": "Na przykład 7",
+
+      "auditDays": "Inwentaryzacja z ostatnich (dni)",
+      "auditDaysPlaceholder": "Na przykład 30"
+    },
+
+    "table": {
+      "product": "Produkt",
+      "category": "Kategoria",
+      "barcode": "Kod kreskowy",
+      "expirationDate": "Termin ważności",
+      "intakeDate": "Przyjęcie",
+      "daysToExpiration": "Pozostało (dni)",
+      "discounted": "Przeceniono",
+      "writtenOff": "Spisano",
+      "actual": "Stan faktyczny",
+      "dailyConsumption": "Zużycie/dzień",
+      "monthlyConsumption": "Zużycie/mies.",
+      "shelfPrice": "Cena na półce",
+      "brutto": "Brutto",
+      "netto": "Netto",
+
+      "pieces": "szt.",
+      "days": "dni",
+
+      "noData": "Nie znaleziono danych",
+      "noDataDescription": "Spróbuj zmienić parametry filtrowania",
+
+      "pagination": {
+        "displayed": "Wyświetlono",
+        "of": "z",
+        "previous": "Wstecz",
+        "next": "Dalej"
+      }
+    },
+
+    "sorting": {
+      "sort": "Sortuj",
+      "ascending": "Sortowanie rosnąco",
+      "descending": "Sortowanie malejąco"
     }
   }
 }

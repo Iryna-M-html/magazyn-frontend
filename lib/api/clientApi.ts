@@ -112,3 +112,15 @@ export const getInventoryReport = async (): Promise<InventoryReportResponse> => 
 
   return res.data;
 };
+
+export interface Category {
+  _id: string;
+  title: string;
+}
+
+// Справочник категорий товаров
+export const getCategories = async (): Promise<ApiResponse<Category[]>> => {
+  const res = await nextServer.get<ApiResponse<Category[]>>("/categories");
+
+  return res.data;
+};

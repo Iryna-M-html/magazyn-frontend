@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { getInventoryReport } from "@/lib/api/clientApi";
+import { getCategories, getInventoryReport } from "@/lib/api/clientApi";
 import type { InventoryReportApiRow } from "@/types/report";
 
 import styles from "./Report.module.css";
@@ -153,6 +153,7 @@ export default function ReportClient() {
   const [rows, setRows] = useState<InventoryReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  const [categoryTitles, setCategoryTitles] = useState<string[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -174,6 +175,19 @@ export default function ReportClient() {
         if (!cancelled) {
           setLoading(false);
         }
+      });
+
+    // Справочник категорий; если не загрузился — список строится из данных отчёта
+    getCategories()
+      .then((response) => {
+        if (!cancelled) {
+          setCategoryTitles(
+            (response.data ?? []).map((category) => category.title),
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Ошибка загрузки категорий:", error);
       });
 
     return () => {
@@ -202,24 +216,28 @@ export default function ReportClient() {
      CATEGORIES
   ======================================================= */
 
-  const categories = useMemo(
-    () => [
+  // Категории с бэкенда + категории из данных, которых нет в справочнике (например, «Другое»)
+  const categories = useMemo(() => {
+    const extraTitles = Array.from(
+      new Set(
+        rows
+          .map((row) => row.category)
+          .filter((category): category is string => Boolean(category))
+          .filter((category) => !categoryTitles.includes(category)),
+      ),
+    ).sort((a, b) => a.localeCompare(b));
+
+    return [
       {
         value: "",
         label: t("categories.all"),
       },
-      ...Array.from(
-        new Set(
-          rows
-            .map((row) => row.category)
-            .filter((category): category is string => Boolean(category)),
-        ),
-      )
-        .sort((a, b) => a.localeCompare(b))
-        .map((category) => ({ value: category, label: category })),
-    ],
-    [rows, t],
-  );
+      ...[...categoryTitles, ...extraTitles].map((title) => ({
+        value: title,
+        label: title,
+      })),
+    ];
+  }, [categoryTitles, rows, t]);
 
   /* =======================================================
      RESET FILTERS

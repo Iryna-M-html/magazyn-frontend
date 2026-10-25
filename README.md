@@ -62,6 +62,7 @@ npm run dev
 | `GET /api/inventory/[intakeId]` | `GET /inventory/intake/:id` | Одна партия (с категорией и ценой товара) |
 | `PATCH /api/inventory/[intakeId]` | `PATCH /inventory/intake/:id` | Уценка / списание |
 | `GET`, `POST /api/inventory/[intakeId]/audits` | `/inventory/intake/:id/audits` | Ревизии партии |
+| `GET /api/categories` | `GET /categories` | Справочник категорий (фильтр в «Raporty») |
 | `GET /api/reports/inventory` | несколько запросов, см. ниже | Строки отчёта «Raporty» |
 
 **Отчёт `/api/reports/inventory`** собирается на стороне Next.js: берётся список партий, затем для каждой партии параллельно (не больше 8 одновременно) запрашиваются её детали и ревизии. Это 2 доп. запроса на партию — при большом числе партий отчёт стоит перенести в один эндпоинт бэкенда. Формат строки — `types/report.ts`.

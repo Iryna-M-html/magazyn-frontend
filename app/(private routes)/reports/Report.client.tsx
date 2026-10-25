@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import {
   AlertTriangle,
   ArrowUpDown,
@@ -167,7 +167,19 @@ function SortableHeader({
           : t("sort")
       }
     >
-      <span>{label}</span>
+      {/* Разрешаем перенос после «/», например «Zużycie/dzień» */}
+      <span>
+        {label.split("/").map((part, index) => (
+          <Fragment key={index}>
+            {index > 0 && (
+              <>
+                /<wbr />
+              </>
+            )}
+            {part}
+          </Fragment>
+        ))}
+      </span>
 
       <ArrowUpDown
         size={14}

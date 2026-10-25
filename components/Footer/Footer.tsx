@@ -29,6 +29,7 @@ export default function Footer() {
             href={href}
             className={isActive ? styles.navTabActive : styles.navTab}
             aria-current={isActive ? "page" : undefined}
+            title={t(label)}
           >
             <Icon size={20} />
 

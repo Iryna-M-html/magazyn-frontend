@@ -877,3 +877,84 @@
     gap: 32px;
   }
 }
+
+/* ============================================================
+   ЦЕНА НЕТТО / БРУТТО ПАРТИИ
+   ============================================================ */
+
+.priceValue {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.priceEdit,
+.priceSave,
+.priceCancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  cursor: pointer;
+}
+
+.priceEdit {
+  border: 1px solid #b7e4cc;
+  background: #ecfdf3;
+  color: #047857;
+}
+
+.priceForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.priceForm input {
+  width: 96px;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: var(--type-input-size);
+  text-align: right;
+}
+
+.priceForm input:focus {
+  border-color: #059669;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
+}
+
+.priceSave {
+  border: 1px solid #059669;
+  background: #059669;
+  color: #ffffff;
+}
+
+.priceCancel {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+}
+
+.priceSave:disabled,
+.priceCancel:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.priceError {
+  margin: -4px 0 0;
+  color: #dc2626;
+  font-size: var(--type-small-size);
+  text-align: right;
+}

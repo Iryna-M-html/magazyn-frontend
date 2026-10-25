@@ -8,15 +8,17 @@ import { ArrowLeft, Camera, Trash2 } from "lucide-react";
 
 import {
   createProductManual,
-  getCategories,
   updateProductByBarcode,
 } from "@/lib/api/clientApi";
+import {
+  DEFAULT_CATEGORY,
+  QUANTITY_UNITS,
+  QuantityUnit,
+} from "@/lib/constants/products";
+import { useCategoryTitles } from "@/lib/hooks/useCategoryTitles";
 
 import styles from "./CreateProduct.module.css";
 
-// Значения совпадают с бэкендом (src/constants/categories.js, src/constants/units.js)
-const DEFAULT_CATEGORY = "Другое";
-const QUANTITY_UNITS = ["g", "kg", "ml"] as const;
 const MAX_PHOTO_SIZE = 5 * 1024 * 1024;
 const BARCODE_PATTERN = /^\d{8,14}$/;
 
@@ -39,44 +41,16 @@ export default function CreateProductClient() {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState(DEFAULT_CATEGORY);
   const [quantity, setQuantity] = useState("");
-  const [unit, setUnit] = useState<(typeof QUANTITY_UNITS)[number]>("g");
+  const [unit, setUnit] = useState<QuantityUnit>("g");
   const [shelfPrice, setShelfPrice] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
 
-  const [categoryTitles, setCategoryTitles] = useState<string[]>([]);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState("");
   const [isExisting, setIsExisting] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Справочник категорий; «Другое» есть всегда (значение по умолчанию в бэкенде)
-  useEffect(() => {
-    let cancelled = false;
-
-    getCategories()
-      .then((response) => {
-        if (!cancelled) {
-          setCategoryTitles(
-            (response.data ?? []).map((category) => category.title),
-          );
-        }
-      })
-      .catch((error) => {
-        console.error("Ошибка загрузки категорий:", error);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const categoryOptions = useMemo(
-    () =>
-      categoryTitles.includes(DEFAULT_CATEGORY)
-        ? categoryTitles
-        : [...categoryTitles, DEFAULT_CATEGORY],
-    [categoryTitles],
-  );
+  const categoryOptions = useCategoryTitles();
 
   const photoPreview = useMemo(
     () => (photo ? URL.createObjectURL(photo) : null),
@@ -361,7 +335,7 @@ export default function CreateProductClient() {
               value={unit}
               aria-label={t("unit")}
               onChange={(event) =>
-                setUnit(event.target.value as (typeof QUANTITY_UNITS)[number])
+                setUnit(event.target.value as QuantityUnit)
               }
             >
               {QUANTITY_UNITS.map((value) => (

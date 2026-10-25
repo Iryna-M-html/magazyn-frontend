@@ -7,6 +7,7 @@ export interface ProductData {
   brand: string;
   imageUrl: string;
   source: string;
+  category?: string;
   product_quantity: number | null;
   product_quantity_unit: string;
 }
@@ -61,6 +62,8 @@ export interface CreateIntakeData {
   quantity: number;
   batch?: string;
   expirationDate: string;
+  /** Цена нетто за 1 шт.; брутто бэкенд считает сам по VAT категории */
+  priceNetto?: number;
 }
 
 // 3. Фиксация приёмки товара (сохранение количества, партии и срока годности)

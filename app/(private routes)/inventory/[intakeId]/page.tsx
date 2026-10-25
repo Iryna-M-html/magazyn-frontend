@@ -1,10 +1,11 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { FormEvent, use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
 import { useTranslations } from "next-intl";
+import { Pencil } from "lucide-react";
 import { formatDate, formatDateTime } from "@/lib/utils/date";
 
 import styles from "./IntakeDetails.module.css";
@@ -38,6 +39,10 @@ interface AuditsResponse {
   data?: InventoryAudit[];
 }
 
+interface UpdatePriceResponse {
+  data?: IntakeItem;
+}
+
 interface UpdateIntakeResponse {
   message?: string;
   intake?: IntakeItem;
@@ -66,6 +71,11 @@ export default function IntakeDetailsPage({
   const [inventoryActionError, setInventoryActionError] = useState<
     string | null
   >(null);
+
+  const [isPriceEditing, setIsPriceEditing] = useState(false);
+  const [priceInput, setPriceInput] = useState("");
+  const [priceSaving, setPriceSaving] = useState(false);
+  const [priceError, setPriceError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchIntake() {
@@ -119,6 +129,52 @@ export default function IntakeDetailsPage({
 
     fetchAudits();
   }, [intakeId]);
+
+  const handleStartPriceEdit = () => {
+    setPriceInput(
+      intake?.priceNetto !== null && intake?.priceNetto !== undefined
+        ? String(intake.priceNetto)
+        : "",
+    );
+    setPriceError(null);
+    setIsPriceEditing(true);
+  };
+
+  // Пустое поле — убрать цену; брутто бэкенд пересчитает сам
+  const handleSavePrice = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const value =
+      priceInput.trim() === ""
+        ? null
+        : Number(priceInput.trim().replace(",", "."));
+
+    if (value !== null && !(value >= 0)) {
+      setPriceError(t("price.invalid"));
+      return;
+    }
+
+    try {
+      setPriceSaving(true);
+      setPriceError(null);
+
+      const response = await axios.patch<UpdatePriceResponse>(
+        `/api/inventory/${intakeId}/price`,
+        { priceNetto: value },
+      );
+
+      if (response.data?.data) {
+        setIntake(response.data.data);
+      }
+
+      setIsPriceEditing(false);
+    } catch (err) {
+      console.error("Ошибка сохранения цены:", err);
+      setPriceError(t("price.error"));
+    } finally {
+      setPriceSaving(false);
+    }
+  };
 
   const handleOpenDiscount = () => {
     setInventoryActionError(null);
@@ -187,7 +243,15 @@ export default function IntakeDetailsPage({
       const updatedIntake = response.data?.intake;
 
       if (updatedIntake) {
-        setIntake(updatedIntake);
+        setIntake((prev) =>
+          prev
+            ? {
+                ...prev,
+                discountedQuantity: updatedIntake.discountedQuantity,
+                writtenOffQuantity: updatedIntake.writtenOffQuantity,
+              }
+            : updatedIntake,
+        );
       } else {
         setIntake((prev) => {
           if (!prev) {
@@ -429,9 +493,87 @@ export default function IntakeDetailsPage({
               <span className={styles.label}>{t("shelfPrice")}</span>
 
               <span className={styles.value}>
-                {product?.shelfPrice !== undefined
+                {product?.shelfPrice !== undefined &&
+                product?.shelfPrice !== null
                   ? `${product.shelfPrice} zł`
                   : "—"}
+              </span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("price.netto")}</span>
+
+              {isPriceEditing ? (
+                <form className={styles.priceForm} onSubmit={handleSavePrice}>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={priceInput}
+                    placeholder="0.00"
+                    aria-label={t("price.netto")}
+                    onChange={(event) => setPriceInput(event.target.value)}
+                    disabled={priceSaving}
+                    autoFocus
+                  />
+
+                  <button
+                    type="submit"
+                    className={styles.priceSave}
+                    disabled={priceSaving}
+                  >
+                    {t("price.save")}
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.priceCancel}
+                    onClick={() => setIsPriceEditing(false)}
+                    disabled={priceSaving}
+                  >
+                    {t("price.cancel")}
+                  </button>
+                </form>
+              ) : (
+                <span className={styles.priceValue}>
+                  <span className={styles.value}>
+                    {intake.priceNetto !== null &&
+                    intake.priceNetto !== undefined
+                      ? `${intake.priceNetto.toFixed(2)} zł`
+                      : "—"}
+                  </span>
+
+                  <button
+                    type="button"
+                    className={styles.priceEdit}
+                    onClick={handleStartPriceEdit}
+                  >
+                    <Pencil size={13} />
+                    {intake.priceNetto !== null &&
+                    intake.priceNetto !== undefined
+                      ? t("price.edit")
+                      : t("price.add")}
+                  </button>
+                </span>
+              )}
+            </div>
+
+            {priceError && <p className={styles.priceError}>{priceError}</p>}
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>
+                {intake.vatRate !== null && intake.vatRate !== undefined
+                  ? t("price.bruttoWithVat", { rate: intake.vatRate })
+                  : t("price.brutto")}
+              </span>
+
+              <span className={styles.valueBold}>
+                {intake.priceBrutto !== null &&
+                intake.priceBrutto !== undefined
+                  ? `${intake.priceBrutto.toFixed(2)} zł`
+                  : intake.priceNetto !== null &&
+                      intake.priceNetto !== undefined
+                    ? t("price.noVat")
+                    : "—"}
               </span>
             </div>
           </section>

@@ -25,6 +25,13 @@ interface BackendIntake {
   writtenOffQuantity?: number;
 }
 
+// Детали партии: брутто бэкенд считает сам по VAT из категории товара
+interface BackendIntakeDetails {
+  productId?: BackendProduct | null;
+  priceNetto?: number | null;
+  priceBrutto?: number | null;
+}
+
 interface BackendAudit {
   countedQuantity?: number;
   countedAt?: string;
@@ -76,10 +83,13 @@ export async function GET() {
           api.get(`/inventory/intake/${intake._id}/audits`, { headers }),
         ]);
 
+        const details: BackendIntakeDetails | null =
+          detailsResult.status === "fulfilled"
+            ? (detailsResult.value.data?.data ?? null)
+            : null;
+
         const product: BackendProduct =
-          (detailsResult.status === "fulfilled"
-            ? detailsResult.value.data?.data?.productId
-            : null) ??
+          details?.productId ??
           intake.productId ??
           {};
 
@@ -111,6 +121,8 @@ export async function GET() {
           lastAuditAt: lastAudit?.countedAt ?? lastAudit?.createdAt ?? null,
           shelfPrice:
             typeof product.shelfPrice === "number" ? product.shelfPrice : null,
+          priceNetto: details?.priceNetto ?? null,
+          priceBrutto: details?.priceBrutto ?? null,
         };
       },
     );

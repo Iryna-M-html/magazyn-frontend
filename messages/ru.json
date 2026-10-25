@@ -98,6 +98,18 @@
     "batch": "Партия",
     "category": "Категория",
     "shelfPrice": "Цена на полке",
+    "price": {
+      "netto": "Цена нетто (партия)",
+      "brutto": "Цена брутто",
+      "bruttoWithVat": "Цена брутто (VAT {rate}%)",
+      "noVat": "в категории нет ставки VAT",
+      "add": "Добавить",
+      "edit": "Изменить",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "invalid": "Введите число не меньше 0",
+      "error": "Не удалось сохранить цену"
+    },
 
     "units": {
       "pieces": "шт."
@@ -299,7 +311,13 @@
     "batchPlaceholder": "Например: LOT-2026-X",
     "expiration": "Срок годности:",
     "selectExpiration": "Выберите срок годности!",
-    "submit": "Сохранить приёмку"
+    "submit": "Сохранить приёмку",
+    "priceNetto": "Цена нетто за 1 шт. (zł):",
+    "priceNettoPlaceholder": "Например: 6.94",
+    "priceNettoInvalid": "Укажите цену нетто (число не меньше 0)",
+    "category": "Категория (ставка VAT):",
+    "categoryHint": "Категория сохранится у товара — от неё зависит цена брутто",
+    "otherCategory": "Другое (без VAT)"
   },
 
   "ProductFound": {

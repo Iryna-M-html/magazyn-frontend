@@ -56,11 +56,11 @@ function toReportRow(row: InventoryReportApiRow): InventoryReportRow {
   return {
     ...row,
     daysToExpiration: getDaysUntil(row.expirationDate),
-    // Данных о расходе и ставках VAT в базе пока нет
+    // Данных о расходе в базе пока нет
     dailyConsumption: null,
     monthlyConsumption: null,
-    shelfPriceBrutto: null,
-    shelfPriceNetto: null,
+    shelfPriceBrutto: row.priceBrutto,
+    shelfPriceNetto: row.priceNetto,
   };
 }
 

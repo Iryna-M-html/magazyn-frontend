@@ -98,6 +98,18 @@
     "batch": "Batch",
     "category": "Category",
     "shelfPrice": "Shelf Price",
+    "price": {
+      "netto": "Net price (batch)",
+      "brutto": "Gross price",
+      "bruttoWithVat": "Gross price (VAT {rate}%)",
+      "noVat": "no VAT rate in category",
+      "add": "Add",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "invalid": "Enter a number of at least 0",
+      "error": "Failed to save the price"
+    },
 
     "units": {
       "pieces": "pcs"
@@ -299,7 +311,13 @@
     "batchPlaceholder": "E.g.: LOT-2026-X",
     "expiration": "Expiration date:",
     "selectExpiration": "Select an expiration date!",
-    "submit": "Save intake"
+    "submit": "Save intake",
+    "priceNetto": "Net price per pc (zł):",
+    "priceNettoPlaceholder": "E.g. 6.94",
+    "priceNettoInvalid": "Enter the net price (a number of at least 0)",
+    "category": "Category (VAT rate):",
+    "categoryHint": "The category is saved to the product — the gross price depends on it",
+    "otherCategory": "Other (no VAT)"
   },
 
   "ProductFound": {

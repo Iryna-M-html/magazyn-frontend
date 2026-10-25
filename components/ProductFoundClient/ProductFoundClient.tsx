@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import {
   getProductByBarcode,
   createInventoryIntake,
+  updateProductByBarcode,
 } from "@/lib/api/clientApi";
 import { IntakeModal } from "./IntakeModal";
 import styles from "./ProductFoundClient.module.css";
@@ -17,6 +18,7 @@ interface ProductData {
   barcode: string;
   brand?: string;
   imageUrl?: string;
+  category?: string;
   product_quantity?: number | null;
   product_quantity_unit?: string;
 }
@@ -72,17 +74,27 @@ export function ProductFoundClient() {
     quantity: number;
     batch: string;
     expirationDate: string;
+    priceNetto: number;
+    category: string;
   }) => {
     if (!product) return;
 
     try {
       setIsSubmitting(true);
 
+      // Категория определяет ставку VAT (брутто) — сохраняем её у товара до приёмки
+      if (data.category !== product.category) {
+        await updateProductByBarcode(product.barcode, {
+          category: data.category,
+        });
+      }
+
       await createInventoryIntake({
         productId: product.id,
         quantity: data.quantity,
         batch: data.batch,
         expirationDate: data.expirationDate,
+        priceNetto: data.priceNetto,
       });
 
       alert(t("intakeSuccess"));
@@ -211,6 +223,7 @@ export function ProductFoundClient() {
         onClose={() => setIsIntakeModalOpen(false)}
         onSubmit={handleIntakeSubmit}
         isSubmitting={isSubmitting}
+        initialCategory={product.category}
       />
     </div>
   );

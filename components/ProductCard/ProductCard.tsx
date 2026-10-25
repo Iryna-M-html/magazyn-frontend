@@ -16,6 +16,10 @@ export interface IntakeItem {
   createdAt?: string;
   discountedQuantity?: number;
   writtenOffQuantity?: number;
+  /** Цена нетто партии; priceBrutto и vatRate бэкенд считает по категории товара */
+  priceNetto?: number | null;
+  priceBrutto?: number | null;
+  vatRate?: number | null;
 
   productId: {
     _id: string;

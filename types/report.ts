@@ -16,6 +16,10 @@ export interface InventoryReportApiRow {
   /** ISO-дата последней ревизии */
   lastAuditAt: string | null;
   shelfPrice: number | null;
+  /** Цена нетто партии (вносится при приёмке) */
+  priceNetto: number | null;
+  /** Брутто, посчитанное бэкендом по VAT из категории */
+  priceBrutto: number | null;
 }
 
 export interface InventoryReportResponse {

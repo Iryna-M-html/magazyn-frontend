@@ -63,6 +63,7 @@ npm run dev
 | `POST /api/inventory/intake` | `POST /inventory/intake` | Приёмка партии |
 | `GET /api/inventory/[intakeId]` | `GET /inventory/intake/:id` | Одна партия (с категорией и ценой товара) |
 | `PATCH /api/inventory/[intakeId]` | `PATCH /inventory/intake/:id` | Уценка / списание |
+| `PATCH /api/inventory/[intakeId]/price` | `PATCH /inventory/intake/:id/price` | Цена нетто партии (брутто = нетто + VAT% категории, считает бэкенд) |
 | `GET`, `POST /api/inventory/[intakeId]/audits` | `/inventory/intake/:id/audits` | Ревизии партии |
 | `GET /api/categories` | `GET /categories` | Справочник категорий (фильтр в «Raporty») |
 | `GET /api/reports/inventory` | несколько запросов, см. ниже | Строки отчёта «Raporty» |
@@ -127,5 +128,6 @@ types/              общие типы
 
 - `npm run build` падает на ошибке TypeScript в `components/BarcodeScanner/BarcodeScanner.tsx` (конструктору `Html5Qrcode` не хватает поля `verbose`). В `npm run dev` приложение работает.
 - ESLint ругается на `setState` внутри `useEffect` в том же `BarcodeScanner.tsx`.
-- В отчёте нет данных о расходе (Zużycie) и ставках VAT (Brutto / Netto) — в базе их пока нет, колонки показывают «—» / «No data».
+- В отчёте нет данных о расходе (Zużycie) — колонки показывают «—».
+- Netto в отчёте — цена партии, которую вносят при приёмке; Brutto бэкенд считает сам: нетто × (1 + VAT), ставка берётся из названия категории («33 (Vat 8%)» → 8%). У партий без цены и у категорий без ставки («Другое») — «No data».
 - `app/api/shope/*` и `components/ServicesGrid`, `components/Hero` — остатки шаблона, в приложении не используются.

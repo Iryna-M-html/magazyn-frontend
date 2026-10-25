@@ -395,3 +395,21 @@
     max-width: 420px;
   }
 }
+
+.fieldGroup select {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111827;
+  font-size: var(--type-input-size);
+}
+
+.fieldHint {
+  color: #6b7280;
+  font-size: var(--type-small-size);
+  line-height: 1.35;
+}

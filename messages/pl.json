@@ -98,6 +98,18 @@
     "batch": "Partia",
     "category": "Kategoria",
     "shelfPrice": "Cena na półce",
+    "price": {
+      "netto": "Cena netto (partia)",
+      "brutto": "Cena brutto",
+      "bruttoWithVat": "Cena brutto (VAT {rate}%)",
+      "noVat": "brak stawki VAT w kategorii",
+      "add": "Dodaj",
+      "edit": "Zmień",
+      "save": "Zapisz",
+      "cancel": "Anuluj",
+      "invalid": "Podaj liczbę nie mniejszą niż 0",
+      "error": "Nie udało się zapisać ceny"
+    },
 
     "units": {
       "pieces": "szt."
@@ -299,7 +311,13 @@
     "batchPlaceholder": "Np.: LOT-2026-X",
     "expiration": "Termin ważności:",
     "selectExpiration": "Wybierz termin ważności!",
-    "submit": "Zapisz przyjęcie"
+    "submit": "Zapisz przyjęcie",
+    "priceNetto": "Cena netto za 1 szt. (zł):",
+    "priceNettoPlaceholder": "Np. 6.94",
+    "priceNettoInvalid": "Podaj cenę netto (liczba nie mniejsza niż 0)",
+    "category": "Kategoria (stawka VAT):",
+    "categoryHint": "Kategoria zapisze się w produkcie — od niej zależy cena brutto",
+    "otherCategory": "Inne (bez VAT)"
   },
 
   "ProductFound": {

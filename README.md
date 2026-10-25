@@ -56,7 +56,9 @@ npm run dev
 
 | Маршрут Next.js | Бэкенд | Назначение |
 |---|---|---|
-| `GET /api/products/barcode/[barcode]` | `GET /products/barcode/:barcode` | Поиск товара по штрихкоду |
+| `GET /api/products/barcode/[barcode]` | `GET /products/barcode/:barcode` | Поиск товара по штрихкоду (база, затем Open Food Facts) |
+| `PATCH /api/products/barcode/[barcode]` | `PATCH /products/barcode/:barcode` | Категория и/или цена на полке |
+| `POST /api/products/manual` | `POST /manual` | Ручное создание товара (multipart, фото в поле `imageUrl` → Cloudinary) |
 | `GET /api/inventory/intake` | `GET /inventory/intake` | Список партий (фильтры `year`, `month`, `productId`, `expirationDate`) |
 | `POST /api/inventory/intake` | `POST /inventory/intake` | Приёмка партии |
 | `GET /api/inventory/[intakeId]` | `GET /inventory/intake/:id` | Одна партия (с категорией и ценой товара) |
@@ -75,13 +77,14 @@ npm run dev
 |---|---|
 | `/sprzedawca` | Главная: сводка по складу и меню разделов. С `?barcode=...` показывает экран «Товар найден» и приёмку |
 | `/scan` | Сканер штрихкода камерой, ручной ввод кода |
+| `/sprzedawca/create?barcode=` | Ручное добавление товара, которого нет ни в базе, ни в Open Food Facts: название, бренд, категория, вес/объём (g, kg, ml), цена, фото. После сохранения — экран «Товар найден» и приёмка |
 | `/months` | Сроки годности по месяцам |
 | `/expiring` | Короткий срок: просроченные, до 3 / 7 / 30 дней, позже |
 | `/products` | Список партий с поиском и пагинацией (`?year=&month=`, `?filter=expired\|later`) |
 | `/inventory/[intakeId]` | Карточка партии: уценка, списание, ревизии |
 | `/reports` | Аналитика и инвентаризация: таблица с фильтрами, сортировкой и экспортом CSV |
 
-`/scan` и экран «Товар найден» — полноэкранные мобильные сценарии, Header и Footer на них скрыты (`components/AppChrome/ChromeGate.tsx`).
+`/scan`, `/sprzedawca/create` и экран «Товар найден» — полноэкранные мобильные сценарии, Header и Footer на них скрыты (`components/AppChrome/ChromeGate.tsx`).
 
 ## Структура проекта
 

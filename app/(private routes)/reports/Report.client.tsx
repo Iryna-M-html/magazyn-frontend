@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 
 import { getCategories, getInventoryReport } from "@/lib/api/clientApi";
 import type { InventoryReportApiRow } from "@/types/report";
+import { formatDate } from "@/lib/utils/date";
 
 import styles from "./Report.module.css";
 
@@ -392,8 +393,8 @@ export default function ReportClient() {
       row.name,
       row.category ?? noData,
       row.barcode,
-      row.expirationDate ?? noData,
-      row.intakeDate ?? noData,
+      formatDate(row.expirationDate, noData),
+      formatDate(row.intakeDate, noData),
       row.daysToExpiration ?? noData,
       row.discountedQuantity,
       row.writtenOffQuantity,
@@ -832,7 +833,7 @@ export default function ReportClient() {
                                 : styles["report-date"]
                             }
                           >
-                            {row.expirationDate}
+                            {formatDate(row.expirationDate)}
                           </span>
                         ) : (
                           noDataCell
@@ -841,7 +842,9 @@ export default function ReportClient() {
 
                       {/* 5. Поступление */}
 
-                      <td>{row.intakeDate ?? noDataCell}</td>
+                      <td>
+                        {row.intakeDate ? formatDate(row.intakeDate) : noDataCell}
+                      </td>
 
                       {/* 6. Остаток дней */}
 

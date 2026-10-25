@@ -39,6 +39,23 @@ export const createProductManual = async (
   return response.data;
 };
 
+export interface UpdateProductData {
+  category?: string;
+  shelfPrice?: number;
+}
+
+// Изменение категории и/или цены на полке
+export const updateProductByBarcode = async (
+  barcode: string,
+  data: UpdateProductData,
+): Promise<ApiResponse<unknown>> => {
+  const response = await nextServer.patch<ApiResponse<unknown>>(
+    `/products/barcode/${barcode}`,
+    data,
+  );
+  return response.data;
+};
+
 export interface CreateIntakeData {
   productId: string;
   quantity: number;

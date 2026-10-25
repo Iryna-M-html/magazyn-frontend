@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
 import { useTranslations } from "next-intl";
+import { formatDate, formatDateTime } from "@/lib/utils/date";
 
 import styles from "./IntakeDetails.module.css";
 
@@ -119,44 +120,6 @@ export default function IntakeDetailsPage({
     fetchAudits();
   }, [intakeId]);
 
-  const formatDate = (dateStr?: string): string => {
-    if (!dateStr) {
-      return "—";
-    }
-    const date = new Date(dateStr);
-    if (Number.isNaN(date.getTime())) {
-      return "—";
-    }
-    return date.toLocaleDateString(undefined, {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
-  const formatDateTime = (dateStr?: string): string => {
-    if (!dateStr) {
-      return "—";
-    }
-
-    const date = new Date(dateStr);
-
-    if (Number.isNaN(date.getTime())) {
-      return "—";
-    }
-
-    const datePart = date.toLocaleDateString(undefined, {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-
-    const timePart = date.toLocaleTimeString(undefined, {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    return `${datePart} ${timePart}`;
-  };
   const handleOpenDiscount = () => {
     setInventoryActionError(null);
     setInventoryAction("discount");

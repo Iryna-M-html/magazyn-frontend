@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import { formatDate } from "@/lib/utils/date";
 import styles from "./ProductCard.module.css";
 import { ImageModal } from "../ImageModal/ImageModal";
 
@@ -38,27 +39,8 @@ export function ProductCard({ item }: ProductCardProps) {
 
   const t = useTranslations("ProductCard");
   const tCommon = useTranslations("Common");
-  const locale = useLocale();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const formatDate = (dateStr?: string) => {
-    if (!dateStr) {
-      return "—";
-    }
-
-    const date = new Date(dateStr);
-
-    if (Number.isNaN(date.getTime())) {
-      return "—";
-    }
-
-    return date.toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
 
   const isCritical = () => {
     if (!expirationDate) {

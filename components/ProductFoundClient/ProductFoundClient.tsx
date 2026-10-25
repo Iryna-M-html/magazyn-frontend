@@ -31,6 +31,7 @@ export function ProductFoundClient() {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isNotFound, setIsNotFound] = useState(false);
   const [isIntakeModalOpen, setIsIntakeModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,6 +46,7 @@ export function ProductFoundClient() {
       try {
         setLoading(true);
         setError("");
+        setIsNotFound(false);
         const res = await getProductByBarcode(barcode);
 
         if (res.status === "success" && res.data) {
@@ -53,6 +55,7 @@ export function ProductFoundClient() {
       } catch (err) {
         if (axios.isAxiosError(err) && err.response?.status === 404) {
           setError(t("notFoundInDb"));
+          setIsNotFound(true);
         } else {
           setError(t("fetchError"));
         }
@@ -112,6 +115,19 @@ export function ProductFoundClient() {
         >
           {t("scanAgain")}
         </button>
+
+        {isNotFound && (
+          <button
+            className={styles.retryButton}
+            onClick={() =>
+              router.push(
+                `/sprzedawca/create?barcode=${encodeURIComponent(barcode ?? "")}`,
+              )
+            }
+          >
+            {t("addManually")}
+          </button>
+        )}
       </div>
     );
   }

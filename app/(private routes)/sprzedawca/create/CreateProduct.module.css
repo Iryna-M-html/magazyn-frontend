@@ -1,0 +1,271 @@
+/* Полноэкранный мобильный сценарий: колонка по центру на широких экранах */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--mobile-column-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+  color: #f8fafc;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #334155;
+  background: linear-gradient(115deg, #1e293b 0%, #263449 55%, #1e293b 100%);
+}
+
+.backButton {
+  display: flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #475569;
+  border-radius: 12px;
+  background: rgba(71, 85, 105, 0.35);
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.headerText {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 18px 16px 24px;
+  padding: 18px;
+  border: 1px solid rgba(203, 213, 225, 0.22);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:
+    0 14px 30px rgba(2, 6, 23, 0.28),
+    0 2px 5px rgba(2, 6, 23, 0.12);
+  color: #1e293b;
+}
+
+/* ---------- Фото ---------- */
+
+.photoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.photoPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 140px;
+  padding: 16px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  background: #f8fafc;
+  color: #059669;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  text-align: center;
+  cursor: pointer;
+}
+
+.photoPlaceholder span {
+  color: #475569;
+}
+
+.photoPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.photoPreview img {
+  width: 100%;
+  max-height: 220px;
+  border-radius: 16px;
+  background: #f1f5f9;
+  object-fit: contain;
+}
+
+.photoActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.photoButton,
+.photoRemove {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  cursor: pointer;
+}
+
+.photoButton {
+  border: 1px solid #b7e4cc;
+  background: #ecfdf3;
+  color: #047857;
+}
+
+.photoRemove {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* ---------- Поля ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field label {
+  color: #334155;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+}
+
+.optional {
+  color: #94a3b8;
+  font-weight: var(--type-weight-regular);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--type-input-size);
+  font-weight: var(--type-input-weight);
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #059669;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.inlineFields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  gap: 8px;
+}
+
+.fieldError {
+  color: #dc2626;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+}
+
+/* ---------- Ошибка формы и отправка ---------- */
+
+.formError {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+}
+
+.formErrorAction {
+  padding: 6px 12px;
+  border: 1px solid #b91c1c;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #b91c1c;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  cursor: pointer;
+}
+
+.submitButton {
+  height: 50px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 14px;
+  background: #059669;
+  color: #ffffff;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #047857;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Узкие телефоны 320–374 */
+@media (max-width: 374px) {
+  .header {
+    padding: 12px 14px;
+  }
+
+  .form {
+    margin: 14px 12px 20px;
+    padding: 14px;
+  }
+}
+
+/* Планшет и десктоп: тонкие границы колонки, как у сканера */
+@media (min-width: 768px) {
+  .container {
+    border-right: 1px solid #1e293b;
+    border-left: 1px solid #1e293b;
+  }
+}

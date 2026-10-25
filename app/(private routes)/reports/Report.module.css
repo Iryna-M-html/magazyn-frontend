@@ -4,13 +4,7 @@
   padding: 24px;
   background-color: #f1f5f9;
   color: #0f172a;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: var(--font-ui);
 }
 
 .report-page * {
@@ -374,4 +368,64 @@
   padding: 32px;
   color: #64748b;
   gap: 6px;
+}
+
+.report-page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+  color: #f8fafc;
+}
+
+.report-title {
+  color: #f8fafc;
+}
+
+.report-title-icon {
+  color: #059669;
+  border-color: #334155;
+  border-radius: 12px;
+}
+
+.report-subtitle {
+  color: #aab6c5;
+}
+
+.report-button {
+  border-radius: 9px;
+}
+
+.report-button-primary {
+  background: #059669;
+}
+
+.report-button-primary:hover {
+  background: #047857;
+}
+
+.report-card {
+  border-color: #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.2);
+}
+
+.report-filter-field input:focus,
+.report-filter-field select:focus {
+  border-color: #059669;
+  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.16);
+}
+
+.report-sort-button:hover,
+.report-sort-icon-active {
+  color: #6ee7b7;
+}
+
+.report-table tbody tr:hover {
+  background-color: #ecfdf5;
+}
+
+.report-page-button-active {
+  background: #059669;
+  border-color: #059669;
 }

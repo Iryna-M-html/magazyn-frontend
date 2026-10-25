@@ -267,3 +267,111 @@
 .navItem:active {
   color: #2563eb;
 }
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.header {
+  height: 64px;
+  border-bottom-color: #334155;
+  background: linear-gradient(115deg, #1e293b, #263449 55%, #1e293b);
+  box-shadow: 0 5px 18px rgba(2, 6, 23, 0.18);
+}
+
+.headerBack,
+.filterButton {
+  color: #cbd5e1;
+}
+
+.headerBack:hover,
+.filterButton:hover {
+  background: #334155;
+}
+
+.title {
+  color: #f8fafc;
+}
+
+.content {
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+}
+
+.loading {
+  color: #cbd5e1;
+}
+
+.loadingSpinner {
+  border-color: #334155;
+  border-top-color: #34d399;
+}
+
+.periodWrapper {
+  box-shadow: 0 7px 18px rgba(2, 6, 23, 0.2);
+}
+
+.periodCard {
+  min-height: 68px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.periodCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 20px rgba(2, 6, 23, 0.16);
+}
+
+.periodCard:focus-visible {
+  outline-color: #34d399;
+}
+
+.dropdown {
+  border-color: #e5e7eb;
+  background: #ffffff;
+}
+
+.emptyState {
+  color: #64748b;
+}
+
+.resultInfo {
+  color: #cbd5e1;
+}
+
+.resultInfo strong {
+  color: #f8fafc;
+}
+
+.bottomNav {
+  width: 100%;
+  max-width: 430px;
+  height: 64px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border: 1px solid #475569;
+  border-bottom: 0;
+  border-radius: 15px 15px 0 0;
+  background: rgba(51, 65, 85, 0.92);
+  box-shadow: 0 -8px 24px rgba(2, 6, 23, 0.28);
+  backdrop-filter: blur(16px);
+}
+
+.navItem {
+  color: #aab6c5;
+}
+
+.navItem:active {
+  color: #4dd0a8;
+}

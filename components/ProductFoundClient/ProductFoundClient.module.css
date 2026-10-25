@@ -5,8 +5,7 @@
   min-height: 100vh;
   padding: 16px;
   background-color: #f8f9fa;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-ui);
   box-sizing: border-box;
 }
 
@@ -284,4 +283,57 @@
 .submitButton:disabled {
   background-color: #9e9e9e;
   cursor: not-allowed;
+}
+
+.container,
+.centeredState {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.backButton {
+  color: #cbd5e1;
+}
+
+.checkIcon {
+  background: #059669;
+}
+
+.statusTitle {
+  color: #34d399;
+}
+
+.productCard {
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.28);
+}
+
+.nextButton,
+.submitButton {
+  background: #059669;
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.24);
+}
+
+.nextButton:active,
+.submitButton:hover:not(:disabled) {
+  background: #047857;
+}
+
+.hintBox {
+  border: 1px solid #b7e4cc;
+  background: #ecfdf3;
+  color: #047857;
+}
+
+.retryButton {
+  background: #059669;
+}
+
+.spinner {
+  border-color: #334155;
+  border-top-color: #34d399;
+}
+
+.fieldGroup input:focus {
+  border-color: #059669;
 }

@@ -30,33 +30,33 @@ import styles from "./ExpiringSoon.module.css";
 
 const PERIOD_COLORS = {
   expired: {
-    bg: "#FEE2E2",
-    text: "#991B1B",
+    bg: "#FFFFFF",
+    text: "#1E293B",
     icon: "#EF4444",
   },
 
   days3: {
-    bg: "#FFEDD5",
-    text: "#9A3412",
-    icon: "#F97316",
+    bg: "#FFFFFF",
+    text: "#1E293B",
+    icon: "#D97706",
   },
 
   days7: {
-    bg: "#FEF3C7",
-    text: "#92400E",
-    icon: "#F59E0B",
+    bg: "#FFFFFF",
+    text: "#1E293B",
+    icon: "#D97706",
   },
 
   days30: {
-    bg: "#E0F2FE",
-    text: "#075985",
-    icon: "#0EA5E9",
+    bg: "#FFFFFF",
+    text: "#1E293B",
+    icon: "#2563EB",
   },
 
   later: {
-    bg: "#F1F5F9",
-    text: "#334155",
-    icon: "#64748B",
+    bg: "#FFFFFF",
+    text: "#1E293B",
+    icon: "#059669",
   },
 };
 

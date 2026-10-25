@@ -9,9 +9,7 @@
 
   box-sizing: border-box;
 
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
+  font-family: var(--font-ui);
 
   color: #111827;
   background-color: #ffffff;
@@ -688,4 +686,115 @@
   .actions {
     flex-direction: column;
   }
+}
+
+.container {
+  min-height: 100dvh;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #334155;
+  background: linear-gradient(115deg, #1e293b, #263449 55%, #1e293b);
+}
+
+.backButton {
+  border: 1px solid #475569;
+  background: #334155;
+  color: #cbd5e1;
+}
+
+.backButton:hover {
+  background: #475569;
+  border-color: #64748b;
+}
+
+.title,
+.headerTitle {
+  color: #f8fafc;
+}
+
+.loader {
+  color: #cbd5e1;
+}
+
+.productHeader,
+.inventoryActions,
+.lastAudit,
+.noAudits {
+  border-color: #e5e7eb;
+  background: #ffffff;
+}
+
+.infoList,
+.auditSection,
+.auditHistory {
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.productTitle,
+.inventoryActionsTitle,
+.auditTitle,
+.auditHistoryTitle,
+.value,
+.valueBold,
+.auditValueBold {
+  color: #1e293b;
+}
+
+.productQuantity,
+.label,
+.value,
+.auditLabel,
+.auditValue,
+.auditHistoryInfo {
+  color: #475569;
+}
+
+.infoRow,
+.auditSection,
+.auditNote,
+.auditHistoryItem {
+  border-color: #e2e8f0;
+}
+
+.inventoryActionsRemaining {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.auditAddBtn {
+  background: #059669;
+}
+
+.auditAddBtn:hover {
+  background: #047857;
+}
+
+.auditOk {
+  color: #059669;
+}
+
+.auditPositive {
+  color: #2563eb;
+}
+
+.auditNote,
+.auditLoading,
+.auditHistoryDate,
+.auditHistoryNote {
+  color: #64748b;
+}
+
+.noAudits {
+  color: #64748b;
 }

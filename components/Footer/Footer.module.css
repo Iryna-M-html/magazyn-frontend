@@ -18,7 +18,7 @@
 }
 
 .text-logo {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 20px;
   letter-spacing: -0.03em;
@@ -40,7 +40,7 @@
 .nav_list_link {
   color: #f7f8fa;
   text-decoration: none;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-ui);
   font-size: 16px;
 }
 
@@ -48,7 +48,7 @@
   display: block;
   width: 311px;
   height: 60px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-ui);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;

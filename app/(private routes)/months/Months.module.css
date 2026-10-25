@@ -273,3 +273,104 @@
     font-size: 17px;
   }
 }
+
+.container {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 64px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #334155;
+  background: linear-gradient(115deg, #1e293b, #263449 55%, #1e293b);
+  box-shadow: 0 5px 18px rgba(2, 6, 23, 0.18);
+}
+
+.backButton,
+.filterBtn {
+  color: #cbd5e1;
+}
+
+.backButton {
+  border-radius: 10px;
+  background: #334155;
+}
+
+.backButton:hover {
+  background: #475569;
+}
+
+.title {
+  color: #f8fafc;
+}
+
+.content {
+  padding-bottom: 88px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+}
+
+.loader {
+  color: #cbd5e1;
+}
+
+.card {
+  min-height: 76px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 7px 18px rgba(2, 6, 23, 0.2);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.28);
+}
+
+.iconCircle {
+  background: var(--period-accent-soft, #ecfdf3);
+  color: var(--period-accent, #059669);
+}
+
+.badgeCount {
+  color: #1e293b;
+}
+
+.bottomNav {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  flex: 0 0 auto;
+  border-top: 1px solid #475569;
+  border-radius: 15px 15px 0 0;
+  background: rgba(51, 65, 85, 0.92);
+  box-shadow: 0 -8px 24px rgba(2, 6, 23, 0.28);
+}
+
+.navTab {
+  color: #aab6c5;
+}
+
+.navTab:hover,
+.navTab:focus-visible {
+  color: #4dd0a8;
+}
+
+.bottomNav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}

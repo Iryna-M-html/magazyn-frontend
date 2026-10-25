@@ -285,10 +285,6 @@ export default function MonthsPage() {
                 type="button"
                 className={styles.card}
                 onClick={() => handleGroupClick(period)}
-                style={{
-                  backgroundColor: period.colorScheme.bg,
-                  color: period.colorScheme.text,
-                }}
               >
                 <div className={styles.cardLeft}>
                   <div

@@ -109,3 +109,54 @@
 .filterButton:active {
   background-color: #f0fdf4;
 }
+
+.container {
+  min-height: 100dvh;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.backButton {
+  color: #cbd5e1;
+  border-radius: 10px;
+}
+
+.backButton:hover {
+  background: #1e293b;
+}
+
+.title {
+  color: #f8fafc;
+}
+
+.subtitle {
+  color: #94a3b8;
+}
+
+.searchInput {
+  border-color: #dbe2ea;
+  box-shadow: 0 5px 16px rgba(2, 6, 23, 0.16);
+}
+
+.searchInput:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.17);
+}
+
+.emptyState {
+  color: #aab6c5;
+}
+
+.errorState {
+  color: #fca5a5;
+}
+
+.filterButton {
+  background: #1e293b;
+  border-color: #34d399;
+  color: #6ee7b7;
+}
+
+.filterButton:active {
+  background: #263449;
+}

@@ -1,6 +1,7 @@
 import { nextServer } from "@/lib/api/api";
 import type { InventoryReportResponse } from "@/types/report";
 import type { ProductCandidate, RecognizedInvoice } from "@/types/invoice";
+import type { AuditLogPage, AuditLogQuery } from "@/types/audit";
 import type {
   CreateUserData,
   LoginData,
@@ -222,4 +223,11 @@ export const matchProducts = async (
     { params: { q: query, source } },
   );
   return res.data.data;
+};
+
+// ---------- Журнал действий (администратор) ----------
+
+export const getAuditLogs = async (query: AuditLogQuery): Promise<AuditLogPage> => {
+  const res = await nextServer.get<AuditLogPage>("/audit-logs", { params: query });
+  return res.data;
 };

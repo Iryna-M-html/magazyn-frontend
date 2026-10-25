@@ -84,6 +84,7 @@
   },
 
   "IntakeDetails": {
+    "history": "Change history",
     "title": "Batch Details",
     "back": "Back",
     "loading": "Loading...",
@@ -500,7 +501,9 @@
     "copied": "Copied",
     "done": "Done",
     "close": "Close",
-    "noAccess": "This page is available to administrators only"
+    "noAccess": "This page is available to administrators only",
+    "logins": "Sign-ins",
+    "changes": "Changes"
   },
 
   "Invoice": {
@@ -561,5 +564,133 @@
     "skipped": "Item skipped",
     "restore": "Restore",
     "remove": "Remove"
+  },
+
+  "AuditLog": {
+    "loading": "Loading...",
+    "loadError": "Could not load the history",
+    "empty": "No events for the selected filters",
+    "filters": {
+      "user": "User",
+      "allUsers": "All users",
+      "role": "Role",
+      "allRoles": "All roles",
+      "action": "Action",
+      "allActions": "All actions",
+      "wholeGroup": "{group} — all",
+      "period": "Period",
+      "from": "From",
+      "to": "To",
+      "entity": "History of the selected object"
+    },
+    "periods": {
+      "today": "Today",
+      "7d": "Last 7 days",
+      "30d": "Last 30 days",
+      "all": "Everything (90 days)",
+      "custom": "Custom dates"
+    },
+    "groups": {
+      "auth": "Sign-in",
+      "users": "Users",
+      "products": "Products",
+      "intakes": "Batches",
+      "other": "Audits and invoices"
+    },
+    "actions": {
+      "auth": {
+        "login": "Sign-in",
+        "login_failed": "Failed sign-in",
+        "logout": "Sign-out",
+        "password_changed": "Code changed"
+      },
+      "user": {
+        "created": "User added",
+        "code_reset": "New code for user"
+      },
+      "product": {
+        "created": "Product added",
+        "updated": "Product changed"
+      },
+      "intake": {
+        "created": "Batch received",
+        "discounted": "Discount",
+        "written_off": "Write-off",
+        "price_changed": "Net price changed"
+      },
+      "audit": {
+        "created": "Stock audit"
+      },
+      "invoice": {
+        "recognized": "Invoice recognized"
+      }
+    },
+    "fields": {
+      "category": "Category",
+      "shelfPrice": "Shelf price",
+      "priceNetto": "Net price",
+      "priceBrutto": "Gross price",
+      "discountedQuantity": "Discounted total",
+      "writtenOffQuantity": "Written off total",
+      "quantity": "Quantity",
+      "batch": "Batch",
+      "expirationDate": "Expiration date",
+      "expectedQuantity": "Expected",
+      "countedQuantity": "Counted",
+      "difference": "Difference",
+      "note": "Note",
+      "role": "Role",
+      "productQuantity": "Weight",
+      "items": "Items",
+      "confidence": "Legibility"
+    },
+    "otherCategory": "Other",
+    "found": "{count, plural, one {# event found} other {# events found}}",
+    "reset": "Clear filters",
+    "export": "Export CSV",
+    "exporting": "Exporting...",
+    "exportError": "Export failed",
+    "retention": "History is kept for 90 days.",
+    "unknownUser": "Unknown user",
+    "filterByUser": "Show only this user",
+    "objectHistory": "object history",
+    "previous": "Previous page",
+    "next": "Next page",
+    "pageOf": "Page {page} of {pages}",
+    "csv": {
+      "date": "Date",
+      "user": "User",
+      "role": "Role",
+      "action": "Action",
+      "object": "Object",
+      "changes": "Changes",
+      "details": "Details",
+      "ip": "IP",
+      "device": "Device",
+      "event": "Event"
+    },
+    "logins": {
+      "title": "Sign-in history",
+      "subtitle": "Who signed in and when — including failed attempts",
+      "searchPlaceholder": "Search: user, IP",
+      "actionFilter": "Event",
+      "allActions": "All events"
+    },
+    "changes": {
+      "title": "Change history",
+      "subtitle": "Who changed what and when — values before and after",
+      "searchPlaceholder": "Search: user, product, invoice, IP",
+      "actionFilter": "What changed",
+      "allActions": "All changes"
+    }
+  },
+
+  "AdminNav": {
+    "title": "Admin panel",
+    "users": "Users",
+    "logins": "Sign-in history",
+    "changes": "Change history",
+    "loading": "Loading...",
+    "noAccess": "This page is available to administrators only"
   }
 }

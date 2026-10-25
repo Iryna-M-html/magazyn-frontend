@@ -1,9 +1,19 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import Link from "next/link";
 import axios from "axios";
 import { useTranslations } from "next-intl";
-import { Check, Copy, KeyRound, ShieldAlert, UserPlus, X } from "lucide-react";
+import {
+  Check,
+  Copy,
+  FilePen,
+  KeyRound,
+  LogIn,
+  ShieldAlert,
+  UserPlus,
+  X,
+} from "lucide-react";
 
 import { useAuth } from "@/components/Auth/AuthProvider";
 import { createUser, getUsers, resetUserPassword } from "@/lib/api/clientApi";
@@ -274,6 +284,23 @@ export default function UsersAdminClient() {
                     </span>
                   </div>
 
+                  <div className={styles.userActions}>
+                  <Link
+                    href={`/admin/logins?userId=${user._id}`}
+                    className={styles.secondaryButton}
+                  >
+                    <LogIn size={15} />
+                    {t("logins")}
+                  </Link>
+
+                  <Link
+                    href={`/admin/changes?userId=${user._id}`}
+                    className={styles.secondaryButton}
+                  >
+                    <FilePen size={15} />
+                    {t("changes")}
+                  </Link>
+
                   <button
                     type="button"
                     className={styles.secondaryButton}
@@ -283,6 +310,7 @@ export default function UsersAdminClient() {
                     <KeyRound size={15} />
                     {t("newCode")}
                   </button>
+                  </div>
                 </li>
               ))}
             </ul>

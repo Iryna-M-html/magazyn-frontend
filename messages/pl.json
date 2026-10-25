@@ -84,6 +84,7 @@
   },
 
   "IntakeDetails": {
+    "history": "Historia zmian",
     "title": "Szczegóły partii",
     "back": "Wstecz",
     "loading": "Ładowanie...",
@@ -500,7 +501,9 @@
     "copied": "Skopiowano",
     "done": "Gotowe",
     "close": "Zamknij",
-    "noAccess": "Ta strona jest dostępna tylko dla administratora"
+    "noAccess": "Ta strona jest dostępna tylko dla administratora",
+    "logins": "Logowania",
+    "changes": "Zmiany"
   },
 
   "Invoice": {
@@ -561,5 +564,133 @@
     "skipped": "Pozycja pominięta",
     "restore": "Przywróć",
     "remove": "Usuń"
+  },
+
+  "AuditLog": {
+    "loading": "Ładowanie...",
+    "loadError": "Nie udało się załadować historii",
+    "empty": "Brak zdarzeń dla wybranych filtrów",
+    "filters": {
+      "user": "Użytkownik",
+      "allUsers": "Wszyscy użytkownicy",
+      "role": "Rola",
+      "allRoles": "Wszystkie role",
+      "action": "Działanie",
+      "allActions": "Wszystkie działania",
+      "wholeGroup": "{group} — wszystkie",
+      "period": "Okres",
+      "from": "Od",
+      "to": "Do",
+      "entity": "Historia wybranego obiektu"
+    },
+    "periods": {
+      "today": "Dziś",
+      "7d": "Ostatnie 7 dni",
+      "30d": "Ostatnie 30 dni",
+      "all": "Wszystko (90 dni)",
+      "custom": "Wybrane daty"
+    },
+    "groups": {
+      "auth": "Logowanie",
+      "users": "Użytkownicy",
+      "products": "Produkty",
+      "intakes": "Partie",
+      "other": "Rewizje i faktury"
+    },
+    "actions": {
+      "auth": {
+        "login": "Logowanie",
+        "login_failed": "Nieudane logowanie",
+        "logout": "Wylogowanie",
+        "password_changed": "Zmiana kodu"
+      },
+      "user": {
+        "created": "Dodano użytkownika",
+        "code_reset": "Nowy kod dla użytkownika"
+      },
+      "product": {
+        "created": "Dodano produkt",
+        "updated": "Zmiana produktu"
+      },
+      "intake": {
+        "created": "Przyjęcie partii",
+        "discounted": "Przecena",
+        "written_off": "Spisanie",
+        "price_changed": "Zmiana ceny netto"
+      },
+      "audit": {
+        "created": "Rewizja"
+      },
+      "invoice": {
+        "recognized": "Rozpoznanie faktury"
+      }
+    },
+    "fields": {
+      "category": "Kategoria",
+      "shelfPrice": "Cena półkowa",
+      "priceNetto": "Cena netto",
+      "priceBrutto": "Cena brutto",
+      "discountedQuantity": "Przecenione razem",
+      "writtenOffQuantity": "Spisane razem",
+      "quantity": "Ilość",
+      "batch": "Partia",
+      "expirationDate": "Termin ważności",
+      "expectedQuantity": "Oczekiwano",
+      "countedQuantity": "Policzono",
+      "difference": "Różnica",
+      "note": "Notatka",
+      "role": "Rola",
+      "productQuantity": "Waga",
+      "items": "Pozycji",
+      "confidence": "Czytelność"
+    },
+    "otherCategory": "Inne",
+    "found": "{count, plural, one {Znaleziono # zdarzenie} few {Znaleziono # zdarzenia} many {Znaleziono # zdarzeń} other {Znaleziono # zdarzenia}}",
+    "reset": "Wyczyść filtry",
+    "export": "Eksport CSV",
+    "exporting": "Eksport...",
+    "exportError": "Nie udało się wyeksportować",
+    "retention": "Historia jest przechowywana przez 90 dni.",
+    "unknownUser": "Nieznany użytkownik",
+    "filterByUser": "Pokaż tylko tego użytkownika",
+    "objectHistory": "historia obiektu",
+    "previous": "Poprzednia strona",
+    "next": "Następna strona",
+    "pageOf": "Strona {page} z {pages}",
+    "csv": {
+      "date": "Data",
+      "user": "Użytkownik",
+      "role": "Rola",
+      "action": "Działanie",
+      "object": "Obiekt",
+      "changes": "Zmiany",
+      "details": "Szczegóły",
+      "ip": "IP",
+      "device": "Urządzenie",
+      "event": "Zdarzenie"
+    },
+    "logins": {
+      "title": "Historia logowań",
+      "subtitle": "Kto i kiedy logował się do systemu — także nieudane próby",
+      "searchPlaceholder": "Szukaj: użytkownik, IP",
+      "actionFilter": "Zdarzenie",
+      "allActions": "Wszystkie zdarzenia"
+    },
+    "changes": {
+      "title": "Historia zmian",
+      "subtitle": "Kto, kiedy i co zmienił — wartości przed i po zmianie",
+      "searchPlaceholder": "Szukaj: użytkownik, produkt, faktura, IP",
+      "actionFilter": "Co zmieniono",
+      "allActions": "Wszystkie zmiany"
+    }
+  },
+
+  "AdminNav": {
+    "title": "Panel administratora",
+    "users": "Użytkownicy",
+    "logins": "Historia logowań",
+    "changes": "Historia zmian",
+    "loading": "Ładowanie...",
+    "noAccess": "Ta strona jest dostępna tylko dla administratora"
   }
 }

@@ -958,3 +958,24 @@
   font-size: var(--type-small-size);
   text-align: right;
 }
+
+/* Ссылка на историю партии (администратор) */
+.historyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 6px 10px;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  color: #cbd5e1;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.historyLink:hover {
+  border-color: #34d399;
+  color: #f8fafc;
+}

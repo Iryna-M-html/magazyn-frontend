@@ -36,7 +36,9 @@ export default function Footer() {
   return (
     <nav className={styles.bottomNav} aria-label={t("main")}>
       {items.map(({ href, label, Icon }) => {
-        const isActive = pathname === href || pathname.startsWith(`${href}/`);
+        // Вкладка панели администратора активна во всех её разделах (/admin/…)
+        const section = href.startsWith("/admin/") ? "/admin" : href;
+        const isActive = pathname === href || pathname.startsWith(`${section}/`);
 
         return (
           <Link

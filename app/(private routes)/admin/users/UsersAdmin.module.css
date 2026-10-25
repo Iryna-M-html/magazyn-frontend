@@ -10,7 +10,14 @@
 }
 
 .header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   padding: 18px 16px 4px;
+}
+
+.header > nav {
+  margin-bottom: 12px;
 }
 
 .title {
@@ -391,4 +398,14 @@
   .formGrid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+.userActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+a.secondaryButton {
+  text-decoration: none;
 }

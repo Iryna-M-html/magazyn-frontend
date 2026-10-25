@@ -1,0 +1,117 @@
+/* Мобилка: разделы — вкладками сверху; с 768px — боковое меню слева */
+.shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+}
+
+.sidebar {
+  padding: 14px 16px 0;
+}
+
+.sidebarTitle {
+  display: none;
+  margin: 0 0 10px;
+  color: #94a3b8;
+  font-size: var(--type-overline-size);
+  font-weight: var(--type-overline-weight);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  overflow-x: auto;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.navItem,
+.navItemActive {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  color: #cbd5e1;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navItem:hover {
+  background: rgba(148, 163, 184, 0.14);
+  color: #f8fafc;
+}
+
+.navItemActive {
+  background: #34d399;
+  color: #06291f;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Разделы рисуют свой фон — внутри панели он прозрачный */
+.main > * {
+  background: transparent !important;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 16px;
+  color: #aab6c5;
+  font-size: var(--type-body-size);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    flex: 0 0 220px;
+    padding: 24px 0 24px 32px;
+  }
+
+  .sidebarTitle {
+    display: block;
+  }
+
+  .nav {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .navItem,
+  .navItemActive {
+    padding: 11px 14px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    flex-basis: 240px;
+    padding-left: 40px;
+  }
+}

@@ -1,11 +1,13 @@
 "use client";
 
 import { FormEvent, use, useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
 import { useTranslations } from "next-intl";
-import { Pencil } from "lucide-react";
+import { History, Pencil } from "lucide-react";
+import { useAuth } from "@/components/Auth/AuthProvider";
 import { formatDate, formatDateTime } from "@/lib/utils/date";
 
 import styles from "./IntakeDetails.module.css";
@@ -56,6 +58,7 @@ export default function IntakeDetailsPage({
   const { intakeId } = use(params);
   const router = useRouter();
   const t = useTranslations("IntakeDetails");
+  const { user: currentUser } = useAuth();
   const [intake, setIntake] = useState<IntakeItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -391,6 +394,17 @@ export default function IntakeDetailsPage({
         </button>
 
         <h1 className={styles.headerTitle}>{t("title")}</h1>
+
+        {/* История изменений этой партии — для администратора */}
+        {currentUser?.role === "admin" && (
+          <Link
+            href={`/admin/changes?entityId=${intakeId}`}
+            className={styles.historyLink}
+          >
+            <History size={16} />
+            {t("history")}
+          </Link>
+        )}
       </header>
 
       <div className={styles.columns}>

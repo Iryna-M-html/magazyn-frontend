@@ -214,8 +214,8 @@ export default function ReportClient() {
       label: t("categories.all"),
     },
     {
-      value: "33 (Vat 8%)",
-      label: "33 (Vat 8%)",
+      value: "17 (Vat 5%)",
+      label: "17 (Vat 5%)",
     },
     {
       value: "Молочные продукты",

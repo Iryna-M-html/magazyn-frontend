@@ -2,18 +2,18 @@
 
 export default function Loader() {
   return (
-    <div className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-white/70 backdrop-blur-sm">
-      <div className="w-fit h-fit flex flex-col items-center justify-center relative">
-        {/* Контейнер для анимированной коробки и сканера */}
-        <div className="relative mb-3 flex flex-col items-center animate-bounce-short">
-          {/* Сканирующий лазерный луч */}
-          <div className="absolute -top-1 w-20 h-1 bg-emerald-500 rounded-full shadow-[0_0_12px_#10b981] animate-scan-beam z-10"></div>
+    <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-white/70 backdrop-blur-sm">
+      <div className="relative flex h-fit w-fit flex-col items-center justify-center">
+        {/* Анимированная коробка */}
+        <div className="relative mb-2 flex flex-col items-center animate-bounce-short">
+          {/* Сканирующий лазер */}
+          <div className="absolute -top-1 z-10 h-0.5 w-14 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-scan-beam" />
 
-          {/* Иконка коробки товара с лабелом */}
+          {/* Коробка */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
-            className="w-24 h-24 drop-shadow-md"
+            className="h-16 w-16 drop-shadow-sm"
           >
             {/* Картонная коробка */}
             <path
@@ -23,6 +23,7 @@ export default function Loader() {
               strokeWidth="3"
               strokeLinejoin="round"
             />
+
             {/* Верхние клапаны */}
             <path
               d="M15 35 L50 55 L85 35"
@@ -31,6 +32,8 @@ export default function Loader() {
               strokeWidth="3"
               strokeLinejoin="round"
             />
+
+            {/* Центральная линия */}
             <path
               d="M50 55 L50 95"
               fill="none"
@@ -38,7 +41,7 @@ export default function Loader() {
               strokeWidth="3"
             />
 
-            {/* Зеленая стилизованная наклейка / штрихкод */}
+            {/* Зеленая наклейка */}
             <rect
               x="58"
               y="52"
@@ -48,7 +51,8 @@ export default function Loader() {
               fill="#4E9F59"
               transform="rotate(-10 68 65)"
             />
-            {/* Полоски штрихкода на наклейке */}
+
+            {/* Штрихкод */}
             <line
               x1="62"
               y1="56"
@@ -57,6 +61,7 @@ export default function Loader() {
               stroke="white"
               strokeWidth="2"
             />
+
             <line
               x1="66"
               y1="56"
@@ -65,6 +70,7 @@ export default function Loader() {
               stroke="white"
               strokeWidth="1"
             />
+
             <line
               x1="69"
               y1="56"
@@ -73,6 +79,7 @@ export default function Loader() {
               stroke="white"
               strokeWidth="2"
             />
+
             <line
               x1="73"
               y1="56"
@@ -84,20 +91,23 @@ export default function Loader() {
           </svg>
         </div>
 
-        {/* Движущаяся конвейерная лента */}
-        <div className="w-36 h-1.5 bg-gray-800 rounded-full relative overflow-hidden flex items-center">
-          <div className="absolute inset-0 w-full h-full bg-[linear-gradient(90deg,transparent_50%,#4e9f59_50%)] bg-[length:16px_100%] animate-conveyor"></div>
+        {/* Конвейер */}
+        <div className="relative flex h-1 w-24 items-center overflow-hidden rounded-full bg-gray-800">
+          <div className="absolute inset-0 h-full w-full animate-conveyor bg-[linear-gradient(90deg,transparent_50%,#4e9f59_50%)] bg-[length:12px_100%]" />
         </div>
 
-        {/* Текст подгрузки */}
-        <div className="mt-4 flex items-center gap-2">
-          <span className="text-sm font-semibold text-gray-700 tracking-wide">
+        {/* Текст */}
+        <div className="mt-3 flex items-center gap-1.5">
+          <span className="text-xs font-semibold tracking-wide text-gray-600">
             Загрузка данных
           </span>
-          <span className="flex gap-1">
-            <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-ping"></span>
-            <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-ping [animation-delay:0.2s]"></span>
-            <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-ping [animation-delay:0.4s]"></span>
+
+          <span className="flex gap-0.5">
+            <span className="h-1 w-1 animate-ping rounded-full bg-emerald-600" />
+
+            <span className="h-1 w-1 animate-ping rounded-full bg-emerald-600 [animation-delay:0.2s]" />
+
+            <span className="h-1 w-1 animate-ping rounded-full bg-emerald-600 [animation-delay:0.4s]" />
           </span>
         </div>
       </div>

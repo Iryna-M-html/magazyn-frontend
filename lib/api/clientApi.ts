@@ -1,4 +1,5 @@
 import { nextServer } from "@/lib/api/api";
+import type { InventoryReportResponse } from "@/types/report";
 export interface ProductData {
   id: string;
   name: string;
@@ -101,6 +102,13 @@ export const getAllIntakes = async ({
   const res = await nextServer.get("/inventory/intake", {
     params,
   });
+
+  return res.data;
+};
+
+// Отчёт «Analityka i inwentaryzacja»: партии с категорией, ценой и последней ревизией
+export const getInventoryReport = async (): Promise<InventoryReportResponse> => {
+  const res = await nextServer.get<InventoryReportResponse>("/reports/inventory");
 
   return res.data;
 };

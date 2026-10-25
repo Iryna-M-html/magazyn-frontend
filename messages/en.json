@@ -157,6 +157,9 @@
   },
 
   "Reports": {
+    "noData": "No data",
+    "loading": "Loading report...",
+    "loadError": "Failed to load the report",
     "title": "Analytics & Stock Audit",
     "subtitle": "Track balances, expiration dates, write-offs, and financial metrics",
 

@@ -157,6 +157,9 @@
   },
 
   "Reports": {
+    "noData": "Brak danych",
+    "loading": "Ładowanie raportu...",
+    "loadError": "Nie udało się załadować raportu",
     "title": "Analityka i inwentaryzacja",
     "subtitle": "Ewidencja stanów, terminów ważności, spisów i wskaźników finansowych",
 

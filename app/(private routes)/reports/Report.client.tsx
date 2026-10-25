@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
   ArrowUpDown,
@@ -12,28 +12,33 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { getInventoryReport } from "@/lib/api/clientApi";
+import type { InventoryReportApiRow } from "@/types/report";
+
 import styles from "./Report.module.css";
 
 /* =========================================================
    TYPES
 ========================================================= */
 
+// null — данных нет в базе (в таблице «No data»)
 export interface InventoryReportRow {
   id: string;
   name: string;
-  category: string;
+  category: string | null;
   barcode: string;
-  expirationDate: string;
-  intakeDate: string;
-  daysToExpiration: number;
+  expirationDate: string | null;
+  intakeDate: string | null;
+  daysToExpiration: number | null;
   discountedQuantity: number;
   writtenOffQuantity: number;
-  actualQuantity: number;
-  dailyConsumption: number;
-  monthlyConsumption: number;
-  shelfPrice: number;
-  shelfPriceBrutto: number;
-  shelfPriceNetto: number;
+  actualQuantity: number | null;
+  lastAuditAt: string | null;
+  dailyConsumption: number | null;
+  monthlyConsumption: number | null;
+  shelfPrice: number | null;
+  shelfPriceBrutto: number | null;
+  shelfPriceNetto: number | null;
 }
 
 type SortKey = keyof InventoryReportRow;
@@ -41,96 +46,37 @@ type SortKey = keyof InventoryReportRow;
 type SortDirection = "asc" | "desc";
 
 /* =========================================================
-   MOCK DATA
+   DATA
 ========================================================= */
 
-const MOCK_DATA: InventoryReportRow[] = [
-  {
-    id: "1",
-    name: "Ketchup łagodny Pudliszki 480g",
-    category: "33 (Vat 8%)",
-    barcode: "5900783000424",
-    expirationDate: "2026-10-15",
-    intakeDate: "2026-09-21",
-    daysToExpiration: 10,
-    discountedQuantity: 4,
-    writtenOffQuantity: 8,
-    actualQuantity: 12,
-    dailyConsumption: 2.5,
-    monthlyConsumption: 75,
-    shelfPrice: 7.5,
-    shelfPriceBrutto: 8.1,
-    shelfPriceNetto: 7.5,
-  },
-  {
-    id: "2",
-    name: "Mleko Świeże 3.2% 1L",
-    category: "Молочные продукты",
-    barcode: "5901234567890",
-    expirationDate: "2026-10-08",
-    intakeDate: "2026-10-01",
-    daysToExpiration: 3,
-    discountedQuantity: 2,
-    writtenOffQuantity: 0,
-    actualQuantity: 18,
-    dailyConsumption: 6,
-    monthlyConsumption: 180,
-    shelfPrice: 4.2,
-    shelfPriceBrutto: 4.54,
-    shelfPriceNetto: 4.2,
-  },
-  {
-    id: "3",
-    name: "Chleb pszenny krojony 500g",
-    category: "Выпечка",
-    barcode: "5901112223334",
-    expirationDate: "2026-10-20",
-    intakeDate: "2026-10-03",
-    daysToExpiration: 15,
-    discountedQuantity: 0,
-    writtenOffQuantity: 1,
-    actualQuantity: 24,
-    dailyConsumption: 4,
-    monthlyConsumption: 120,
-    shelfPrice: 5.5,
-    shelfPriceBrutto: 5.94,
-    shelfPriceNetto: 5.5,
-  },
-  {
-    id: "4",
-    name: "Ser Gouda Hochland 150g",
-    category: "Молочные продукты",
-    barcode: "5901234567123",
-    expirationDate: "2026-10-06",
-    intakeDate: "2026-09-28",
-    daysToExpiration: 1,
-    discountedQuantity: 6,
-    writtenOffQuantity: 2,
-    actualQuantity: 9,
-    dailyConsumption: 1.8,
-    monthlyConsumption: 54,
-    shelfPrice: 8.99,
-    shelfPriceBrutto: 9.71,
-    shelfPriceNetto: 8.99,
-  },
-  {
-    id: "5",
-    name: "Bułka pszenna 100g",
-    category: "Выпечка",
-    barcode: "5909876543210",
-    expirationDate: "2026-10-12",
-    intakeDate: "2026-10-04",
-    daysToExpiration: 7,
-    discountedQuantity: 3,
-    writtenOffQuantity: 0,
-    actualQuantity: 31,
-    dailyConsumption: 5.2,
-    monthlyConsumption: 156,
-    shelfPrice: 1.99,
-    shelfPriceBrutto: 2.15,
-    shelfPriceNetto: 1.99,
-  },
-];
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+// Дней до окончания срока по календарным датам (локальное время)
+function getDaysToExpiration(expirationDate: string | null): number | null {
+  if (!expirationDate) {
+    return null;
+  }
+
+  const [year, month, day] = expirationDate.split("-").map(Number);
+  const expiration = new Date(year, month - 1, day);
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  return Math.round((expiration.getTime() - today.getTime()) / MS_PER_DAY);
+}
+
+function toReportRow(row: InventoryReportApiRow): InventoryReportRow {
+  return {
+    ...row,
+    daysToExpiration: getDaysToExpiration(row.expirationDate),
+    // Данных о расходе и ставках VAT в базе пока нет
+    dailyConsumption: null,
+    monthlyConsumption: null,
+    shelfPriceBrutto: null,
+    shelfPriceNetto: null,
+  };
+}
 
 /* =========================================================
    SORTABLE HEADER
@@ -201,6 +147,41 @@ export default function ReportClient() {
   const t = useTranslations("Reports");
 
   /* =======================================================
+     DATA
+  ======================================================= */
+
+  const [rows, setRows] = useState<InventoryReportRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    getInventoryReport()
+      .then((response) => {
+        if (!cancelled) {
+          setRows(response.data.map(toReportRow));
+        }
+      })
+      .catch((error) => {
+        console.error("Ошибка загрузки отчёта:", error);
+
+        if (!cancelled) {
+          setLoadError(true);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  /* =======================================================
      FILTERS
   ======================================================= */
 
@@ -221,24 +202,24 @@ export default function ReportClient() {
      CATEGORIES
   ======================================================= */
 
-  const categories = [
-    {
-      value: "",
-      label: t("categories.all"),
-    },
-    {
-      value: "17 (Vat 5%)",
-      label: "17 (Vat 5%)",
-    },
-    {
-      value: "Молочные продукты",
-      label: t("categories.dairy"),
-    },
-    {
-      value: "Выпечка",
-      label: t("categories.bakery"),
-    },
-  ];
+  const categories = useMemo(
+    () => [
+      {
+        value: "",
+        label: t("categories.all"),
+      },
+      ...Array.from(
+        new Set(
+          rows
+            .map((row) => row.category)
+            .filter((category): category is string => Boolean(category)),
+        ),
+      )
+        .sort((a, b) => a.localeCompare(b))
+        .map((category) => ({ value: category, label: category })),
+    ],
+    [rows, t],
+  );
 
   /* =======================================================
      RESET FILTERS
@@ -272,7 +253,7 @@ export default function ReportClient() {
   ======================================================= */
 
   const filteredData = useMemo(() => {
-    let result = MOCK_DATA.filter((row) => {
+    let result = rows.filter((row) => {
       /* Название */
       const matchesName = row.name
         .toLowerCase()
@@ -289,7 +270,9 @@ export default function ReportClient() {
 
       /* Срок годности */
       const matchesExpiration =
-        !maxDaysToExp || row.daysToExpiration <= Number(maxDaysToExp);
+        !maxDaysToExp ||
+        (row.daysToExpiration !== null &&
+          row.daysToExpiration <= Number(maxDaysToExp));
 
       /* Ревизия */
       const matchesAudit = (() => {
@@ -303,17 +286,13 @@ export default function ReportClient() {
           return true;
         }
 
-        /*
-         * Пока используется intakeDate.
-         * После появления auditDate здесь можно заменить
-         * row.intakeDate на row.auditDate.
-         */
-        const intakeDate = new Date(row.intakeDate);
-        const today = new Date();
+        // Последняя ревизия не старше N дней
+        if (!row.lastAuditAt) {
+          return false;
+        }
 
         const difference =
-          Math.abs(today.getTime() - intakeDate.getTime()) /
-          (1000 * 60 * 60 * 24);
+          (Date.now() - new Date(row.lastAuditAt).getTime()) / MS_PER_DAY;
 
         return difference <= auditDays;
       })();
@@ -336,6 +315,10 @@ export default function ReportClient() {
         const aValue = a[sortKey];
         const bValue = b[sortKey];
 
+        if (aValue === null || bValue === null) {
+          return aValue === bValue ? 0 : aValue === null ? 1 : -1;
+        }
+
         let comparison = 0;
 
         if (typeof aValue === "number" && typeof bValue === "number") {
@@ -353,6 +336,7 @@ export default function ReportClient() {
 
     return result;
   }, [
+    rows,
     searchName,
     selectedCategory,
     searchBarcode,
@@ -384,24 +368,26 @@ export default function ReportClient() {
       t("table.netto"),
     ];
 
-    const rows = filteredData.map((row) => [
+    const noData = t("noData");
+
+    const csvRows = filteredData.map((row) => [
       row.name,
-      row.category,
+      row.category ?? noData,
       row.barcode,
-      row.expirationDate,
-      row.intakeDate,
-      row.daysToExpiration,
+      row.expirationDate ?? noData,
+      row.intakeDate ?? noData,
+      row.daysToExpiration ?? noData,
       row.discountedQuantity,
       row.writtenOffQuantity,
-      row.actualQuantity,
-      row.dailyConsumption,
-      row.monthlyConsumption,
-      row.shelfPrice.toFixed(2),
-      row.shelfPriceBrutto.toFixed(2),
-      row.shelfPriceNetto.toFixed(2),
+      row.actualQuantity ?? noData,
+      row.dailyConsumption ?? "—",
+      row.monthlyConsumption ?? "—",
+      row.shelfPrice?.toFixed(2) ?? noData,
+      row.shelfPriceBrutto?.toFixed(2) ?? noData,
+      row.shelfPriceNetto?.toFixed(2) ?? noData,
     ]);
 
-    const csv = [headers, ...rows]
+    const csv = [headers, ...csvRows]
       .map((row) =>
         row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(";"),
       )
@@ -428,6 +414,10 @@ export default function ReportClient() {
   /* =======================================================
      RENDER
   ======================================================= */
+
+  const noDataCell = (
+    <span className={styles["report-muted"]}>{t("noData")}</span>
+  );
 
   return (
     <div className={styles["report-page"]}>
@@ -755,7 +745,17 @@ export default function ReportClient() {
             </thead>
 
             <tbody>
-              {filteredData.length === 0 ? (
+              {loading || loadError ? (
+                <tr>
+                  <td colSpan={14}>
+                    <div className={styles["report-empty"]}>
+                      <PackageCheck size={32} />
+
+                      <strong>{loading ? t("loading") : t("loadError")}</strong>
+                    </div>
+                  </td>
+                </tr>
+              ) : filteredData.length === 0 ? (
                 <tr>
                   <td colSpan={14}>
                     <div className={styles["report-empty"]}>
@@ -769,7 +769,9 @@ export default function ReportClient() {
                 </tr>
               ) : (
                 filteredData.map((row) => {
-                  const isCritical = row.daysToExpiration <= 7;
+                  const isCritical =
+                    row.daysToExpiration !== null &&
+                    row.daysToExpiration <= 7;
 
                   return (
                     <tr key={row.id}>
@@ -784,9 +786,13 @@ export default function ReportClient() {
                       {/* 2. Категория */}
 
                       <td>
-                        <span className={styles["report-category"]}>
-                          {row.category}
-                        </span>
+                        {row.category ? (
+                          <span className={styles["report-category"]}>
+                            {row.category}
+                          </span>
+                        ) : (
+                          noDataCell
+                        )}
                       </td>
 
                       {/* 3. Штрихкод */}
@@ -800,25 +806,31 @@ export default function ReportClient() {
                       {/* 4. Срок годности */}
 
                       <td>
-                        <span
-                          className={
-                            isCritical
-                              ? `${styles["report-date"]} ${styles["report-date-critical"]}`
-                              : styles["report-date"]
-                          }
-                        >
-                          {row.expirationDate}
-                        </span>
+                        {row.expirationDate ? (
+                          <span
+                            className={
+                              isCritical
+                                ? `${styles["report-date"]} ${styles["report-date-critical"]}`
+                                : styles["report-date"]
+                            }
+                          >
+                            {row.expirationDate}
+                          </span>
+                        ) : (
+                          noDataCell
+                        )}
                       </td>
 
                       {/* 5. Поступление */}
 
-                      <td>{row.intakeDate}</td>
+                      <td>{row.intakeDate ?? noDataCell}</td>
 
                       {/* 6. Остаток дней */}
 
                       <td>
-                        {isCritical ? (
+                        {row.daysToExpiration === null ? (
+                          noDataCell
+                        ) : isCritical ? (
                           <span className={styles["report-critical-badge"]}>
                             <AlertTriangle size={13} />
                             {row.daysToExpiration} {t("units.days")}
@@ -857,32 +869,56 @@ export default function ReportClient() {
                       {/* 9. Факт ревизии */}
 
                       <td className={styles["report-actual-cell"]}>
-                        <span className={styles["report-actual-value"]}>
-                          {row.actualQuantity} {t("units.pieces")}
-                        </span>
+                        {row.actualQuantity !== null ? (
+                          <span className={styles["report-actual-value"]}>
+                            {row.actualQuantity} {t("units.pieces")}
+                          </span>
+                        ) : (
+                          noDataCell
+                        )}
                       </td>
 
                       {/* 10. Расход / день */}
 
-                      <td>{row.dailyConsumption}</td>
+                      <td>
+                        {row.dailyConsumption ?? (
+                          <span className={styles["report-muted"]}>—</span>
+                        )}
+                      </td>
 
                       {/* 11. Расход / месяц */}
 
-                      <td>{row.monthlyConsumption}</td>
+                      <td>
+                        {row.monthlyConsumption ?? (
+                          <span className={styles["report-muted"]}>—</span>
+                        )}
+                      </td>
 
                       {/* 12. Цена полка */}
 
                       <td>
-                        <strong>{row.shelfPrice.toFixed(2)} zł</strong>
+                        {row.shelfPrice !== null ? (
+                          <strong>{row.shelfPrice.toFixed(2)} zł</strong>
+                        ) : (
+                          noDataCell
+                        )}
                       </td>
 
                       {/* 13. Brutto */}
 
-                      <td>{row.shelfPriceBrutto.toFixed(2)} zł</td>
+                      <td>
+                        {row.shelfPriceBrutto !== null
+                          ? `${row.shelfPriceBrutto.toFixed(2)} zł`
+                          : noDataCell}
+                      </td>
 
                       {/* 14. Netto */}
 
-                      <td>{row.shelfPriceNetto.toFixed(2)} zł</td>
+                      <td>
+                        {row.shelfPriceNetto !== null
+                          ? `${row.shelfPriceNetto.toFixed(2)} zł`
+                          : noDataCell}
+                      </td>
                     </tr>
                   );
                 })

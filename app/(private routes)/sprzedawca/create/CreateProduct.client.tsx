@@ -37,7 +37,7 @@ export default function CreateProductClient() {
   const tCommon = useTranslations("Common");
 
   const [barcode, setBarcode] = useState(searchParams.get("barcode") ?? "");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(searchParams.get("name") ?? "");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState(DEFAULT_CATEGORY);
   const [quantity, setQuantity] = useState("");
@@ -177,8 +177,14 @@ export default function CreateProductClient() {
       }
     }
 
-    // Дальше — привычный экран «Товар найден» → приёмка партии
-    router.replace(`/sprzedawca?barcode=${encodeURIComponent(cleanBarcode)}`);
+    // Пришли из приёмки по фактуре — возвращаемся к ней; иначе — экран «Товар найден» → приёмка партии
+    const returnTo = searchParams.get("returnTo");
+
+    router.replace(
+      returnTo?.startsWith("/") && !returnTo.startsWith("//")
+        ? returnTo
+        : `/sprzedawca?barcode=${encodeURIComponent(cleanBarcode)}`,
+    );
   };
 
   return (

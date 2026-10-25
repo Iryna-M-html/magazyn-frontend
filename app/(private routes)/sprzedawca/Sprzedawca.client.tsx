@@ -20,6 +20,7 @@ import {
   Package,
   TrendingUp,
   ChevronRight,
+  FileScan,
 } from "lucide-react";
 
 import styles from "./Sprzedawca.module.css";
@@ -238,6 +239,27 @@ const SprzedawcaClient = () => {
 
                   <div className={styles.menuSubtitle}>
                     {tMenu("scanSubtitle")}
+                  </div>
+                </div>
+              </div>
+
+              <ChevronRight size={20} opacity={0.7} />
+            </Link>
+
+            <Link
+              href="/invoice"
+              className={`${styles.menuCard} ${styles.btnInvoice}`}
+            >
+              <div className={styles.menuCardLeft}>
+                <div className={styles.iconWrapper}>
+                  <FileScan size={24} />
+                </div>
+
+                <div>
+                  <div className={styles.menuTitle}>{tMenu("invoice")}</div>
+
+                  <div className={styles.menuSubtitle}>
+                    {tMenu("invoiceSubtitle")}
                   </div>
                 </div>
               </div>

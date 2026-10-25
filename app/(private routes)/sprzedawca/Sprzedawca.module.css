@@ -192,6 +192,11 @@
   --menu-accent-soft: #fffbeb;
 }
 
+.btnInvoice {
+  --menu-accent: #0d9488;
+  --menu-accent-soft: #ccfbf1;
+}
+
 .btnProducts {
   --menu-accent: #9333a6;
   --menu-accent-soft: #f3e8ff;
@@ -310,7 +315,7 @@
   }
 
   .menuList {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 16px;
   }
 

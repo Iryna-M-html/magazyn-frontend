@@ -1,5 +1,6 @@
 import { nextServer } from "@/lib/api/api";
 import type { InventoryReportResponse } from "@/types/report";
+import type { ProductCandidate, RecognizedInvoice } from "@/types/invoice";
 import type {
   CreateUserData,
   LoginData,
@@ -192,6 +193,33 @@ export const resetUserPassword = async (
 ): Promise<UserWithAccessCode> => {
   const res = await nextServer.post<{ data: UserWithAccessCode }>(
     `/users/${userId}/reset-password`,
+  );
+  return res.data.data;
+};
+
+// ---------- Приёмка по фактуре ----------
+
+export const recognizeInvoice = async (
+  image: Blob,
+): Promise<RecognizedInvoice> => {
+  const formData = new FormData();
+  formData.append("invoice", image, "invoice.jpg");
+
+  const res = await nextServer.post<{ data: RecognizedInvoice }>(
+    "/invoices/recognize",
+    formData,
+    { timeout: 120_000 },
+  );
+  return res.data.data;
+};
+
+export const matchProducts = async (
+  query: string,
+  source: "db" | "off",
+): Promise<ProductCandidate[]> => {
+  const res = await nextServer.get<{ data: ProductCandidate[] }>(
+    "/products/match",
+    { params: { q: query, source } },
   );
   return res.data.data;
 };

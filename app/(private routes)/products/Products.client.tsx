@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Search, ArrowLeft } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { ProductCard, IntakeItem } from "@/components/ProductCard/ProductCard";
 import { Pagination } from "@/components/Pagination/Pagination";
 import styles from "./Products.module.css";
@@ -10,24 +11,26 @@ import { getAllIntakes } from "@/lib/api/clientApi";
 
 const ITEMS_PER_PAGE = 5;
 
-const MONTH_NAMES = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "Октябрь",
-  "Ноябрь",
-  "Декабрь",
-];
+const MONTH_KEYS = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+] as const;
 
 export default function ProductsClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations("Products");
+  const tMonths = useTranslations("Months.months");
 
   const yearParam = searchParams.get("year");
   const monthParam = searchParams.get("month");
@@ -88,7 +91,7 @@ export default function ProductsClient() {
         }
       } catch (err) {
         console.error("Ошибка загрузки данных:", err);
-        setError("Не удалось загрузить список товаров");
+        setError(t("loadError"));
         setIntakes([]);
       } finally {
         setLoading(false);
@@ -96,7 +99,7 @@ export default function ProductsClient() {
     };
 
     fetchIntakes();
-  }, [yearParam, monthParam, filterParam]);
+  }, [yearParam, monthParam, filterParam, t]);
 
   // ============================================================
   // ЗАГОЛОВОК СТРАНИЦЫ
@@ -105,21 +108,22 @@ export default function ProductsClient() {
   const pageTitle = useMemo(() => {
     if (yearParam && monthParam) {
       const monthIndex = Number(monthParam) - 1;
-      const monthName = MONTH_NAMES[monthIndex] || monthParam;
+      const monthKey = MONTH_KEYS[monthIndex];
+      const monthName = monthKey ? tMonths(monthKey) : monthParam;
 
-      return `Товары: ${monthName} ${yearParam}`;
+      return t("monthTitle", { month: monthName, year: yearParam });
     }
 
     if (filterParam === "expired") {
-      return "Просроченные товары";
+      return t("expiredTitle");
     }
 
     if (filterParam === "later") {
-      return "Товары со сроком позже";
+      return t("laterTitle");
     }
 
-    return "Все товары";
-  }, [yearParam, monthParam, filterParam]);
+    return t("allTitle");
+  }, [yearParam, monthParam, filterParam, t, tMonths]);
 
   // ============================================================
   // ПОИСК
@@ -194,7 +198,7 @@ export default function ProductsClient() {
           <h1 className={styles.title}>{pageTitle}</h1>
 
           <p className={styles.subtitle}>
-            Всего: {filteredProducts.length} позиций
+            {t("total", { count: filteredProducts.length })}
           </p>
         </div>
       </header>
@@ -208,7 +212,7 @@ export default function ProductsClient() {
 
         <input
           type="text"
-          placeholder="Поиск по названию или коду"
+          placeholder={t("searchPlaceholder")}
           value={searchQuery}
           onChange={handleSearchChange}
           className={styles.searchInput}
@@ -220,7 +224,7 @@ export default function ProductsClient() {
       ======================================================== */}
 
       {loading ? (
-        <div className={styles.emptyState}>Загрузка товаров...</div>
+        <div className={styles.emptyState}>{t("loading")}</div>
       ) : error ? (
         <div className={styles.errorState}>{error}</div>
       ) : (
@@ -230,7 +234,7 @@ export default function ProductsClient() {
               <ProductCard key={item._id} item={item} />
             ))
           ) : (
-            <div className={styles.emptyState}>Товары не найдены</div>
+            <div className={styles.emptyState}>{t("empty")}</div>
           )}
         </div>
       )}
@@ -252,7 +256,7 @@ export default function ProductsClient() {
       ======================================================== */}
 
       <div className={styles.bottomBar}>
-        <button className={styles.filterButton}>ФИЛЬТРЫ</button>
+        <button className={styles.filterButton}>{t("filters")}</button>
       </div>
     </div>
   );

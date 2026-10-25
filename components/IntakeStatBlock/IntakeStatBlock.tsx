@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import styles from "./IntakeStatBlock.module.css";
 
 // Интерфейс одной партии
@@ -33,9 +34,12 @@ interface IntakeStatBlockProps {
 
 const IntakeStatBlock: React.FC<IntakeStatBlockProps> = ({
   intakes = [],
-  subtext = "позиций на складе",
-  label = "Всего партий (шт)",
+  subtext,
+  label,
 }) => {
+  const t = useTranslations("Stats");
+  const tCommon = useTranslations("Common");
+
   const { totalBatches, totalItemsCount } = useMemo(() => {
     const totalBatches = intakes.length;
 
@@ -51,15 +55,17 @@ const IntakeStatBlock: React.FC<IntakeStatBlockProps> = ({
 
   return (
     <div className={styles.statCard}>
-      <div className={styles.statLabel}>{label}</div>
+      <div className={styles.statLabel}>{label ?? t("totalBatches")}</div>
 
       <div className={styles.statValue}>
         {totalBatches}
 
-        <span className={styles.statValueSub}>({totalItemsCount} шт)</span>
+        <span className={styles.statValueSub}>
+          ({tCommon("pieces", { count: totalItemsCount })})
+        </span>
       </div>
 
-      <div className={styles.statSubtext}>{subtext}</div>
+      <div className={styles.statSubtext}>{subtext ?? t("warehouse")}</div>
     </div>
   );
 };

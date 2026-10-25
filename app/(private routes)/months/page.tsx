@@ -14,9 +14,6 @@ import {
   XCircle,
   Calendar,
   SlidersHorizontal,
-  Home,
-  Search,
-  FileText,
   MoreHorizontal,
   ChevronRight,
   ArrowLeft, // ⭐ ИЗМЕНЕНИЕ: добавили стрелку назад
@@ -310,46 +307,6 @@ export default function MonthsPage() {
           </div>
         )}
       </main>
-
-      {/* ================= НИЖНЯЯ НАВИГАЦИЯ ================= */}
-
-      <nav className={styles.bottomNav}>
-        <button
-          type="button"
-          className={styles.navTab}
-          onClick={() => router.push("/")}
-        >
-          <Home size={20} />
-          <span>{t("home")}</span>
-        </button>
-
-        <button
-          type="button"
-          className={styles.navTab}
-          onClick={() => router.push("/products")}
-        >
-          <Search size={20} />
-          <span>{t("search")}</span>
-        </button>
-
-        <button
-          type="button"
-          className={styles.navTab}
-          onClick={() => router.push("/reports")}
-        >
-          <FileText size={20} />
-          <span>{t("reports")}</span>
-        </button>
-
-        <button
-          type="button"
-          className={styles.navTab}
-          onClick={() => router.push("/more")}
-        >
-          <MoreHorizontal size={20} />
-          <span>{t("more")}</span>
-        </button>
-      </nav>
     </div>
   );
 }

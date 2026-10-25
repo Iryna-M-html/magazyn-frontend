@@ -22,7 +22,10 @@
 .modal h3 {
   margin-top: 0;
   margin-bottom: 16px;
-  font-size: 18px;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
   text-align: center;
 }
 
@@ -33,7 +36,8 @@
   border: 1px solid #333;
   background: #2a2a2a;
   color: #fff;
-  font-size: 16px;
+  font-size: var(--type-input-size);
+  font-weight: var(--type-input-weight);
   outline: none;
   box-sizing: border-box;
 }
@@ -44,7 +48,9 @@
 
 .errorMessage {
   color: #ef4444;
-  font-size: 12px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
   margin-top: 6px;
   display: block;
 }
@@ -61,7 +67,9 @@
   padding: 10px;
   border-radius: 8px;
   border: none;
-  font-weight: 600;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
   cursor: pointer;
 }
 

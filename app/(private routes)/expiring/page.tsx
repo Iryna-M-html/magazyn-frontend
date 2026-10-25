@@ -16,10 +16,6 @@ import {
   Calendar,
   AlertTriangle,
   SlidersHorizontal,
-  Home,
-  Search,
-  FileText,
-  MoreHorizontal,
   ChevronRight,
   ChevronDown,
 } from "lucide-react";
@@ -340,17 +336,8 @@ export default function ExpiringDaysPage() {
         return <Calendar {...iconProps} />;
     }
   };
-  const goHome = () => {
-    router.push("/");
-  };
   const goProducts = () => {
     router.push("/products");
-  };
-  const goReports = () => {
-    router.push("/reports");
-  };
-  const goMore = () => {
-    router.push("/more");
   };
   const handleOpenFilters = () => {
     console.log("Открыть фильтры");
@@ -480,33 +467,6 @@ export default function ExpiringDaysPage() {
           </div>
         )}
       </section>
-
-      {/* ======================================================
-          BOTTOM NAVIGATION
-      ====================================================== */}
-
-      <nav className={styles.bottomNav} aria-label={t("navigation")}>
-        <button type="button" className={styles.navItem} onClick={goHome}>
-          <Home size={21} aria-hidden="true" />
-          <span>{t("home")}</span>
-        </button>
-
-        <button type="button" className={styles.navItem} onClick={goProducts}>
-          <Search size={21} aria-hidden="true" />
-          <span>{t("search")}</span>
-        </button>
-
-        <button type="button" className={styles.navItem} onClick={goReports}>
-          <FileText size={21} aria-hidden="true" />
-          <span>{t("reports")}</span>
-        </button>
-
-        <button type="button" className={styles.navItem} onClick={goMore}>
-          <MoreHorizontal size={21} aria-hidden="true" />
-
-          <span>{t("more")}</span>
-        </button>
-      </nav>
     </main>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
+import { useTranslations } from "next-intl";
 import {
   getProductByBarcode,
   createInventoryIntake,
@@ -24,6 +25,8 @@ export function ProductFoundClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const barcode = searchParams.get("barcode");
+  const t = useTranslations("ProductFound");
+  const tCommon = useTranslations("Common");
 
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,9 +52,9 @@ export function ProductFoundClient() {
         }
       } catch (err) {
         if (axios.isAxiosError(err) && err.response?.status === 404) {
-          setError("Товар не найден в базе данных");
+          setError(t("notFoundInDb"));
         } else {
-          setError("Ошибка при запросе данных о товаре");
+          setError(t("fetchError"));
         }
       } finally {
         setLoading(false);
@@ -59,7 +62,7 @@ export function ProductFoundClient() {
     };
 
     fetchProduct();
-  }, [barcode, router]);
+  }, [barcode, router, t]);
 
   // Фиксация приёмки на бэкенде (POST /inventory/intake)
   const handleIntakeSubmit = async (data: {
@@ -79,12 +82,12 @@ export function ProductFoundClient() {
         expirationDate: data.expirationDate,
       });
 
-      alert("Товар успешно принят!");
+      alert(t("intakeSuccess"));
       setIsIntakeModalOpen(false);
       router.push("/sprzedawca"); // Возврат на главную панель после успешной приемки
     } catch (err) {
       console.error(err);
-      alert("Ошибка при сохранении данных приемки");
+      alert(t("intakeError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -94,7 +97,7 @@ export function ProductFoundClient() {
     return (
       <div className={styles.centeredState}>
         <div className={styles.spinner}></div>
-        <p>Поиск товара...</p>
+        <p>{t("searching")}</p>
       </div>
     );
   }
@@ -102,12 +105,12 @@ export function ProductFoundClient() {
   if (error || !product) {
     return (
       <div className={styles.centeredState}>
-        <p className={styles.errorText}>{error || "Товар не найден"}</p>
+        <p className={styles.errorText}>{error || t("notFound")}</p>
         <button
           className={styles.retryButton}
           onClick={() => router.push("/scan")}
         >
-          Сканировать заново
+          {t("scanAgain")}
         </button>
       </div>
     );
@@ -120,7 +123,7 @@ export function ProductFoundClient() {
         <button
           className={styles.backButton}
           onClick={() => router.push("/scan")}
-          aria-label="Назад"
+          aria-label={tCommon("back")}
         >
           ←
         </button>
@@ -129,7 +132,7 @@ export function ProductFoundClient() {
       {/* Статус выполнения */}
       <div className={styles.statusBadge}>
         <div className={styles.checkIcon}>✓</div>
-        <span className={styles.statusTitle}>Товар найден</span>
+        <span className={styles.statusTitle}>{t("found")}</span>
       </div>
 
       {/* Карточка найденного товара */}
@@ -143,7 +146,7 @@ export function ProductFoundClient() {
             />
           ) : (
             <div className={styles.placeholderImage}>
-              Изображение отсутствует
+              {t("noImage")}
             </div>
           )}
         </div>
@@ -152,29 +155,30 @@ export function ProductFoundClient() {
 
         {product.product_quantity && (
           <p className={styles.productWeight}>
-            {product.product_quantity} {product.product_quantity_unit || "г"}
+            {product.product_quantity} {product.product_quantity_unit || t("defaultUnit")}
           </p>
         )}
 
         <div className={styles.infoRow}>
-          <span className={styles.infoLabel}>Код:</span>
+          <span className={styles.infoLabel}>{t("code")}</span>
           <span className={styles.infoValue}>{product.barcode}</span>
         </div>
 
         <div className={styles.infoRow}>
-          <span className={styles.infoLabel}>Бренд:</span>
+          <span className={styles.infoLabel}>{t("brand")}</span>
           <span className={styles.infoValue}>
-            {product.brand || "Не указан"}
+            {product.brand || t("notSpecified")}
           </span>
         </div>
       </div>
 
       {/* Блок-подсказка */}
       <div className={styles.hintBox}>
-        Если это не тот товар –<br />
-        отсканируйте ещё раз
+        {t("hintWrong")}
         <br />
-        или введите код вручную
+        {t("hintRescan")}
+        <br />
+        {t("hintManual")}
       </div>
 
       {/* Кнопка "ДАЛЕЕ" */}
@@ -182,7 +186,7 @@ export function ProductFoundClient() {
         className={styles.nextButton}
         onClick={() => setIsIntakeModalOpen(true)}
       >
-        ДАЛЕЕ
+        {t("next")}
       </button>
 
       {/* Модалка приёмки */}

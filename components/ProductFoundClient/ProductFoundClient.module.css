@@ -47,8 +47,10 @@
 }
 
 .statusTitle {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
   color: #4caf50;
 }
 
@@ -80,21 +82,26 @@
 
 .placeholderImage {
   color: #999;
-  font-size: 13px;
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  line-height: var(--type-caption-leading);
   text-align: center;
 }
 
 .productName {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
   color: #111827;
   margin: 0 0 4px 0;
-  line-height: 1.3;
 }
 
 .productWeight {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
   color: #111827;
   margin: 0 0 16px 0;
 }
@@ -102,7 +109,9 @@
 .infoRow {
   display: flex;
   gap: 8px;
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
   margin-bottom: 8px;
 }
 
@@ -111,7 +120,7 @@
 }
 
 .infoValue {
-  font-weight: 500;
+  font-weight: var(--type-weight-medium);
   color: #111827;
 }
 
@@ -121,8 +130,9 @@
   text-align: center;
   padding: 16px;
   border-radius: 14px;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
   width: 100%;
   max-width: 340px;
   margin-bottom: 24px;
@@ -137,11 +147,11 @@
   border: none;
   border-radius: 14px;
   padding: 18px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   margin-top: auto;
   box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
 }
@@ -165,7 +175,9 @@
 .errorText {
   color: #ef4444;
   margin-bottom: 16px;
-  font-size: 16px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .retryButton {
@@ -174,7 +186,9 @@
   border: none;
   padding: 12px 20px;
   border-radius: 10px;
-  font-weight: 600;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
   cursor: pointer;
 }
 
@@ -225,8 +239,10 @@
 
 .modalHeader h3 {
   margin: 0;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
   color: #111827;
 }
 
@@ -251,16 +267,18 @@
 }
 
 .fieldGroup label {
-  font-size: 13px;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
   color: #4b5563;
-  font-weight: 600;
 }
 
 .fieldGroup input {
   padding: 12px;
   border: 1px solid #d1d5db;
   border-radius: 10px;
-  font-size: 15px;
+  font-size: var(--type-input-size);
+  font-weight: var(--type-input-weight);
   outline: none;
 }
 
@@ -274,8 +292,9 @@
   border: none;
   padding: 14px;
   border-radius: 12px;
-  font-weight: 700;
-  font-size: 15px;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
   cursor: pointer;
   margin-top: 8px;
 }

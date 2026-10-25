@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import styles from "./ProductFoundClient.module.css";
 
 interface IntakeModalProps {
@@ -23,13 +24,15 @@ export function IntakeModal({
   const [quantity, setQuantity] = useState(1);
   const [batch, setBatch] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
+  const t = useTranslations("Intake");
+  const tCommon = useTranslations("Common");
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!expirationDate) {
-      alert("Выберите срок годности!");
+      alert(t("selectExpiration"));
       return;
     }
 
@@ -44,7 +47,7 @@ export function IntakeModal({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3>Фиксация приёмки</h3>
+          <h3>{t("title")}</h3>
           <button className={styles.closeBtn} onClick={onClose}>
             ✕
           </button>
@@ -52,7 +55,7 @@ export function IntakeModal({
 
         <form onSubmit={handleSubmit} className={styles.modalForm}>
           <div className={styles.fieldGroup}>
-            <label>Количество (шт.):</label>
+            <label>{t("quantity")}</label>
             <input
               type="number"
               min="1"
@@ -63,17 +66,17 @@ export function IntakeModal({
           </div>
 
           <div className={styles.fieldGroup}>
-            <label>Номер / Серия партии (batch):</label>
+            <label>{t("batch")}</label>
             <input
               type="text"
-              placeholder="Например: LOT-2026-X"
+              placeholder={t("batchPlaceholder")}
               value={batch}
               onChange={(e) => setBatch(e.target.value)}
             />
           </div>
 
           <div className={styles.fieldGroup}>
-            <label>Срок годности (expirationDate):</label>
+            <label>{t("expiration")}</label>
             <input
               type="date"
               value={expirationDate}
@@ -87,7 +90,7 @@ export function IntakeModal({
             className={styles.submitButton}
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Сохранение..." : "Сохранить приёмку"}
+            {isSubmitting ? tCommon("saving") : t("submit")}
           </button>
         </form>
       </div>

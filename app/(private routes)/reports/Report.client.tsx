@@ -151,6 +151,7 @@ function SortableHeader({
   sortDirection,
   onSort,
 }: SortableHeaderProps) {
+  const t = useTranslations("Reports.sorting");
   const isActive = currentSortKey === sort;
 
   return (
@@ -161,9 +162,9 @@ function SortableHeader({
       title={
         isActive
           ? sortDirection === "asc"
-            ? "Сортировка по убыванию"
-            : "Сортировка по возрастанию"
-          : "Сортировать"
+            ? t("descending")
+            : t("ascending")
+          : t("sort")
       }
     >
       <span>{label}</span>

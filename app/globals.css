@@ -22,8 +22,87 @@
 
   --app-max-width: 430px;
   --font-ui:
-    "Aptos", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica,
+    var(--font-roboto), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Arial, sans-serif;
+  --toastify-font-family: var(--font-ui);
+
+  /* Типографика (эталон — страница /sprzedawca) */
+  --type-weight-regular: 450;
+  --type-weight-medium: 550;
+  --type-weight-semibold: 650;
+  --type-weight-bold: 700;
+
+  /* Крупные числа (statValue) */
+  --type-display-size: 23px;
+  --type-display-weight: 720;
+  --type-display-tracking: -0.045em;
+  --type-display-leading: 1.2;
+
+  /* Заголовок страницы / модалки (title) */
+  --type-title-size: 19px;
+  --type-title-weight: 700;
+  --type-title-tracking: -0.04em;
+  --type-title-leading: 1.15;
+
+  /* Заголовок карточки / блока (menuTitle) */
+  --type-heading-size: 14px;
+  --type-heading-weight: 680;
+  --type-heading-tracking: -0.015em;
+  --type-heading-leading: 1.3;
+
+  /* Основной текст */
+  --type-body-size: 13px;
+  --type-body-weight: var(--type-weight-regular);
+  --type-body-leading: 1.4;
+
+  /* Подзаголовок страницы, вторичный текст (subtitle) */
+  --type-small-size: 12px;
+  --type-small-weight: var(--type-weight-regular);
+  --type-small-tracking: 0.005em;
+
+  /* Подпись карточки (menuSubtitle) */
+  --type-subtitle-size: 11px;
+  --type-subtitle-weight: var(--type-weight-regular);
+  --type-subtitle-leading: 1.35;
+
+  /* Подпись показателя (statLabel) */
+  --type-caption-size: 11px;
+  --type-caption-weight: var(--type-weight-medium);
+  --type-caption-leading: 1.35;
+
+  /* Мелкий поясняющий текст (statSubtext) */
+  --type-micro-size: 10px;
+  --type-micro-weight: var(--type-weight-regular);
+  --type-micro-leading: 1.35;
+
+  /* Подписи нижней навигации (navLabel) */
+  --type-nav-size: 10px;
+  --type-nav-weight: 600;
+  --type-nav-tracking: 0.005em;
+
+  /* Заголовок секции капсом (sectionTitle) */
+  --type-overline-size: 11px;
+  --type-overline-weight: var(--type-weight-bold);
+  --type-overline-tracking: 0.11em;
+  --type-overline-leading: 1.4;
+
+  /* Бейджи (badge) */
+  --type-badge-size: 11px;
+  --type-badge-weight: var(--type-weight-semibold);
+
+  /* Подписи полей форм */
+  --type-label-size: 12px;
+  --type-label-weight: 600;
+  --type-label-tracking: 0.005em;
+
+  /* Кнопки */
+  --type-button-size: 13px;
+  --type-button-weight: var(--type-weight-semibold);
+  --type-button-tracking: 0.005em;
+
+  /* Поля ввода: 16px, чтобы iOS не зумил страницу при фокусе */
+  --type-input-size: 16px;
+  --type-input-weight: var(--type-weight-regular);
 }
 
 *,
@@ -44,6 +123,18 @@ select {
 input,
 textarea {
   user-select: text;
+}
+
+/* Поля ввода не наследуют светлый цвет текста тёмных страниц */
+input,
+textarea,
+select {
+  color: var(--color-text-main);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
 }
 
 html,

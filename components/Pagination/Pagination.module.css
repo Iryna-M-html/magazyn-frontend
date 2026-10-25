@@ -32,7 +32,8 @@
 }
 
 .pageInfo {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
   color: #6b7280;
 }

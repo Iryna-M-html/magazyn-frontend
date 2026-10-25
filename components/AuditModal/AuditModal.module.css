@@ -53,8 +53,10 @@
 
   color: #111827;
 
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
 }
 
 .closeButton {
@@ -114,14 +116,18 @@
 .expectedLabel {
   color: #4b5563;
 
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .expectedValue {
   color: #111827;
 
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
 }
 
 /* FIELDS */
@@ -138,8 +144,9 @@
 .label {
   color: #111827;
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
 }
 
 /* INPUT */
@@ -162,7 +169,8 @@
 
   color: #111827;
 
-  font-size: 16px;
+  font-size: var(--type-input-size);
+  font-weight: var(--type-input-weight);
 
   outline: none;
 
@@ -192,7 +200,9 @@
 
   color: #6b7280;
 
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 
   pointer-events: none;
 }
@@ -215,9 +225,9 @@
 
   font-family: inherit;
 
-  font-size: 14px;
+  font-size: var(--type-input-size);
+  font-weight: var(--type-input-weight);
 
-  line-height: 1.4;
 
   resize: vertical;
 
@@ -251,7 +261,9 @@
 
   color: #dc2626;
 
-  font-size: 13px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 /* ACTIONS */
@@ -274,8 +286,9 @@
 
   border-radius: 10px;
 
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
 
   cursor: pointer;
 

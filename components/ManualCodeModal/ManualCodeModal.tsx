@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import styles from "./ManualCodeModal.module.css";
 
 interface ManualCodeModalProps {
@@ -16,6 +17,8 @@ export const ManualCodeModal: React.FC<ManualCodeModalProps> = ({
 }) => {
   const [barcode, setBarcode] = useState("");
   const [error, setError] = useState("");
+  const t = useTranslations("ManualCode");
+  const tCommon = useTranslations("Common");
 
   if (!isOpen) return null;
 
@@ -24,7 +27,7 @@ export const ManualCodeModal: React.FC<ManualCodeModalProps> = ({
     const barcodeRegex = /^\d{8,14}$/;
 
     if (!barcodeRegex.test(barcode)) {
-      setError("Штрихкод должен содержать только цифры (от 8 до 14 символов)");
+      setError(t("invalid"));
       return;
     }
 
@@ -35,12 +38,12 @@ export const ManualCodeModal: React.FC<ManualCodeModalProps> = ({
   return (
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h3>Ввести код вручную</h3>
+        <h3>{t("title")}</h3>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             className={styles.input}
-            placeholder="Введите штрихкод..."
+            placeholder={t("placeholder")}
             value={barcode}
             onChange={(e) => {
               setBarcode(e.target.value);
@@ -56,10 +59,10 @@ export const ManualCodeModal: React.FC<ManualCodeModalProps> = ({
               className={styles.cancelBtn}
               onClick={onClose}
             >
-              Отмена
+              {tCommon("cancel")}
             </button>
             <button type="submit" className={styles.submitBtn}>
-              Найти
+              {t("submit")}
             </button>
           </div>
         </form>

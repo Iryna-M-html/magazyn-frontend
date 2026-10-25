@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import styles from "./InventoryActionModal.module.css";
 
@@ -29,6 +30,8 @@ export function InventoryActionModal({
   onSubmit,
 }: InventoryActionModalProps) {
   const [quantity, setQuantity] = useState("");
+  const t = useTranslations("IntakeDetails.inventoryAction");
+  const tCommon = useTranslations("Common");
 
   if (!isOpen) {
     return null;
@@ -36,13 +39,13 @@ export function InventoryActionModal({
 
   const isDiscount = type === "discount";
 
-  const title = isDiscount ? "Уценка товара" : "Списание товара";
+  const title = isDiscount ? t("discountTitle") : t("writeOffTitle");
 
   const description = isDiscount
-    ? "Укажите количество товара, которое необходимо уценить."
-    : "Укажите количество товара, которое необходимо списать.";
+    ? t("discountDescription")
+    : t("writeOffDescription");
 
-  const buttonText = isDiscount ? "Уценить" : "Списать";
+  const buttonText = isDiscount ? t("discountSubmit") : t("writeOffSubmit");
 
   const numericQuantity = Number(quantity);
 
@@ -101,21 +104,23 @@ export function InventoryActionModal({
             className={styles.closeButton}
             onClick={onClose}
             disabled={loading}
-            aria-label="Закрыть"
+            aria-label={tCommon("close")}
           >
             ×
           </button>
         </div>
 
         <div className={styles.available}>
-          <span className={styles.availableLabel}>Доступно для обработки</span>
+          <span className={styles.availableLabel}>{t("available")}</span>
 
-          <strong className={styles.availableValue}>{maxQuantity} шт.</strong>
+          <strong className={styles.availableValue}>
+            {tCommon("pieces", { count: maxQuantity })}
+          </strong>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="inventory-action-quantity">Количество, шт.</label>
+            <label htmlFor="inventory-action-quantity">{t("quantity")}</label>
 
             <input
               id="inventory-action-quantity"
@@ -125,14 +130,14 @@ export function InventoryActionModal({
               step={1}
               value={quantity}
               onChange={handleQuantityChange}
-              placeholder="Введите количество"
+              placeholder={t("quantityPlaceholder")}
               disabled={loading || maxQuantity <= 0}
               autoFocus
             />
 
             {quantity !== "" && numericQuantity > maxQuantity ? (
               <div className={styles.fieldError}>
-                Нельзя обработать больше {maxQuantity} шт.
+                {t("exceedsAvailable", { quantity: maxQuantity })}
               </div>
             ) : null}
           </div>
@@ -150,7 +155,7 @@ export function InventoryActionModal({
               onClick={onClose}
               disabled={loading}
             >
-              Отмена
+              {t("cancel")}
             </button>
 
             <button
@@ -160,7 +165,7 @@ export function InventoryActionModal({
               }`}
               disabled={!isValid || loading || maxQuantity <= 0}
             >
-              {loading ? "Сохранение..." : buttonText}
+              {loading ? t("saving") : buttonText}
             </button>
           </div>
         </form>

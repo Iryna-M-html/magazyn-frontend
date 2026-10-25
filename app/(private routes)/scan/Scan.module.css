@@ -30,9 +30,9 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
   color: #a1a1aa;
 }
 
@@ -55,9 +55,10 @@
 
 .instructionText {
   color: #ffffff;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
@@ -73,8 +74,9 @@
   background-color: transparent;
   border: none;
   color: #ffffff;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -89,7 +91,9 @@
   transform: translateX(-50%);
   padding: 10px 20px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
   z-index: 20;
 }
 

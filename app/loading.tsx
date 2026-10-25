@@ -1,6 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 export default function Loader() {
+  const t = useTranslations("Common");
+
   return (
     <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-white/70 backdrop-blur-sm">
       <div className="relative flex h-fit w-fit flex-col items-center justify-center">
@@ -98,8 +102,8 @@ export default function Loader() {
 
         {/* Текст */}
         <div className="mt-3 flex items-center gap-1.5">
-          <span className="text-xs font-semibold tracking-wide text-gray-600">
-            Загрузка данных
+          <span className="text-[11px] font-[650] tracking-wide text-gray-600">
+            {t("loadingData")}
           </span>
 
           <span className="flex gap-0.5">

@@ -5,9 +5,10 @@
 }
 
 .statLabel {
-  font-size: 13px;
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  line-height: var(--type-caption-leading);
   color: #64748b;
-  font-weight: 500;
   margin-bottom: 4px;
 }
 
@@ -15,21 +16,26 @@
   display: flex;
   align-items: baseline;
 
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-tracking);
+  line-height: var(--type-display-leading);
   color: #1e293b;
-  line-height: 1.2;
 }
 
 .statValueSub {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
   color: #64748b;
   margin-left: 4px;
 }
 
 .statSubtext {
-  font-size: 12px;
+  font-size: var(--type-micro-size);
+  font-weight: var(--type-micro-weight);
+  line-height: var(--type-micro-leading);
   color: #94a3b8;
   margin-top: 2px;
 }

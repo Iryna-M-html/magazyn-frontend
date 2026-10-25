@@ -63,7 +63,9 @@
   background-color: #f9fafb;
 
   color: #9ca3af;
-  font-size: 11px;
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  line-height: var(--type-caption-leading);
   text-align: center;
 }
 
@@ -75,8 +77,10 @@
 .name {
   margin: 0 0 4px;
 
-  font-size: 15px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
 
   color: #111827;
 
@@ -88,14 +92,18 @@
 .barcode {
   margin: 0 0 4px;
 
-  font-size: 12px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
   color: #6b7280;
 }
 
 .brand {
   margin: 0 0 8px;
 
-  font-size: 12px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
   color: #6b7280;
 }
 
@@ -104,7 +112,9 @@
   flex-direction: column;
   gap: 3px;
 
-  font-size: 12px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
   color: #374151;
 }
 
@@ -114,7 +124,7 @@
 
 .criticalDate {
   color: #dc2626;
-  font-weight: 600;
+  font-weight: var(--type-weight-semibold);
 }
 
 .actions {
@@ -138,8 +148,9 @@
   color: #047857;
   background-color: transparent;
 
-  font-size: 12px;
-  font-weight: 500;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
 
   text-decoration: none;
   white-space: nowrap;

@@ -21,14 +21,18 @@
 
   text-align: center;
 
-  font-size: 15px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 
   color: #6b7280;
 }
 
 .error {
   color: #dc2626;
-  font-weight: 500;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .backErrorBtn {
@@ -43,7 +47,9 @@
   background: #ffffff;
   color: #374151;
 
-  font-size: 14px;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
 
   cursor: pointer;
 }
@@ -93,8 +99,10 @@
 .headerTitle {
   margin: 0;
 
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
 
   color: #111827;
 }
@@ -153,7 +161,9 @@
 
   color: #9ca3af;
 
-  font-size: 11px;
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  line-height: var(--type-caption-leading);
 
   text-align: center;
 }
@@ -172,15 +182,18 @@
 
   color: #111827;
 
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
 }
 
 .productQuantity {
   color: #4b5563;
 
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 .barcode {
@@ -188,8 +201,10 @@
 
   color: #6b7280;
 
-  font-family: monospace;
-  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 /* ================= INFORMATION LIST ================= */
@@ -214,7 +229,9 @@
 
   border-bottom: 1px solid #f3f4f6;
 
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .label {
@@ -224,7 +241,7 @@
 .value {
   color: #111827;
 
-  font-weight: 500;
+  font-weight: var(--type-weight-medium);
 
   text-align: right;
 }
@@ -232,8 +249,10 @@
 .valueBold {
   color: #111827;
 
-  font-size: 15px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
 
   text-align: right;
 }
@@ -241,7 +260,7 @@
 .valueCritical {
   color: #dc2626;
 
-  font-weight: 700;
+  font-weight: var(--type-weight-bold);
 
   text-align: right;
 }
@@ -280,8 +299,10 @@
 
   color: #111827;
 
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
 }
 
 .inventoryActionsRemaining {
@@ -296,8 +317,8 @@
 
   color: #6b7280;
 
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--type-badge-size);
+  font-weight: var(--type-badge-weight);
 
   white-space: nowrap;
 }
@@ -328,8 +349,9 @@
   border-radius: 10px;
 
   font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
 
   cursor: pointer;
 
@@ -394,8 +416,9 @@
 
   color: #6b7280;
 
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 /* ================= AUDIT SECTION ================= */
@@ -423,8 +446,10 @@
 
   color: #111827;
 
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
 }
 
 .auditAddBtn {
@@ -436,8 +461,9 @@
   background: #111827;
   color: #ffffff;
 
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
 
   cursor: pointer;
 
@@ -453,7 +479,9 @@
 
   color: #6b7280;
 
-  font-size: 13px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 
   text-align: center;
 }
@@ -476,7 +504,9 @@
 
   margin-bottom: 10px;
 
-  font-size: 13px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .auditRow:last-child {
@@ -496,25 +526,25 @@
 .auditValueBold {
   color: #111827;
 
-  font-weight: 700;
+  font-weight: var(--type-weight-bold);
 }
 
 .auditOk {
   color: #16a34a;
 
-  font-weight: 700;
+  font-weight: var(--type-weight-bold);
 }
 
 .auditNegative {
   color: #dc2626;
 
-  font-weight: 700;
+  font-weight: var(--type-weight-bold);
 }
 
 .auditPositive {
   color: #2563eb;
 
-  font-weight: 700;
+  font-weight: var(--type-weight-bold);
 }
 
 .auditNote {
@@ -525,8 +555,9 @@
 
   color: #6b7280;
 
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 .noAudits {
@@ -539,7 +570,9 @@
 
   color: #6b7280;
 
-  font-size: 13px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 
   text-align: center;
 }
@@ -555,8 +588,10 @@
 
   color: #111827;
 
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
 }
 
 .auditHistoryItem {
@@ -570,7 +605,9 @@
 
   color: #6b7280;
 
-  font-size: 12px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 .auditHistoryInfo {
@@ -581,7 +618,9 @@
 
   color: #4b5563;
 
-  font-size: 13px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .auditHistoryNote {
@@ -589,7 +628,9 @@
 
   color: #6b7280;
 
-  font-size: 12px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
 }
 
 /* ================= ACTIONS ================= */
@@ -610,8 +651,9 @@
 
   border-radius: 10px;
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
 
   cursor: pointer;
 
@@ -689,15 +731,11 @@
 }
 
 .container {
-  min-height: 100dvh;
   background: #0f172a;
   color: #f8fafc;
 }
 
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   padding-top: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid #334155;

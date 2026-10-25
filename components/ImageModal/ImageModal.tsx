@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useTranslations } from "next-intl";
 import styles from "./ImageModal.module.css";
 
 interface ImageModalProps {
@@ -10,9 +11,12 @@ interface ImageModalProps {
 
 export const ImageModal = ({
   imageUrl,
-  altText = "Изображение",
+  altText,
   onClose,
 }: ImageModalProps) => {
+  const t = useTranslations("ImageModal");
+  const tCommon = useTranslations("Common");
+
   useEffect(() => {
     if (!imageUrl) return;
 
@@ -51,19 +55,19 @@ export const ImageModal = ({
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
-      aria-label="Просмотр изображения"
+      aria-label={t("view")}
     >
       <div className={styles.modalContent} onClick={handleContentClick}>
         <button
           type="button"
           className={styles.closeButton}
           onClick={onClose}
-          aria-label="Закрыть"
+          aria-label={tCommon("close")}
         >
           ×
         </button>
 
-        <img src={imageUrl} alt={altText} className={styles.image} />
+        <img src={imageUrl} alt={altText ?? t("alt")} className={styles.image} />
       </div>
     </div>,
     document.body,

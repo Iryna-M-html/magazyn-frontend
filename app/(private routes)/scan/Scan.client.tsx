@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useTranslations } from "next-intl";
 import { BarcodeScanner } from "@/components/BarcodeScanner/BarcodeScanner";
 import { ManualCodeModal } from "@/components/ManualCodeModal/ManualCodeModal";
 import { getProductByBarcode } from "@/lib/api/clientApi";
@@ -10,6 +11,7 @@ import styles from "./Scan.module.css";
 
 export default function ScanClient() {
   const router = useRouter();
+  const t = useTranslations("Scan");
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,16 +39,16 @@ export default function ScanClient() {
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 404) {
-          if (confirm("Товар не найден. Желаете добавить его вручную?")) {
+          if (confirm(t("notFoundConfirm"))) {
             router.push(`/sprzedawca/create?barcode=${cleanBarcode}`);
           }
         } else {
           setErrorMessage(
-            error.response?.data?.message || "Ошибка поиска товара",
+            error.response?.data?.message || t("searchError"),
           );
         }
       } else {
-        setErrorMessage("Произошла неизвестная ошибка");
+        setErrorMessage(t("unknownError"));
       }
     } finally {
       setLoading(false);
@@ -59,21 +61,21 @@ export default function ScanClient() {
         <button className={styles.backButton} onClick={() => router.back()}>
           ←
         </button>
-        <span className={styles.headerTitle}>2. СКАНИРОВАНИЕ ШТРИХКОДА</span>
+        <span className={styles.headerTitle}>{t("title")}</span>
       </header>
 
       <main className={styles.scannerArea}>
         <BarcodeScanner onScanSuccess={handleBarcodeSubmit} />
         <div className={styles.instructionOverlay}>
           <p className={styles.instructionText}>
-            Наведите камеру
+            {t("aimCamera")}
             <br />
-            на штрихкод товара
+            {t("atBarcode")}
           </p>
         </div>
       </main>
 
-      {loading && <div className={styles.statusToast}>Поиск товара...</div>}
+      {loading && <div className={styles.statusToast}>{t("searching")}</div>}
       {errorMessage && <div className={styles.errorToast}>{errorMessage}</div>}
 
       <footer className={styles.footer}>
@@ -82,7 +84,7 @@ export default function ScanClient() {
           onClick={() => setIsManualModalOpen(true)}
         >
           <span className={styles.keyboardIcon}>⌨</span>
-          Ввести код вручную
+          {t("manual")}
         </button>
       </footer>
 

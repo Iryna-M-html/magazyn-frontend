@@ -10,7 +10,7 @@
     "expiringSoon": "Krótki termin",
     "nextDays": "w najbliższe 7 dni",
     "overview": "Przegląd magazyn+sklep",
-    "inNorm": "W норми"
+    "inNorm": "W normie"
   },
 
   "Menu": {
@@ -132,7 +132,7 @@
       "writeOffSubmit": "Spisać",
       "saving": "Zapisywanie...",
 
-      "updateError": "Nie удалось zaktualizować ilości towaru."
+      "updateError": "Nie udało się zaktualizować ilości towaru."
     },
 
     "audit": {
@@ -250,5 +250,97 @@
         "next": "Następna"
       }
     }
+  },
+
+  "Common": {
+    "loading": "Ładowanie...",
+    "loadingData": "Ładowanie danych",
+    "close": "Zamknij",
+    "cancel": "Anuluj",
+    "back": "Wstecz",
+    "saving": "Zapisywanie...",
+    "pieces": "{count} szt."
+  },
+
+  "ProductCard": {
+    "openImage": "Otwórz zdjęcie produktu",
+    "productAlt": "Produkt",
+    "noPhoto": "Brak zdjęcia",
+    "noName": "Bez nazwy",
+    "noBrand": "Marka nie podana",
+    "expiration": "Termin ważności:",
+    "quantity": "Ilość:",
+    "details": "Szczegóły"
+  },
+
+  "Pagination": {
+    "pageOf": "{current} z {total}"
+  },
+
+  "ImageModal": {
+    "alt": "Zdjęcie",
+    "view": "Podgląd zdjęcia"
+  },
+
+  "ManualCode": {
+    "title": "Wpisz kod ręcznie",
+    "placeholder": "Wpisz kod kreskowy...",
+    "invalid": "Kod kreskowy może zawierać tylko cyfry (od 8 do 14 znaków)",
+    "submit": "Szukaj"
+  },
+
+  "Intake": {
+    "title": "Rejestracja przyjęcia",
+    "quantity": "Ilość (szt.):",
+    "batch": "Numer / seria partii:",
+    "batchPlaceholder": "Np.: LOT-2026-X",
+    "expiration": "Termin ważności:",
+    "selectExpiration": "Wybierz termin ważności!",
+    "submit": "Zapisz przyjęcie"
+  },
+
+  "ProductFound": {
+    "notFoundInDb": "Nie znaleziono produktu w bazie danych",
+    "fetchError": "Błąd podczas pobierania danych produktu",
+    "intakeSuccess": "Produkt został przyjęty!",
+    "intakeError": "Błąd podczas zapisywania przyjęcia",
+    "searching": "Wyszukiwanie produktu...",
+    "notFound": "Nie znaleziono produktu",
+    "scanAgain": "Skanuj ponownie",
+    "found": "Produkt znaleziony",
+    "noImage": "Brak zdjęcia",
+    "defaultUnit": "g",
+    "code": "Kod:",
+    "brand": "Marka:",
+    "notSpecified": "Nie podano",
+    "hintWrong": "Jeśli to nie ten produkt –",
+    "hintRescan": "zeskanuj ponownie",
+    "hintManual": "lub wpisz kod ręcznie",
+    "next": "DALEJ"
+  },
+
+  "Scan": {
+    "title": "2. SKANOWANIE KODU KRESKOWEGO",
+    "aimCamera": "Skieruj aparat",
+    "atBarcode": "na kod kreskowy produktu",
+    "searching": "Wyszukiwanie produktu...",
+    "notFoundConfirm": "Nie znaleziono produktu. Czy chcesz dodać go ręcznie?",
+    "searchError": "Błąd wyszukiwania produktu",
+    "unknownError": "Wystąpił nieznany błąd",
+    "manual": "Wpisz kod ręcznie",
+    "flashlight": "Latarka"
+  },
+
+  "Products": {
+    "monthTitle": "Produkty: {month} {year}",
+    "expiredTitle": "Produkty przeterminowane",
+    "laterTitle": "Produkty z późniejszym terminem",
+    "allTitle": "Wszystkie produkty",
+    "total": "Razem: {count, plural, one {# pozycja} few {# pozycje} other {# pozycji}}",
+    "searchPlaceholder": "Szukaj po nazwie lub kodzie",
+    "loading": "Ładowanie produktów...",
+    "empty": "Nie znaleziono produktów",
+    "loadError": "Nie udało się załadować listy produktów",
+    "filters": "FILTRY"
   }
 }

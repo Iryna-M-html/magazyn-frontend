@@ -13,8 +13,6 @@ import IntakeStatBlock, {
 
 import { getAllIntakes, IntakesListResponse } from "@/lib/api/clientApi";
 
-import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
-
 import {
   QrCode,
   CalendarDays,
@@ -22,51 +20,9 @@ import {
   Package,
   TrendingUp,
   ChevronRight,
-  Home,
-  BarChart3,
-  FileText,
-  MoreHorizontal,
 } from "lucide-react";
 
 import styles from "./Sprzedawca.module.css";
-const Logo = () => (
-  <svg
-    className={styles.logo}
-    width="52"
-    height="52"
-    viewBox="0 0 100 100"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <defs>
-      <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#3B82F6" />
-        <stop offset="50%" stopColor="#8B5CF6" />
-        <stop offset="100%" stopColor="#EC4899" />
-      </linearGradient>
-    </defs>
-
-    <path
-      d="M 50 85 L 15 50 L 32 30 L 50 48 L 68 30 L 85 50 Z"
-      stroke="url(#logo-gradient)"
-      strokeWidth="10"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      fill="none"
-    />
-
-    <path
-      d="M 33 45 L 50 28 L 67 45"
-      stroke="#1E293B"
-      strokeWidth="9"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-  </svg>
-);
-
 function parseExpirationDate(dateStr?: string | null): Date | null {
   if (!dateStr) {
     return null;
@@ -106,10 +62,8 @@ const SprzedawcaClient = () => {
 
   const barcode = searchParams.get("barcode");
 
-  const tHeader = useTranslations("Header");
   const tStats = useTranslations("Stats");
   const tMenu = useTranslations("Menu");
-  const tNav = useTranslations("Navigation");
 
   const [items, setItems] = useState<IntakeItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -189,26 +143,6 @@ const SprzedawcaClient = () => {
   }
   return (
     <div className={styles.container}>
-      {/* ======================================================
-          HEADER
-      ====================================================== */}
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <Logo />
-
-          <div>
-            <h1 className={styles.title}>{tHeader("title")}</h1>
-
-            <p className={styles.subtitle}>{tHeader("subtitle")}</p>
-          </div>
-        </div>
-
-        <div className={styles.headerRight}>
-          <div className={styles.headerLanguageSwitcher}>
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </header>
       <div className={styles.content}>
         {/* ====================================================
             ОБЗОР СКЛАДА
@@ -388,36 +322,6 @@ const SprzedawcaClient = () => {
           </div>
         </section>
       </div>
-
-      {/* ======================================================
-          НИЖНЯЯ НАВИГАЦИЯ
-      ====================================================== */}
-
-      <nav className={styles.bottomNav} aria-label={tNav("main")}>
-        <Link href="/" className={styles.navTabActive}>
-          <Home size={20} />
-
-          <span className={styles.navLabel}>{tNav("main")}</span>
-        </Link>
-
-        <Link href="/products" className={styles.navTab}>
-          <BarChart3 size={20} />
-
-          <span className={styles.navLabel}>{tNav("products")}</span>
-        </Link>
-
-        <Link href="/reports" className={styles.navTab}>
-          <FileText size={20} />
-
-          <span className={styles.navLabel}>{tNav("reports")}</span>
-        </Link>
-
-        <Link href="/more" className={styles.navTab}>
-          <MoreHorizontal size={20} />
-
-          <span className={styles.navLabel}>{tNav("more")}</span>
-        </Link>
-      </nav>
     </div>
   );
 };

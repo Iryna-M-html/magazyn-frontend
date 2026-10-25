@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
+import { useTranslations } from "next-intl";
 import styles from "./BarcodeScanner.module.css";
 
 interface BarcodeScannerProps {
@@ -13,6 +14,7 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
 }) => {
   const [html5Qrcode, setHtml5Qrcode] = useState<Html5Qrcode | null>(null);
   const [isTorchOn, setIsTorchOn] = useState(false);
+  const t = useTranslations("Scan");
 
   useEffect(() => {
     const formatsToSupport = [
@@ -71,7 +73,7 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
         type="button"
         className={`${styles.flashButton} ${isTorchOn ? styles.active : ""}`}
         onClick={toggleFlashlight}
-        title="Фонарик"
+        title={t("flashlight")}
       >
         ⚡
       </button>

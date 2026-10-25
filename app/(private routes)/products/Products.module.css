@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   padding: 16px;
   background-color: #f8f9fa;
   box-sizing: border-box;
@@ -25,14 +24,18 @@
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
   color: #111827;
   margin: 0;
 }
 
 .subtitle {
-  font-size: 13px;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
   color: #6b7280;
   margin: 2px 0 0 0;
 }
@@ -56,7 +59,8 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   background-color: #ffffff;
-  font-size: 14px;
+  font-size: var(--type-input-size);
+  font-weight: var(--type-input-weight);
   outline: none;
   box-sizing: border-box;
 }
@@ -76,14 +80,18 @@
   text-align: center;
   color: #9ca3af;
   margin-top: 32px;
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .errorState {
   text-align: center;
   color: #ef4444;
   margin-top: 32px;
-  font-size: 14px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
 }
 
 .bottomBar {
@@ -98,11 +106,11 @@
   color: #10b981;
   border-radius: 14px;
   padding: 14px;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  letter-spacing: var(--type-button-tracking);
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   transition: background-color 0.2s;
 }
 
@@ -111,7 +119,6 @@
 }
 
 .container {
-  min-height: 100dvh;
   background: #0f172a;
   color: #f8fafc;
 }

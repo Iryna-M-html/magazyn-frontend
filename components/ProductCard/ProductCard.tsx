@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import styles from "./ProductCard.module.css";
 import { ImageModal } from "../ImageModal/ImageModal";
 
@@ -35,6 +36,10 @@ interface ProductCardProps {
 export function ProductCard({ item }: ProductCardProps) {
   const { _id, productId, expirationDate, quantity } = item;
 
+  const t = useTranslations("ProductCard");
+  const tCommon = useTranslations("Common");
+  const locale = useLocale();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const formatDate = (dateStr?: string) => {
@@ -48,7 +53,7 @@ export function ProductCard({ item }: ProductCardProps) {
       return "—";
     }
 
-    return date.toLocaleDateString("ru-RU", {
+    return date.toLocaleDateString(locale, {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
@@ -84,39 +89,40 @@ export function ProductCard({ item }: ProductCardProps) {
               type="button"
               className={styles.imageButton}
               onClick={() => setIsModalOpen(true)}
-              aria-label="Открыть изображение товара"
+              aria-label={t("openImage")}
             >
               <img
                 src={productId.imageUrl}
-                alt={productId.name || "Товар"}
+                alt={productId.name || t("productAlt")}
                 className={styles.image}
               />
             </button>
           ) : (
-            <div className={styles.noImage}>Нет фото</div>
+            <div className={styles.noImage}>{t("noPhoto")}</div>
           )}
         </div>
 
         {/* Информация о товаре */}
         <div className={styles.info}>
-          <h3 className={styles.name}>{productId?.name || "Без названия"}</h3>
+          <h3 className={styles.name}>{productId?.name || t("noName")}</h3>
 
           <p className={styles.barcode}>{productId?.barcode || "—"}</p>
 
           <p className={styles.brand}>
-            {productId?.brand || "Бренд не указан"}
+            {productId?.brand || t("noBrand")}
           </p>
 
           <div className={styles.details}>
             <div>
-              <span className={styles.label}>Срок годности:</span>{" "}
+              <span className={styles.label}>{t("expiration")}</span>{" "}
               <span className={isCritical() ? styles.criticalDate : undefined}>
                 {formatDate(expirationDate)}
               </span>
             </div>
 
             <div>
-              <span className={styles.label}>Количество:</span> {quantity} шт.
+              <span className={styles.label}>{t("quantity")}</span>{" "}
+              {tCommon("pieces", { count: quantity })}
             </div>
           </div>
         </div>
@@ -124,7 +130,7 @@ export function ProductCard({ item }: ProductCardProps) {
         {/* Действия */}
         <div className={styles.actions}>
           <Link href={`/inventory/${_id}`} className={styles.detailsBtn}>
-            Детально
+            {t("details")}
           </Link>
         </div>
       </article>

@@ -250,5 +250,97 @@
         "next": "Next"
       }
     }
+  },
+
+  "Common": {
+    "loading": "Loading...",
+    "loadingData": "Loading data",
+    "close": "Close",
+    "cancel": "Cancel",
+    "back": "Back",
+    "saving": "Saving...",
+    "pieces": "{count} pcs"
+  },
+
+  "ProductCard": {
+    "openImage": "Open product image",
+    "productAlt": "Product",
+    "noPhoto": "No photo",
+    "noName": "Untitled",
+    "noBrand": "Brand not specified",
+    "expiration": "Expiration date:",
+    "quantity": "Quantity:",
+    "details": "Details"
+  },
+
+  "Pagination": {
+    "pageOf": "{current} of {total}"
+  },
+
+  "ImageModal": {
+    "alt": "Image",
+    "view": "Image preview"
+  },
+
+  "ManualCode": {
+    "title": "Enter code manually",
+    "placeholder": "Enter barcode...",
+    "invalid": "Barcode must contain digits only (8 to 14 characters)",
+    "submit": "Find"
+  },
+
+  "Intake": {
+    "title": "Register intake",
+    "quantity": "Quantity (pcs):",
+    "batch": "Batch number / series:",
+    "batchPlaceholder": "E.g.: LOT-2026-X",
+    "expiration": "Expiration date:",
+    "selectExpiration": "Select an expiration date!",
+    "submit": "Save intake"
+  },
+
+  "ProductFound": {
+    "notFoundInDb": "Product not found in the database",
+    "fetchError": "Error while fetching product data",
+    "intakeSuccess": "Product received successfully!",
+    "intakeError": "Error while saving intake",
+    "searching": "Searching for product...",
+    "notFound": "Product not found",
+    "scanAgain": "Scan again",
+    "found": "Product found",
+    "noImage": "No image",
+    "defaultUnit": "g",
+    "code": "Code:",
+    "brand": "Brand:",
+    "notSpecified": "Not specified",
+    "hintWrong": "If this is not the right product –",
+    "hintRescan": "scan again",
+    "hintManual": "or enter the code manually",
+    "next": "NEXT"
+  },
+
+  "Scan": {
+    "title": "2. BARCODE SCANNING",
+    "aimCamera": "Point the camera",
+    "atBarcode": "at the product barcode",
+    "searching": "Searching for product...",
+    "notFoundConfirm": "Product not found. Would you like to add it manually?",
+    "searchError": "Product search error",
+    "unknownError": "An unknown error occurred",
+    "manual": "Enter code manually",
+    "flashlight": "Flashlight"
+  },
+
+  "Products": {
+    "monthTitle": "Products: {month} {year}",
+    "expiredTitle": "Expired products",
+    "laterTitle": "Products expiring later",
+    "allTitle": "All products",
+    "total": "Total: {count, plural, one {# item} other {# items}}",
+    "searchPlaceholder": "Search by name or code",
+    "loading": "Loading products...",
+    "empty": "No products found",
+    "loadError": "Failed to load the product list",
+    "filters": "FILTERS"
   }
 }

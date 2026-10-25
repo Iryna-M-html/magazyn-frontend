@@ -44,15 +44,18 @@
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
   color: #111827;
   margin: 0 0 4px 0;
 }
 
 .subtitle {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--type-subtitle-size);
+  font-weight: var(--type-subtitle-weight);
+  line-height: var(--type-subtitle-leading);
   color: #6b7280;
   margin: 0;
 }

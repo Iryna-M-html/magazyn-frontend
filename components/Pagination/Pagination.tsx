@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import styles from "./Pagination.module.css";
 
 interface PaginationProps {
@@ -13,6 +14,8 @@ export function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
+  const t = useTranslations("Pagination");
+
   if (totalPages <= 1) return null;
 
   return (
@@ -26,7 +29,7 @@ export function Pagination({
       </button>
 
       <span className={styles.pageInfo}>
-        {currentPage} из {totalPages}
+        {t("pageOf", { current: currentPage, total: totalPages })}
       </span>
 
       <button

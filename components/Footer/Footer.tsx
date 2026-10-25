@@ -1,88 +1,41 @@
+"use client";
+
 import Link from "next/link";
-import css from "./Footer.module.css";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { BarChart3, FileText, Home, MoreHorizontal } from "lucide-react";
+
+import styles from "./Footer.module.css";
+
+const NAV_ITEMS = [
+  { href: "/sprzedawca", label: "main", Icon: Home },
+  { href: "/products", label: "products", Icon: BarChart3 },
+  { href: "/reports", label: "reports", Icon: FileText },
+  { href: "/more", label: "more", Icon: MoreHorizontal },
+] as const;
 
 export default function Footer() {
+  const t = useTranslations("Navigation");
+  const pathname = usePathname();
+
   return (
-    <footer className={css["footer"]}>
-      <div className="container">
-        {" "}
-        <div className={css["footer-container"]}>
-          <div>
-            <div className={css["footer-link"]}>
-              <div className={css["footer-logo"]}>
-                <p className={css["text-logo"]}>E-Pharmacy</p>
+    <nav className={styles.bottomNav} aria-label={t("main")}>
+      {NAV_ITEMS.map(({ href, label, Icon }) => {
+        const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
-                <ul className={css["nav_list"]}>
-                  <li className={css["nav_list_item"]}>
-                    <Link className={css["nav_list_link"]} href="/">
-                      Home
-                    </Link>
-                  </li>
+        return (
+          <Link
+            key={href}
+            href={href}
+            className={isActive ? styles.navTabActive : styles.navTab}
+            aria-current={isActive ? "page" : undefined}
+          >
+            <Icon size={20} />
 
-                  <li className={css["nav_list_item"]}>
-                    <Link
-                      className={css["nav_list_link"]}
-                      href="/medicine-store"
-                    >
-                      Medicine store
-                    </Link>
-                  </li>
-                  <li className={css["nav_list_item"]}>
-                    <Link className={css["nav_list_link"]} href="/medicine">
-                      Medicine
-                    </Link>
-                  </li>
-                </ul>
-                <ul className={css["social_links"]}>
-                  <li>
-                    <Link
-                      href="https://www.facebook.com"
-                      target="_blank"
-                      aria-label="facebook"
-                      className={css["social_link_item"]}
-                    >
-                      <svg className={css["social_icon"]} aria-hidden="true">
-                        <use href="/sprite.svg#facebook"></use>
-                      </svg>
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="https://www.instagram.com"
-                      target="_blank"
-                      aria-label="instagram"
-                      className={css["social_link_item"]}
-                    >
-                      <svg className={css["social_icon"]} aria-hidden="true">
-                        <use href="/sprite.svg#instagram"></use>
-                      </svg>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://www.youtube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="youtube"
-                      className={css["social_link_item"]}
-                    >
-                      <svg className={css["social_icon"]} aria-hidden="true">
-                        <use href="/sprite.svg#youtube"></use>
-                      </svg>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <p className={css["footer-text"]}>
-              Get the medicine to help you feel better, get back to your active
-              life, and enjoy every moment.
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
+            <span className={styles.navLabel}>{t(label)}</span>
+          </Link>
+        );
+      })}
+    </nav>
   );
 }

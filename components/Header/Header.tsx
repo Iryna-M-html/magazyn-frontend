@@ -52,7 +52,7 @@ export default function Header() {
       <div className={styles.headerLeft}>
         <Logo />
 
-        <div>
+        <div className={styles.brandText}>
           <p className={styles.title}>{t("title")}</p>
 
           <p className={styles.subtitle}>{t("subtitle")}</p>

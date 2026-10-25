@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+  width: 100%;
   min-height: 100%;
   background: #0f172a;
 }
@@ -11,8 +12,38 @@
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+  min-width: 0;
 }
 
 .page > * {
   flex: 1 0 auto;
+}
+
+/* Десктоп: Header сверху, боковое меню слева, контент прокручивается отдельно */
+@media (min-width: 1440px) {
+  .shell:has(> nav) {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "header header"
+      "nav page";
+    flex: 1 1 auto;
+    height: 100%;
+    max-width: var(--app-max-width);
+    margin: 0 auto;
+  }
+
+  .shell:has(> nav) > header {
+    grid-area: header;
+  }
+
+  .shell:has(> nav) > nav {
+    grid-area: nav;
+  }
+
+  .shell:has(> nav) > .page {
+    grid-area: page;
+    overflow-y: auto;
+  }
 }

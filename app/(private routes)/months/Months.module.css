@@ -1,7 +1,6 @@
 .container {
-  max-width: var(--app-max-width);
   width: 100%;
-  margin: 0 auto;
+  min-width: 0;
   background-color: var(--color-bg-app);
   display: flex;
   flex-direction: column;
@@ -112,8 +111,8 @@
 }
 
 .list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -193,29 +192,6 @@
   line-height: var(--type-heading-leading);
 }
 
-/* ============================================================
-   MOBILE
-   ============================================================ */
-
-@media (max-width: 480px) {
-  .header {
-    padding: 14px 16px;
-  }
-
-  .backButton {
-    width: 36px;
-    height: 36px;
-  }
-
-  .content {
-    padding: 8px 12px 20px;
-  }
-
-  .card {
-    padding: 13px 14px;
-  }
-}
-
 .container {
   background: #0f172a;
   color: #f8fafc;
@@ -283,3 +259,62 @@
   color: #1e293b;
 }
 
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+
+/* Узкие телефоны 320–374 */
+@media (max-width: 374px) {
+  .header {
+    padding: 12px 14px;
+  }
+
+  .backButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .content {
+    padding: 8px 14px 20px;
+  }
+
+  .card {
+    padding: 13px 14px;
+  }
+
+  .cardLeft {
+    gap: 10px;
+  }
+}
+
+/* Планшет */
+@media (min-width: 768px) {
+  .header {
+    padding: 16px 32px;
+  }
+
+  .content {
+    padding: 24px 32px 32px;
+  }
+
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1440px) {
+  .header {
+    padding: 16px 40px;
+  }
+
+  .content {
+    padding: 32px 40px 40px;
+  }
+
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}

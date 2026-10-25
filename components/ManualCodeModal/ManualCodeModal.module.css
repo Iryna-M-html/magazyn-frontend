@@ -82,3 +82,27 @@
   background: #22c55e;
   color: #fff;
 }
+
+/* ================= RESPONSIVE ================= */
+
+.modal {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+@media (max-width: 374px) {
+  .modal {
+    padding: 16px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 400px;
+    padding: 24px;
+  }
+}

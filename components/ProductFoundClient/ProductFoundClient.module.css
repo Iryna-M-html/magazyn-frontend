@@ -356,3 +356,42 @@
 .fieldGroup input:focus {
   border-color: #059669;
 }
+
+/* ================= RESPONSIVE ================= */
+
+/* «Товар найден» — мобильный сценарий: колонка до 480px по центру */
+.container,
+.centeredState {
+  width: 100%;
+  min-width: 0;
+  max-width: var(--mobile-column-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+}
+
+.modalContent {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+@media (max-width: 374px) {
+  .productCard {
+    padding: 20px 16px;
+  }
+
+  .modalContent {
+    padding: 20px 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .centeredState {
+    border-left: 1px solid #1e293b;
+    border-right: 1px solid #1e293b;
+  }
+
+  .modalContent {
+    max-width: 420px;
+  }
+}

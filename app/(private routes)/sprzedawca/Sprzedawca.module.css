@@ -3,9 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 430px;
   min-width: 0;
-  margin: 0 auto;
   padding-bottom: 0;
   background: #0f172a;
   color: #f8fafc;
@@ -47,8 +45,10 @@
 
 .statsHeader {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 8px 12px;
   margin-bottom: 16px;
 }
 
@@ -201,6 +201,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
 }
 
 .iconWrapper {
@@ -239,5 +240,82 @@
 @media (prefers-reduced-motion: reduce) {
   .menuCard {
     transition: none;
+  }
+}
+
+/* Узкие телефоны 320–374 */
+@media (max-width: 374px) {
+  .content {
+    gap: 22px;
+    padding: 20px 14px;
+  }
+
+  .statsCard {
+    padding: 14px;
+  }
+
+  .gridTwoCols {
+    gap: 8px;
+  }
+
+  .statBox,
+  .statBoxWarning {
+    padding: 11px 10px;
+  }
+
+  .menuCard {
+    padding: 14px 12px;
+  }
+
+  .menuCardLeft {
+    gap: 12px;
+  }
+}
+
+/* Планшет */
+@media (min-width: 768px) {
+  .content {
+    gap: 32px;
+    padding: 28px 32px 32px;
+  }
+
+  .statsCard {
+    padding: 22px;
+  }
+
+  .gridTwoCols {
+    gap: 14px;
+  }
+
+  .menuList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .menuCard {
+    min-height: 104px;
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1440px) {
+  .content {
+    gap: 36px;
+    padding: 36px 40px 40px;
+  }
+
+  .gridTwoCols {
+    gap: 16px;
+  }
+
+  .menuList {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .menuCard {
+    min-height: 116px;
+    padding: 18px;
   }
 }

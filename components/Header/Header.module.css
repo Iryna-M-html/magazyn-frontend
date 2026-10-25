@@ -51,6 +51,38 @@
 }
 
 .headerRight {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
+}
+
+.brandText {
+  min-width: 0;
+}
+
+/* Узкие телефоны 320–374 */
+@media (max-width: 374px) {
+  .header {
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .headerLeft {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .logo {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    padding: 4px;
+  }
+}
+
+/* Планшет и десктоп */
+@media (min-width: 768px) {
+  .header {
+    padding: 16px 32px;
+  }
 }

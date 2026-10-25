@@ -1,9 +1,6 @@
 .backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
@@ -55,5 +52,41 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Мобилка: крестик внутри картинки, чтобы не уходил за край экрана */
+@media (max-width: 767px) {
+  .backdrop {
+    padding: 16px;
+  }
+
+  .modalContent {
+    max-width: 100%;
+  }
+
+  .image {
+    max-height: 80dvh;
+  }
+
+  .closeButton {
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.65);
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .modalContent {
+    max-width: min(90vw, 1100px);
   }
 }

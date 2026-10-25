@@ -240,8 +240,7 @@
 
 .container {
   width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
+  min-width: 0;
   background: #0f172a;
   color: #f8fafc;
 }
@@ -322,3 +321,83 @@
   color: #f8fafc;
 }
 
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+
+/* Узкие телефоны 320–374 */
+@media (max-width: 374px) {
+  .header {
+    height: auto;
+    min-height: 64px;
+    gap: 4px;
+    padding: 8px 10px;
+  }
+
+  .title {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .content {
+    padding: 14px 12px;
+  }
+
+  .periodCard {
+    padding: 12px 10px;
+  }
+
+  .periodInfo {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .dropdown {
+    padding: 8px;
+  }
+}
+
+/* Планшет: товары в раскрытом периоде — в 2 колонки */
+@media (min-width: 768px) {
+  .header {
+    padding: 0 24px;
+  }
+
+  .content {
+    padding: 24px 32px 32px;
+  }
+
+  .periodList {
+    gap: 14px;
+  }
+
+  .dropdown {
+    padding: 14px;
+  }
+
+  .productList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Десктоп: 3 колонки товаров */
+@media (min-width: 1440px) {
+  .header {
+    padding: 0 32px;
+  }
+
+  .content {
+    padding: 32px 40px 40px;
+  }
+
+  .dropdown {
+    padding: 16px;
+  }
+
+  .productList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}

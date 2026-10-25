@@ -54,3 +54,58 @@
     transition: none;
   }
 }
+
+/* Планшет: вкладки равномерно по всей ширине */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .bottomNav {
+    justify-content: space-evenly;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* Десктоп: боковое меню слева */
+@media (min-width: 1440px) {
+  .bottomNav {
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 4px;
+    height: 100%;
+    margin: 0;
+    padding: 24px 16px;
+    overflow-y: auto;
+    border: 0;
+    border-right: 1px solid #334155;
+    border-radius: 0;
+    background: rgba(30, 41, 59, 0.6);
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .navTab,
+  .navTabActive {
+    flex-direction: row;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 12px;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .navTab:hover {
+    background: rgba(148, 163, 184, 0.12);
+    color: #e2e8f0;
+  }
+
+  .navTabActive {
+    background: rgba(52, 211, 153, 0.12);
+  }
+
+  .navLabel {
+    font-size: var(--type-heading-size);
+    font-weight: var(--type-weight-semibold);
+  }
+}

@@ -365,274 +365,292 @@ export default function IntakeDetailsPage({
 
         <h1 className={styles.headerTitle}>{t("title")}</h1>
       </header>
-      <section className={styles.productHeader}>
-        <div className={styles.imageContainer}>
-          {product?.imageUrl ? (
-            <Image
-              src={product.imageUrl}
-              alt={product.name || t("noName")}
-              width={64}
-              height={64}
-              className={styles.image}
-            />
-          ) : (
-            <div className={styles.noImage}>{t("noImage")}</div>
-          )}
-        </div>
 
-        <div className={styles.productMainInfo}>
-          <h2 className={styles.productTitle}>
-            {product?.name || t("noName")}
-          </h2>
-
-          {product?.productQuantity && product?.productQuantityUnit ? (
-            <div className={styles.productQuantity}>
-              {product.productQuantity} {product.productQuantityUnit}
-            </div>
-          ) : null}
-
-          <p className={styles.barcode}>{product?.barcode || "—"}</p>
-        </div>
-      </section>
-      <section className={styles.infoList}>
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("expirationDate")}</span>
-
-          <span
-            className={
-              isExpirationCritical ? styles.valueCritical : styles.value
-            }
-          >
-            {formatDate(intake.expirationDate)}
-          </span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("receivedQuantity")}</span>
-
-          <span className={styles.value}>
-            {intake.quantity} {t("units.pieces")}
-          </span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("discounted")}</span>
-
-          <span className={styles.value}>
-            {discountedQuantity} {t("units.pieces")}
-          </span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("writtenOff")}</span>
-
-          <span className={styles.value}>
-            {writtenOffQuantity} {t("units.pieces")}
-          </span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("remaining")}</span>
-
-          <span className={styles.valueBold}>
-            {remainingQuantity} {t("units.pieces")}
-          </span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("addedDate")}</span>
-
-          <span className={styles.value}>
-            {formatDateTime(intake.scannedAt || intake.createdAt)}
-          </span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("batch")}</span>
-
-          <span className={styles.value}>{intake.batch || "—"}</span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("category")}</span>
-
-          <span className={styles.value}>{product?.category || "—"}</span>
-        </div>
-
-        <div className={styles.infoRow}>
-          <span className={styles.label}>{t("shelfPrice")}</span>
-
-          <span className={styles.value}>
-            {product?.shelfPrice !== undefined
-              ? `${product.shelfPrice} zł`
-              : "—"}
-          </span>
-        </div>
-      </section>
-
-      {/* ===================================================
-       * INVENTORY ACTIONS
-       * =================================================== */}
-
-      <section className={styles.inventoryActions}>
-        <div className={styles.inventoryActionsHeader}>
-          <h2 className={styles.inventoryActionsTitle}>
-            {t("inventoryAction.title")}
-          </h2>
-
-          <span className={styles.inventoryActionsRemaining}>
-            {t("inventoryAction.remaining")}: {remainingQuantity}{" "}
-            {t("units.pieces")}
-          </span>
-        </div>
-
-        <div className={styles.inventoryButtons}>
-          <button
-            type="button"
-            className={styles.discountButton}
-            onClick={handleOpenDiscount}
-            disabled={remainingQuantity <= 0}
-          >
-            {t("inventoryAction.discount")}
-          </button>
-
-          <button
-            type="button"
-            className={styles.writeOffButton}
-            onClick={handleOpenWriteOff}
-            disabled={remainingQuantity <= 0}
-          >
-            {t("inventoryAction.writeOff")}
-          </button>
-        </div>
-
-        {remainingQuantity <= 0 ? (
-          <div className={styles.noRemaining}>
-            {t("inventoryAction.noRemaining")}
-          </div>
-        ) : null}
-      </section>
-
-      {/* ===================================================
-       * AUDIT
-       * =================================================== */}
-
-      <section className={styles.auditSection}>
-        <div className={styles.auditHeader}>
-          <h2 className={styles.auditTitle}>{t("audit.title")}</h2>
-
-          <button
-            type="button"
-            className={styles.auditAddBtn}
-            onClick={() => {
-              setAuditError(null);
-              setIsAuditModalOpen(true);
-            }}
-          >
-            {t("audit.create")}
-          </button>
-        </div>
-
-        {auditLoading ? (
-          <div className={styles.auditLoading}>{t("loading")}</div>
-        ) : lastAudit ? (
-          <div className={styles.lastAudit}>
-            <div className={styles.auditRow}>
-              <span className={styles.auditLabel}>{t("audit.lastAudit")}</span>
-
-              <span className={styles.auditValue}>
-                {formatDateTime(lastAudit.countedAt)}
-              </span>
+      <div className={styles.columns}>
+        <div className={styles.mainColumn}>
+          <section className={styles.productHeader}>
+            <div className={styles.imageContainer}>
+              {product?.imageUrl ? (
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name || t("noName")}
+                  width={64}
+                  height={64}
+                  className={styles.image}
+                />
+              ) : (
+                <div className={styles.noImage}>{t("noImage")}</div>
+              )}
             </div>
 
-            <div className={styles.auditRow}>
-              <span className={styles.auditLabel}>{t("audit.expected")}</span>
+            <div className={styles.productMainInfo}>
+              <h2 className={styles.productTitle}>
+                {product?.name || t("noName")}
+              </h2>
 
-              <span className={styles.auditValue}>
-                {lastAudit.expectedQuantity} {t("units.pieces")}
-              </span>
+              {product?.productQuantity && product?.productQuantityUnit ? (
+                <div className={styles.productQuantity}>
+                  {product.productQuantity} {product.productQuantityUnit}
+                </div>
+              ) : null}
+
+              <p className={styles.barcode}>{product?.barcode || "—"}</p>
             </div>
-
-            <div className={styles.auditRow}>
-              <span className={styles.auditLabel}>{t("audit.actual")}</span>
-
-              <strong className={styles.auditValueBold}>
-                {lastAudit.countedQuantity} {t("units.pieces")}
-              </strong>
-            </div>
-
-            <div className={styles.auditRow}>
-              <span className={styles.auditLabel}>{t("audit.difference")}</span>
+          </section>
+          <section className={styles.infoList}>
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("expirationDate")}</span>
 
               <span
                 className={
-                  lastAudit.difference === 0
-                    ? styles.auditOk
-                    : lastAudit.difference < 0
-                      ? styles.auditNegative
-                      : styles.auditPositive
+                  isExpirationCritical ? styles.valueCritical : styles.value
                 }
               >
-                {lastAudit.difference > 0 ? "+" : ""}
-                {lastAudit.difference} {t("units.pieces")}
+                {formatDate(intake.expirationDate)}
               </span>
             </div>
 
-            {lastAudit.note ? (
-              <div className={styles.auditNote}>{lastAudit.note}</div>
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("receivedQuantity")}</span>
+
+              <span className={styles.value}>
+                {intake.quantity} {t("units.pieces")}
+              </span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("discounted")}</span>
+
+              <span className={styles.value}>
+                {discountedQuantity} {t("units.pieces")}
+              </span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("writtenOff")}</span>
+
+              <span className={styles.value}>
+                {writtenOffQuantity} {t("units.pieces")}
+              </span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("remaining")}</span>
+
+              <span className={styles.valueBold}>
+                {remainingQuantity} {t("units.pieces")}
+              </span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("addedDate")}</span>
+
+              <span className={styles.value}>
+                {formatDateTime(intake.scannedAt || intake.createdAt)}
+              </span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("batch")}</span>
+
+              <span className={styles.value}>{intake.batch || "—"}</span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("category")}</span>
+
+              <span className={styles.value}>{product?.category || "—"}</span>
+            </div>
+
+            <div className={styles.infoRow}>
+              <span className={styles.label}>{t("shelfPrice")}</span>
+
+              <span className={styles.value}>
+                {product?.shelfPrice !== undefined
+                  ? `${product.shelfPrice} zł`
+                  : "—"}
+              </span>
+            </div>
+          </section>
+        </div>
+
+        <div className={styles.sideColumn}>
+          {/* ===================================================
+           * INVENTORY ACTIONS
+           * =================================================== */}
+
+          <section className={styles.inventoryActions}>
+            <div className={styles.inventoryActionsHeader}>
+              <h2 className={styles.inventoryActionsTitle}>
+                {t("inventoryAction.title")}
+              </h2>
+
+              <span className={styles.inventoryActionsRemaining}>
+                {t("inventoryAction.remaining")}: {remainingQuantity}{" "}
+                {t("units.pieces")}
+              </span>
+            </div>
+
+            <div className={styles.inventoryButtons}>
+              <button
+                type="button"
+                className={styles.discountButton}
+                onClick={handleOpenDiscount}
+                disabled={remainingQuantity <= 0}
+              >
+                {t("inventoryAction.discount")}
+              </button>
+
+              <button
+                type="button"
+                className={styles.writeOffButton}
+                onClick={handleOpenWriteOff}
+                disabled={remainingQuantity <= 0}
+              >
+                {t("inventoryAction.writeOff")}
+              </button>
+            </div>
+
+            {remainingQuantity <= 0 ? (
+              <div className={styles.noRemaining}>
+                {t("inventoryAction.noRemaining")}
+              </div>
             ) : null}
-          </div>
-        ) : (
-          <div className={styles.noAudits}>{t("audit.noAudits")}</div>
-        )}
+          </section>
 
-        {/* =================================================
-         * HISTORY
-         * ================================================= */}
+          {/* ===================================================
+           * AUDIT
+           * =================================================== */}
 
-        {audits.length > 0 ? (
-          <div className={styles.auditHistory}>
-            <h3 className={styles.auditHistoryTitle}>{t("audit.history")}</h3>
+          <section className={styles.auditSection}>
+            <div className={styles.auditHeader}>
+              <h2 className={styles.auditTitle}>{t("audit.title")}</h2>
 
-            {audits.map((audit) => (
-              <div key={audit._id} className={styles.auditHistoryItem}>
-                <div className={styles.auditHistoryDate}>
-                  {formatDateTime(audit.countedAt)}
-                </div>
+              <button
+                type="button"
+                className={styles.auditAddBtn}
+                onClick={() => {
+                  setAuditError(null);
+                  setIsAuditModalOpen(true);
+                }}
+              >
+                {t("audit.create")}
+              </button>
+            </div>
 
-                <div className={styles.auditHistoryInfo}>
-                  <span>
-                    {t("audit.expected")}: {audit.expectedQuantity}{" "}
-                    {t("units.pieces")}
+            {auditLoading ? (
+              <div className={styles.auditLoading}>{t("loading")}</div>
+            ) : lastAudit ? (
+              <div className={styles.lastAudit}>
+                <div className={styles.auditRow}>
+                  <span className={styles.auditLabel}>
+                    {t("audit.lastAudit")}
                   </span>
 
-                  <span>
-                    {t("audit.actual")}: {audit.countedQuantity}{" "}
-                    {t("units.pieces")}
+                  <span className={styles.auditValue}>
+                    {formatDateTime(lastAudit.countedAt)}
+                  </span>
+                </div>
+
+                <div className={styles.auditRow}>
+                  <span className={styles.auditLabel}>
+                    {t("audit.expected")}
+                  </span>
+
+                  <span className={styles.auditValue}>
+                    {lastAudit.expectedQuantity} {t("units.pieces")}
+                  </span>
+                </div>
+
+                <div className={styles.auditRow}>
+                  <span className={styles.auditLabel}>{t("audit.actual")}</span>
+
+                  <strong className={styles.auditValueBold}>
+                    {lastAudit.countedQuantity} {t("units.pieces")}
+                  </strong>
+                </div>
+
+                <div className={styles.auditRow}>
+                  <span className={styles.auditLabel}>
+                    {t("audit.difference")}
                   </span>
 
                   <span
                     className={
-                      audit.difference === 0
+                      lastAudit.difference === 0
                         ? styles.auditOk
-                        : audit.difference < 0
+                        : lastAudit.difference < 0
                           ? styles.auditNegative
                           : styles.auditPositive
                     }
                   >
-                    {t("audit.difference")}: {audit.difference > 0 ? "+" : ""}
-                    {audit.difference} {t("units.pieces")}
+                    {lastAudit.difference > 0 ? "+" : ""}
+                    {lastAudit.difference} {t("units.pieces")}
                   </span>
                 </div>
 
-                {audit.note ? (
-                  <div className={styles.auditHistoryNote}>{audit.note}</div>
+                {lastAudit.note ? (
+                  <div className={styles.auditNote}>{lastAudit.note}</div>
                 ) : null}
               </div>
-            ))}
-          </div>
-        ) : null}
-      </section>
+            ) : (
+              <div className={styles.noAudits}>{t("audit.noAudits")}</div>
+            )}
+
+            {/* =================================================
+             * HISTORY
+             * ================================================= */}
+
+            {audits.length > 0 ? (
+              <div className={styles.auditHistory}>
+                <h3 className={styles.auditHistoryTitle}>
+                  {t("audit.history")}
+                </h3>
+
+                {audits.map((audit) => (
+                  <div key={audit._id} className={styles.auditHistoryItem}>
+                    <div className={styles.auditHistoryDate}>
+                      {formatDateTime(audit.countedAt)}
+                    </div>
+
+                    <div className={styles.auditHistoryInfo}>
+                      <span>
+                        {t("audit.expected")}: {audit.expectedQuantity}{" "}
+                        {t("units.pieces")}
+                      </span>
+
+                      <span>
+                        {t("audit.actual")}: {audit.countedQuantity}{" "}
+                        {t("units.pieces")}
+                      </span>
+
+                      <span
+                        className={
+                          audit.difference === 0
+                            ? styles.auditOk
+                            : audit.difference < 0
+                              ? styles.auditNegative
+                              : styles.auditPositive
+                        }
+                      >
+                        {t("audit.difference")}:{" "}
+                        {audit.difference > 0 ? "+" : ""}
+                        {audit.difference} {t("units.pieces")}
+                      </span>
+                    </div>
+
+                    {audit.note ? (
+                      <div className={styles.auditHistoryNote}>
+                        {audit.note}
+                      </div>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </section>
+        </div>
+      </div>
 
       {/* ===================================================
        * ACTIONS

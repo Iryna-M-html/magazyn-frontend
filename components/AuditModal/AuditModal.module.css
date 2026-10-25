@@ -357,3 +357,33 @@
     }
   }
 }
+
+/* ================= RESPONSIVE ================= */
+
+/* Модалка не выходит за экран по высоте; низ bottom sheet учитывает safe area */
+.modal {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .modal {
+    max-height: 92dvh;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 374px) {
+  .modal {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Планшет и десктоп: по центру, чуть шире */
+@media (min-width: 768px) {
+  .modal {
+    max-width: 460px;
+    padding: 24px;
+  }
+}

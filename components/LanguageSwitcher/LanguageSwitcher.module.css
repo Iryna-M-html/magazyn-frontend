@@ -56,3 +56,10 @@
   outline: 2px solid #2563eb;
   outline-offset: 1px;
 }
+
+/* Узкие телефоны 320–374 */
+@media (max-width: 374px) {
+  .langButton {
+    padding: 6px 8px;
+  }
+}

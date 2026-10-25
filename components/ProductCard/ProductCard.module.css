@@ -1,7 +1,10 @@
+/* На узких карточках (< ~300px контента) кнопка «Szczegóły» переносится под информацию */
 .card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+  min-width: 0;
   padding: 12px;
   border: 1px solid #e8edf2;
   border-radius: 12px;
@@ -71,7 +74,7 @@
 
 .info {
   min-width: 0;
-  flex: 1;
+  flex: 1 1 140px;
 }
 
 .name {
@@ -135,6 +138,7 @@
   gap: 8px;
 
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .detailsBtn {
@@ -166,4 +170,11 @@
 
 .detailsBtn:active {
   background-color: #d1fae5;
+}
+
+/* В сетке карточка заполняет ячейку по высоте */
+@media (min-width: 768px) {
+  .card {
+    height: 100%;
+  }
 }

@@ -102,3 +102,10 @@
   background-color: #22c55e;
   box-shadow: 0 0 8px #22c55e;
 }
+
+/* ================= RESPONSIVE ================= */
+
+/* Рамка прицела сжимается на узких экранах */
+.targetFrame {
+  width: min(260px, 80%);
+}

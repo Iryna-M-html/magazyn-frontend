@@ -31,8 +31,8 @@ import {
 import styles from "./Sprzedawca.module.css";
 const Logo = () => (
   <svg
-    width="36"
-    height="36"
+    width="52"
+    height="52"
     viewBox="0 0 100 100"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

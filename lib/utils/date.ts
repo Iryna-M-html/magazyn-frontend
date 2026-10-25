@@ -44,3 +44,34 @@ export function formatDateTime(value?: string | null, fallback = "—"): string 
 
   return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
+
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+/**
+ * Сколько календарных дней осталось до даты (сегодня — 0, вчера — −1).
+ * Сравниваются календарные даты в местном времени, время суток не учитывается.
+ */
+export function getDaysUntil(value?: string | null): number | null {
+  if (!value) {
+    return null;
+  }
+
+  const match = DATE_ONLY_PATTERN.exec(value);
+  const target = match
+    ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]))
+    : new Date(value);
+
+  if (Number.isNaN(target.getTime())) {
+    return null;
+  }
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const targetDay = new Date(
+    target.getFullYear(),
+    target.getMonth(),
+    target.getDate(),
+  );
+
+  return Math.round((targetDay.getTime() - today.getTime()) / MS_PER_DAY);
+}

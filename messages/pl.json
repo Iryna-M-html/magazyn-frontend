@@ -381,5 +381,30 @@
     "validationError": "Sprawdź poprawność danych",
     "saveError": "Nie udało się zapisać produktu. Spróbuj ponownie.",
     "priceSaveFailed": "Produkt zapisany, ale nie udało się zapisać ceny. Możesz ją dodać później."
+  },
+
+  "Recommendations": {
+    "title": "Rekomendacje sprzedaży",
+    "subtitle": "Najpierw sprzedawaj partie z najkrótszym terminem ważności",
+    "productsCount": "{count, plural, one {# produkt} few {# produkty} many {# produktów} other {# produktu}}",
+    "searchPlaceholder": "Szukaj po nazwie lub kodzie",
+    "loading": "Ładowanie rekomendacji...",
+    "loadError": "Nie udało się załadować danych",
+    "empty": "Brak produktów w magazynie",
+    "emptySearch": "Nie znaleziono produktów",
+    "brand": "Producent",
+    "weight": "Waga / objętość",
+    "barcode": "Kod kreskowy",
+    "noData": "Brak danych",
+    "noImage": "Brak zdjęcia",
+    "sellFirst": "Najpierw sprzedaj partię z terminem ważności <b>{date}</b> — <b>{count} szt.</b>",
+    "writeOff": "Termin minął: spisz partię z <b>{date}</b> — <b>{count} szt.</b>",
+    "batchesTitle": "Partie w magazynie ({count})",
+    "batch": "Partia",
+    "sellFirstBadge": "Sprzedaj najpierw",
+    "expired": "Przeterminowana",
+    "today": "Ostatni dzień",
+    "daysLeft": "{count, plural, one {Został # dzień} few {Zostały # dni} many {Zostało # dni} other {Zostało # dnia}}",
+    "pieces": "{count} szt."
   }
 }

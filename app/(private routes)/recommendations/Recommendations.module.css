@@ -1,0 +1,414 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+  color: #f8fafc;
+}
+
+/* ---------- Шапка страницы ---------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.backButton {
+  display: flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #475569;
+  border-radius: 12px;
+  background: rgba(71, 85, 105, 0.35);
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.headerText {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  letter-spacing: var(--type-small-tracking);
+}
+
+/* ---------- Контент ---------- */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 16px 24px;
+}
+
+.searchBox {
+  position: relative;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: #94a3b8;
+  transform: translateY(-50%);
+}
+
+.searchInput {
+  width: 100%;
+  height: 46px;
+  padding: 0 12px 0 40px;
+  border: 1px solid #dbe2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--type-input-size);
+}
+
+.searchInput:focus {
+  border-color: #10b981;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+.state {
+  padding: 40px 16px;
+  color: #aab6c5;
+  font-size: var(--type-body-size);
+  text-align: center;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+/* ---------- Карточка товара ---------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(203, 213, 225, 0.22);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:
+    0 14px 30px rgba(2, 6, 23, 0.28),
+    0 2px 5px rgba(2, 6, 23, 0.12);
+  color: #1e293b;
+}
+
+.product {
+  display: flex;
+  gap: 14px;
+  min-width: 0;
+}
+
+.imageWrapper {
+  flex: 0 0 88px;
+  width: 88px;
+  height: 88px;
+  overflow: hidden;
+  border: 1px solid #e7ebef;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.noImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+  padding: 4px;
+  color: #94a3b8;
+  font-size: var(--type-micro-size);
+  text-align: center;
+}
+
+.productInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.productName {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+}
+
+.details > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: var(--type-small-size);
+  line-height: 1.35;
+}
+
+.details dt {
+  color: #64748b;
+}
+
+.details dt::after {
+  content: ":";
+}
+
+.details dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #1e293b;
+  font-weight: var(--type-weight-medium);
+}
+
+.barcode {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Выделенные рекомендации ---------- */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+}
+
+.alert svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.alert p {
+  margin: 0;
+}
+
+.alertSell {
+  border: 1px solid #b7e4cc;
+  border-left: 4px solid #059669;
+  background: #ecfdf3;
+  color: #065f46;
+}
+
+.alertDanger {
+  border: 1px solid #fecaca;
+  border-left: 4px solid #dc2626;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* ---------- Список партий ---------- */
+
+.batchesTitle {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: var(--type-overline-size);
+  font-weight: var(--type-overline-weight);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+.batchList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.batchRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  padding: 10px 12px;
+  border: 1px solid #e7ebef;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.batchRow:hover {
+  background: #f8fafc;
+}
+
+.batchRowSellFirst {
+  border-color: #6ee7b7;
+  background: #f0fdf4;
+}
+
+.batchRowExpired {
+  border-color: #fecaca;
+  background: #fff7f7;
+}
+
+.batchMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.batchDate {
+  font-size: var(--type-body-size);
+  font-weight: var(--type-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.batchCode {
+  overflow-wrap: anywhere;
+  color: #64748b;
+  font-size: var(--type-small-size);
+}
+
+.batchSide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.batchQuantity {
+  min-width: 52px;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-weight-bold);
+  text-align: right;
+}
+
+.batchArrow {
+  color: #94a3b8;
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: var(--type-badge-size);
+  font-weight: var(--type-badge-weight);
+  white-space: nowrap;
+}
+
+.badgeSell {
+  background: #059669;
+  color: #ffffff;
+}
+
+.badgeDanger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badgeWarning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badgeNeutral {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 374px) {
+  .header,
+  .content {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .imageWrapper {
+    flex-basis: 72px;
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 20px 32px;
+  }
+
+  .content {
+    padding: 24px 32px 32px;
+  }
+
+  .searchBox {
+    max-width: 560px;
+  }
+
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@media (min-width: 1440px) {
+  .header {
+    padding: 24px 40px;
+  }
+
+  .content {
+    padding: 28px 40px 40px;
+  }
+
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .batchRow {
+    transition: none;
+  }
+}

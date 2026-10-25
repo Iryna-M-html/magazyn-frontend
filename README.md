@@ -83,6 +83,7 @@ npm run dev
 | `/products` | Список партий с поиском и пагинацией (`?year=&month=`, `?filter=expired\|later`) |
 | `/inventory/[intakeId]` | Карточка партии: уценка, списание, ревизии |
 | `/reports` | Аналитика и инвентаризация: таблица с фильтрами, сортировкой и экспортом CSV |
+| `/recommendations` | Рекомендации по реализации (вкладка «Więcej»): по каждому товару — какую партию продать первой, просроченные партии к списанию, все партии с остатком |
 
 `/scan`, `/sprzedawca/create` и экран «Товар найден» — полноэкранные мобильные сценарии, Header и Footer на них скрыты (`components/AppChrome/ChromeGate.tsx`).
 
@@ -126,6 +127,5 @@ types/              общие типы
 
 - `npm run build` падает на ошибке TypeScript в `components/BarcodeScanner/BarcodeScanner.tsx` (конструктору `Html5Qrcode` не хватает поля `verbose`). В `npm run dev` приложение работает.
 - ESLint ругается на `setState` внутри `useEffect` в том же `BarcodeScanner.tsx`.
-- Вкладка «Więcej» ведёт на `/more` — такой страницы пока нет (404).
 - В отчёте нет данных о расходе (Zużycie) и ставках VAT (Brutto / Netto) — в базе их пока нет, колонки показывают «—» / «No data».
 - `app/api/shope/*` и `components/ServicesGrid`, `components/Hero` — остатки шаблона, в приложении не используются.

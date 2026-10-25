@@ -381,5 +381,30 @@
     "validationError": "Check the entered data",
     "saveError": "Failed to save the product. Please try again.",
     "priceSaveFailed": "The product was saved, but the price could not be saved. You can add it later."
+  },
+
+  "Recommendations": {
+    "title": "Sales recommendations",
+    "subtitle": "Sell batches with the nearest expiry date first",
+    "productsCount": "{count, plural, one {# product} other {# products}}",
+    "searchPlaceholder": "Search by name or code",
+    "loading": "Loading recommendations...",
+    "loadError": "Failed to load data",
+    "empty": "No products in stock",
+    "emptySearch": "No products found",
+    "brand": "Manufacturer",
+    "weight": "Weight / volume",
+    "barcode": "Barcode",
+    "noData": "No data",
+    "noImage": "No photo",
+    "sellFirst": "Sell the batch expiring on <b>{date}</b> first — <b>{count} pcs</b>",
+    "writeOff": "Expired: write off the batch from <b>{date}</b> — <b>{count} pcs</b>",
+    "batchesTitle": "Batches in stock ({count})",
+    "batch": "Batch",
+    "sellFirstBadge": "Sell first",
+    "expired": "Expired",
+    "today": "Last day",
+    "daysLeft": "{count, plural, one {# day left} other {# days left}}",
+    "pieces": "{count} pcs"
   }
 }

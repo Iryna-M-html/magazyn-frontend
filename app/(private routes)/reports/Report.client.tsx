@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 
 import { getCategories, getInventoryReport } from "@/lib/api/clientApi";
 import type { InventoryReportApiRow } from "@/types/report";
-import { formatDate } from "@/lib/utils/date";
+import { formatDate, getDaysUntil } from "@/lib/utils/date";
 
 import styles from "./Report.module.css";
 
@@ -52,25 +52,10 @@ type SortDirection = "asc" | "desc";
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-// Дней до окончания срока по календарным датам (локальное время)
-function getDaysToExpiration(expirationDate: string | null): number | null {
-  if (!expirationDate) {
-    return null;
-  }
-
-  const [year, month, day] = expirationDate.split("-").map(Number);
-  const expiration = new Date(year, month - 1, day);
-
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-  return Math.round((expiration.getTime() - today.getTime()) / MS_PER_DAY);
-}
-
 function toReportRow(row: InventoryReportApiRow): InventoryReportRow {
   return {
     ...row,
-    daysToExpiration: getDaysToExpiration(row.expirationDate),
+    daysToExpiration: getDaysUntil(row.expirationDate),
     // Данных о расходе и ставках VAT в базе пока нет
     dailyConsumption: null,
     monthlyConsumption: null,

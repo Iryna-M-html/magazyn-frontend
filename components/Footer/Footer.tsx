@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { href: "/sprzedawca", label: "main", Icon: Home },
   { href: "/products", label: "products", Icon: BarChart3 },
   { href: "/reports", label: "reports", Icon: FileText },
-  { href: "/more", label: "more", Icon: MoreHorizontal },
+  { href: "/recommendations", label: "more", Icon: MoreHorizontal },
 ] as const;
 
 export default function Footer() {

@@ -1,0 +1,394 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.62), transparent 45%),
+    #0f172a;
+  color: #f8fafc;
+}
+
+.header {
+  padding: 18px 16px 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+  font-size: var(--type-small-size);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  padding: 16px 16px 24px;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 16px;
+  color: #aab6c5;
+  font-size: var(--type-body-size);
+  text-align: center;
+}
+
+/* ---------- Карточки ---------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(203, 213, 225, 0.22);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:
+    0 14px 30px rgba(2, 6, 23, 0.28),
+    0 2px 5px rgba(2, 6, 23, 0.12);
+  color: #1e293b;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field label {
+  color: #334155;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--type-input-size);
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #059669;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
+}
+
+.hint,
+.muted {
+  margin: 0;
+  color: #64748b;
+  font-size: var(--type-small-size);
+  line-height: 1.4;
+}
+
+.error {
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: var(--type-body-size);
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 12px;
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.primaryButton {
+  height: 46px;
+  padding: 0 18px;
+  border: 0;
+  background: #059669;
+  color: #ffffff;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: #047857;
+}
+
+.secondaryButton {
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+}
+
+.secondaryButton:hover:not(:disabled) {
+  border-color: #059669;
+  color: #047857;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* ---------- Список пользователей ---------- */
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.userRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e7ebef;
+  border-radius: 14px;
+}
+
+.userMain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.userName {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  overflow-wrap: anywhere;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+}
+
+.youBadge {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: #3730a3;
+  font-size: var(--type-badge-size);
+  font-weight: var(--type-badge-weight);
+}
+
+.userMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: var(--type-small-size);
+}
+
+.roleBadge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: var(--type-badge-size);
+  font-weight: var(--type-badge-weight);
+}
+
+.role_user {
+  background: #ecfdf3;
+  color: #047857;
+}
+
+.role_owner {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.role_admin {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.statusActive {
+  color: #047857;
+}
+
+.statusPending {
+  color: #b45309;
+}
+
+.createdAt {
+  color: #94a3b8;
+}
+
+/* ---------- Окно с кодом ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(2, 6, 23, 0.6);
+}
+
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  padding: 22px 20px;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #1e293b;
+}
+
+.dialogClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.credentials dt {
+  color: #64748b;
+  font-size: var(--type-small-size);
+}
+
+.credentials dd {
+  margin: 2px 0 0;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  overflow-wrap: anywhere;
+}
+
+/* Код можно выделить и скопировать вручную (глобально user-select: none) */
+.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 22px !important;
+  letter-spacing: 0.08em;
+  user-select: all;
+}
+
+.warning {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: var(--type-small-size);
+  line-height: 1.4;
+}
+
+.dialogActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 374px) {
+  .header,
+  .content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 24px 32px 4px;
+  }
+
+  .content {
+    padding: 20px 32px 32px;
+  }
+
+  .formGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card > .primaryButton {
+    align-self: flex-start;
+  }
+}
+
+@media (min-width: 1440px) {
+  .header {
+    padding: 28px 40px 4px;
+  }
+
+  .content {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    padding: 24px 40px 40px;
+  }
+
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

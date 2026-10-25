@@ -1,7 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { LogOut, UserCircle } from "lucide-react";
 
+import { useAuth } from "@/components/Auth/AuthProvider";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 
 import styles from "./Header.module.css";
@@ -46,6 +48,8 @@ const Logo = () => (
 
 export default function Header() {
   const t = useTranslations("Header");
+  const tRoles = useTranslations("Roles");
+  const { user, logout } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -58,6 +62,28 @@ export default function Header() {
           <p className={styles.subtitle}>{t("subtitle")}</p>
         </div>
       </div>
+
+      {/* Вошедший пользователь: имя и фамилия, роль, выход */}
+      {user && (
+        <div className={styles.userInfo}>
+          <UserCircle size={22} className={styles.userIcon} aria-hidden="true" />
+
+          <div className={styles.userText}>
+            <span className={styles.userName}>{user.fullName}</span>
+            <span className={styles.userRole}>{tRoles(user.role)}</span>
+          </div>
+
+          <button
+            type="button"
+            className={styles.logoutButton}
+            onClick={logout}
+            title={t("logout")}
+            aria-label={t("logout")}
+          >
+            <LogOut size={18} />
+          </button>
+        </div>
+      )}
 
       <div className={styles.headerRight}>
         <LanguageSwitcher />

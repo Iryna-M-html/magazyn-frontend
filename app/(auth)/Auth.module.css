@@ -1,0 +1,179 @@
+/* Общие стили страниц входа и смены кода */
+.page {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 24px 16px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(30, 41, 59, 0.75), transparent 55%),
+    #0f172a;
+  color: #f8fafc;
+  --language-switcher-background: rgba(71, 85, 105, 0.48);
+  --language-switcher-border: #475569;
+  --language-switcher-text: #cbd5e1;
+  --language-switcher-active-background: #34d399;
+  --language-switcher-active-text: #06291f;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.brandTitle {
+  margin: 0;
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-tracking);
+}
+
+.brandSubtitle {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: var(--type-small-size);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 400px;
+  padding: 22px 20px;
+  border: 1px solid rgba(203, 213, 225, 0.22);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:
+    0 14px 30px rgba(2, 6, 23, 0.28),
+    0 2px 5px rgba(2, 6, 23, 0.12);
+  color: #1e293b;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+  line-height: var(--type-title-leading);
+}
+
+.cardText {
+  margin: -6px 0 0;
+  color: #64748b;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  color: #334155;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+}
+
+.field input {
+  width: 100%;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--type-input-size);
+}
+
+.field input:focus {
+  border-color: #059669;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordWrapper input {
+  padding-right: 46px;
+}
+
+.togglePassword {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.hint {
+  color: #64748b;
+  font-size: var(--type-small-size);
+}
+
+.error {
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+}
+
+.submitButton {
+  height: 50px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 14px;
+  background: #059669;
+  color: #ffffff;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  cursor: pointer;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #047857;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.linkButton {
+  align-self: center;
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  font-size: var(--type-small-size);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 374px) {
+  .card {
+    padding: 18px 14px;
+  }
+}

@@ -1,5 +1,6 @@
 {
   "Header": {
+    "logout": "Wyloguj się",
     "title": "IVPOL",
     "subtitle": "Statystyki sklepu"
   },
@@ -26,6 +27,7 @@
   },
 
   "Navigation": {
+    "users": "Użytkownicy",
     "main": "Główna",
     "products": "Produkty",
     "reports": "Raporty",
@@ -424,5 +426,78 @@
     "today": "Ostatni dzień",
     "daysLeft": "{count, plural, one {Został # dzień} few {Zostały # dni} many {Zostało # dni} other {Zostało # dnia}}",
     "pieces": "{count} szt."
+  },
+
+  "Roles": {
+    "user": "Sprzedawca",
+    "owner": "Kierownik",
+    "admin": "Administrator"
+  },
+
+  "Auth": {
+    "loginTitle": "Logowanie",
+    "loginText": "Podaj imię, nazwisko i kod otrzymany od administratora",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "accessCode": "Kod dostępu",
+    "showCode": "Pokaż kod",
+    "hideCode": "Ukryj kod",
+    "signIn": "Zaloguj się",
+    "signingIn": "Logowanie...",
+    "fillAll": "Wypełnij wszystkie pola",
+    "invalidCredentials": "Nieprawidłowe imię, nazwisko lub kod",
+    "tooManyAttempts": "Zbyt wiele prób. Spróbuj ponownie za 15 minut.",
+    "loginError": "Nie udało się zalogować. Spróbuj ponownie.",
+    "changeTitle": "Ustaw własny kod",
+    "changeText": "Zalogowałeś się kodem od administratora. Wymyśl własny kod — będziesz go używać przy kolejnych logowaniach.",
+    "currentCode": "Kod od administratora",
+    "newCode": "Nowy kod",
+    "confirmCode": "Powtórz nowy kod",
+    "codeHint": "Co najmniej {min} znaków",
+    "codeTooShort": "Nowy kod musi mieć co najmniej {min} znaków",
+    "codesDoNotMatch": "Kody nie są takie same",
+    "codeSameAsOld": "Nowy kod musi być inny niż kod od administratora",
+    "wrongCurrentCode": "Nieprawidłowy kod od administratora",
+    "sessionExpired": "Sesja wygasła. Zaloguj się ponownie.",
+    "changeError": "Nie udało się zapisać kodu",
+    "saveCode": "Zapisz kod",
+    "saving": "Zapisywanie...",
+    "logout": "Wyloguj się"
+  },
+
+  "UsersAdmin": {
+    "title": "Użytkownicy",
+    "subtitle": "Dodawaj pracowników i wydawaj kody dostępu",
+    "addTitle": "Nowy użytkownik",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "role": "Rola",
+    "addHint": "Kod dostępu zostanie wygenerowany automatycznie. Przy pierwszym logowaniu użytkownik ustawi własny kod.",
+    "create": "Dodaj i wygeneruj kod",
+    "creating": "Dodawanie...",
+    "nameRequired": "Podaj imię i nazwisko (co najmniej 2 litery)",
+    "invalidName": "Imię i nazwisko mogą zawierać tylko litery",
+    "createError": "Nie udało się dodać użytkownika",
+    "listTitle": "Wszyscy użytkownicy ({count})",
+    "loading": "Ładowanie...",
+    "loadError": "Nie udało się załadować użytkowników",
+    "empty": "Brak użytkowników",
+    "you": "Ty",
+    "statusActive": "Aktywny",
+    "statusPending": "Musi ustawić kod",
+    "createdAt": "dodano {date}",
+    "newCode": "Nowy kod",
+    "resetConfirm": "Wygenerować nowy kod dla: {name}? Obecny kod przestanie działać, a użytkownik zostanie wylogowany.",
+    "resetError": "Nie udało się wygenerować kodu",
+    "createdDone": "Użytkownik dodany",
+    "resetDone": "Nowy kod wygenerowany",
+    "loginName": "Imię i nazwisko do logowania",
+    "accessCode": "Kod dostępu",
+    "codeOnce": "Przekaż kod pracownikowi. Kod jest pokazywany tylko teraz — później można jedynie wygenerować nowy.",
+    "copy": "Kopiuj kod",
+    "copied": "Skopiowano",
+    "done": "Gotowe",
+    "close": "Zamknij",
+    "noAccess": "Ta strona jest dostępna tylko dla administratora"
   }
 }

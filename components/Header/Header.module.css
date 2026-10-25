@@ -86,3 +86,96 @@
     padding: 16px 32px;
   }
 }
+
+/* ---------- Вошедший пользователь ---------- */
+
+/* Мобилка: отдельной строкой под логотипом */
+.header {
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+.userInfo {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  gap: 10px;
+  order: 3;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid #475569;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.userIcon {
+  flex-shrink: 0;
+  color: #56c6a0;
+}
+
+.userText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.userName {
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+  line-height: var(--type-heading-leading);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userRole {
+  color: #94a3b8;
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+}
+
+.logoutButton {
+  display: flex;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  background: rgba(71, 85, 105, 0.35);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.logoutButton:hover {
+  background: rgba(220, 38, 38, 0.2);
+  color: #fecaca;
+}
+
+/* Планшет и десктоп: в одной строке, между логотипом и переключателем языка */
+@media (min-width: 768px) {
+  .header {
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  .userInfo {
+    flex-basis: auto;
+    order: 0;
+    max-width: 360px;
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoutButton {
+    transition: none;
+  }
+}

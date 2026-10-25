@@ -1,5 +1,12 @@
 import { nextServer } from "@/lib/api/api";
 import type { InventoryReportResponse } from "@/types/report";
+import type {
+  CreateUserData,
+  LoginData,
+  LoginResponse,
+  User,
+  UserWithAccessCode,
+} from "@/types/user";
 export interface ProductData {
   id: string;
   name: string;
@@ -143,4 +150,48 @@ export const getCategories = async (): Promise<ApiResponse<Category[]>> => {
   const res = await nextServer.get<ApiResponse<Category[]>>("/categories");
 
   return res.data;
+};
+
+// ---------- Вход и пользователи ----------
+
+export const login = async (data: LoginData): Promise<LoginResponse> => {
+  const res = await nextServer.post<LoginResponse>("/auth/login", data);
+  return res.data;
+};
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post("/auth/logout");
+};
+
+export const changePassword = async (data: {
+  currentPassword: string;
+  newPassword: string;
+}): Promise<void> => {
+  await nextServer.post("/auth/change-password", data);
+};
+
+export const getCurrentUser = async (): Promise<User> => {
+  const res = await nextServer.get<{ user: User }>("/users/me");
+  return res.data.user;
+};
+
+export const getUsers = async (): Promise<User[]> => {
+  const res = await nextServer.get<{ data: User[] }>("/users");
+  return res.data.data;
+};
+
+export const createUser = async (
+  data: CreateUserData,
+): Promise<UserWithAccessCode> => {
+  const res = await nextServer.post<{ data: UserWithAccessCode }>("/users", data);
+  return res.data.data;
+};
+
+export const resetUserPassword = async (
+  userId: string,
+): Promise<UserWithAccessCode> => {
+  const res = await nextServer.post<{ data: UserWithAccessCode }>(
+    `/users/${userId}/reset-password`,
+  );
+  return res.data.data;
 };

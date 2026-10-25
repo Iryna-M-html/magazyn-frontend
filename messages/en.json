@@ -1,5 +1,6 @@
 {
   "Header": {
+    "logout": "Sign out",
     "title": "IVPOL",
     "subtitle": "Store Statistics"
   },
@@ -26,6 +27,7 @@
   },
 
   "Navigation": {
+    "users": "Users",
     "main": "Home",
     "products": "Products",
     "reports": "Reports",
@@ -424,5 +426,78 @@
     "today": "Last day",
     "daysLeft": "{count, plural, one {# day left} other {# days left}}",
     "pieces": "{count} pcs"
+  },
+
+  "Roles": {
+    "user": "Seller",
+    "owner": "Manager",
+    "admin": "Administrator"
+  },
+
+  "Auth": {
+    "loginTitle": "Sign in",
+    "loginText": "Enter your first name, last name and the code from your administrator",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "accessCode": "Access code",
+    "showCode": "Show code",
+    "hideCode": "Hide code",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "fillAll": "Fill in all fields",
+    "invalidCredentials": "Incorrect name or code",
+    "tooManyAttempts": "Too many attempts. Try again in 15 minutes.",
+    "loginError": "Could not sign in. Please try again.",
+    "changeTitle": "Set your own code",
+    "changeText": "You signed in with a code from your administrator. Choose your own code for future sign-ins.",
+    "currentCode": "Code from administrator",
+    "newCode": "New code",
+    "confirmCode": "Repeat new code",
+    "codeHint": "At least {min} characters",
+    "codeTooShort": "The new code must be at least {min} characters",
+    "codesDoNotMatch": "The codes do not match",
+    "codeSameAsOld": "The new code must differ from the administrator's code",
+    "wrongCurrentCode": "Incorrect administrator code",
+    "sessionExpired": "Your session has expired. Please sign in again.",
+    "changeError": "Could not save the code",
+    "saveCode": "Save code",
+    "saving": "Saving...",
+    "logout": "Sign out"
+  },
+
+  "UsersAdmin": {
+    "title": "Users",
+    "subtitle": "Add employees and issue access codes",
+    "addTitle": "New user",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "role": "Role",
+    "addHint": "The access code is generated automatically. The user will set their own code at first sign-in.",
+    "create": "Add and generate code",
+    "creating": "Adding...",
+    "nameRequired": "Enter first and last name (at least 2 letters)",
+    "invalidName": "First and last name may contain letters only",
+    "createError": "Could not add the user",
+    "listTitle": "All users ({count})",
+    "loading": "Loading...",
+    "loadError": "Could not load users",
+    "empty": "No users yet",
+    "you": "You",
+    "statusActive": "Active",
+    "statusPending": "Must set a code",
+    "createdAt": "added {date}",
+    "newCode": "New code",
+    "resetConfirm": "Generate a new code for {name}? The current code will stop working and the user will be signed out.",
+    "resetError": "Could not generate a code",
+    "createdDone": "User added",
+    "resetDone": "New code generated",
+    "loginName": "Name for sign-in",
+    "accessCode": "Access code",
+    "codeOnce": "Give this code to the employee. It is shown only now — later you can only generate a new one.",
+    "copy": "Copy code",
+    "copied": "Copied",
+    "done": "Done",
+    "close": "Close",
+    "noAccess": "This page is available to administrators only"
   }
 }

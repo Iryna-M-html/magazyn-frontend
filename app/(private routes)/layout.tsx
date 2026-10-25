@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { ChromeGate } from "@/components/AppChrome/ChromeGate";
+import { AuthProvider } from "@/components/Auth/AuthProvider";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 
@@ -12,20 +13,22 @@ export default function PrivateLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={styles.shell}>
-      <Suspense fallback={null}>
-        <ChromeGate>
-          <Header />
-        </ChromeGate>
-      </Suspense>
+    <AuthProvider>
+      <div className={styles.shell}>
+        <Suspense fallback={null}>
+          <ChromeGate>
+            <Header />
+          </ChromeGate>
+        </Suspense>
 
-      <div className={styles.page}>{children}</div>
+        <div className={styles.page}>{children}</div>
 
-      <Suspense fallback={null}>
-        <ChromeGate>
-          <Footer />
-        </ChromeGate>
-      </Suspense>
-    </div>
+        <Suspense fallback={null}>
+          <ChromeGate>
+            <Footer />
+          </ChromeGate>
+        </Suspense>
+      </div>
+    </AuthProvider>
   );
 }

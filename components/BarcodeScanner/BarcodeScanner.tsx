@@ -25,8 +25,10 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
       Html5QrcodeSupportedFormats.CODE_128,
     ];
 
-    const scanner = new Html5Qrcode("reader", { formatsToSupport });
-    setHtml5Qrcode(scanner);
+   const scanner = new Html5Qrcode("reader", {
+  formatsToSupport,
+  verbose: false, // <-- добавьте этот параметр
+}); 
 
     scanner
       .start(

@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: сервер",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Next.js: браузер",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:3000"
+    }
+  ]
+}
